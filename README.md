@@ -15,7 +15,7 @@ Gathering your friends together for an awesome night of social deduction and spo
 
 ![Design image](FrontPage.png)![Design image](MiddlePage.png)![Design image](VotingPage.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 
 ```mermaid
 sequenceDiagram
@@ -32,7 +32,6 @@ sequenceDiagram
 - Unique lobby join code generation for connecting mobile devices
 - Secret, automated role distribution with hidden card reveal mechanics
 - Synchronized real-time game loop across all connected devices
-- Night action interface for special player roles
 - Interactive daytime voting with live tallies and elimination results
 - Storage of match history and user game statistics
 
@@ -40,17 +39,22 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses correct HTML structure across component views. Pages include a lobby page for entering room codes and names, a host setup page for configuring role/card counts, and a main gameplay page for role reveals, night actions, and day voting.
+- **CSS** - Application styling that looks clean on mobile devices and desktop screens. Uses dark thematic styling with fitting colors, high contrast for night/day phases, and simple card reveal visual.
+- **React** -  Provides the login screen, lobby setup, secret role display, and the voting page. I will use React for switching between these different screens and building the UI components.
+- **Service** - Backend service with endpoints for:
+    -Creating lobbies and generating unique room join codes
+    -User login
+    -Retrieving Game Phase Changes
+    -Retrieving active voting tallies
+    -Fetching custom, randomly generated player avatars using the [DiceBear API](https://www.dicebear.com/)
+
+- **DB/Login** - Stores user profiles, match history, and player win/loss records. Passwords securely hashed and stored; users must be authenticated to join or host games.
+- **WebSocket** - As players join lobbies, lock in day votes, or their player gets killed, their actions are broadcast in real time to all other connected devices to synchronize the game
+
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
-> Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
