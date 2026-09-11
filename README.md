@@ -1,6 +1,5 @@
 # Nightfall Game Manager
 
-[My Notes](notes.md)
 
 This application is essentially a digital game manager for Mafia and Werewolf-style party games. It lets users play a fully functional in-person game with no cards at all. It will let users connect to the same digital room or lobby as one another. It also lets users pick their own set of cards or roles depending on player count, and then automatically deals those cards out, one to each player. It will also allow users to vote for specific players they want out each day cycle. The game has a typical day/night cycle, where roles are able to use their abilities every night, and the reveal happens during the day. Similarly, during the day, the town (group) has the ability to vote someone out who they think may be the killer(s). Ultimately, this application will make playing your favorite party game even more enjoyable.
 
@@ -16,13 +15,6 @@ Gathering your friends together for an awesome night of social deduction and spo
 ![Design image](FrontPage.png)![Design image](MiddlePage.png)![Design image](VotingPage.png)
 
 
-
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
-```
 
 ### Key features
 
@@ -57,12 +49,12 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Git commit requirement)
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology including your 3rd party API and use of WebSocket
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [ ] I completed the prerequisites for this deliverable (Git commit requirement) - Couldn't spread all of my commits across multiple days because I just figure out about that requirement today. I was still working on AWS setup before today, also wasn't sure if I was going to stay in the class.
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology including your 3rd party API and use of WebSocket
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ## 🚀 AWS deliverable
 
