@@ -1,19 +1,15 @@
 # Nightfall Game Manager
 
 [My Notes](notes.md)
-This application is essentially a digital game manager for Mafia and Werewolf style party games. It will allow users the ability to play a full functioning in-person game with no cards at all. lets users connect to the same digital room or lobby as one another. It will let users pick their own set of cards or roles depending on player count, and then autoamitically deal those cards out, one to each player. It will also allow users to vote for specific people they want out each day cycle. The game has a typical day/night cycle, where roles are able to use their powers every night, and understanding happens in the day. Similarly in the day the town (group) had the ability to vote someone out who they think may be the killer(s). Ultimately, this applicaiton will make playing your favorite party game even more enjoyable.
 
-To see the full details, and learn how the game is played: [here](https://en.wikipedia.org/wiki/Mafia_(party_game))
+This application is essentially a digital game manager for Mafia and Werewolf-style party games. It lets users play a fully functional in-person game with no cards at all. It will let users connect to the same digital room or lobby as one another. It also lets users pick their own set of cards or roles depending on player count, and then automatically deals those cards out, one to each player. It will also allow users to vote for specific players they want out each day cycle. The game has a typical day/night cycle, where roles are able to use their abilities every night, and the reveal happens during the day. Similarly, during the day, the town (group) has the ability to vote someone out who they think may be the killer(s). Ultimately, this application will make playing your favorite party game even more enjoyable.
 
-> [!NOTE]
-> This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
+[Full Deails on how the game is played](https://en.wikipedia.org/wiki/Mafia_(party_game))
 
-> [!NOTE]
-> If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Gathering your friends together for an awesome night of social deduction and spooky party games should be exciting and simple, but manual card setup, confusing voting schemes, and night phases can stall the fun. The Nightfall Game Manager is the ultimate solution for the quickest, simplest, no-card mafia/werewolf game. It turns every player's phone into a more interactive controller. Users simply join a room and then receive their hidden role, execute night actions, and vote on a real-time player elimination with a click of their phone. The application manages the tedious setup, so everyone can focus on the scheming and fun.
 
 ### Design
 
