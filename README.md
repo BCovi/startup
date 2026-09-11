@@ -1,9 +1,9 @@
 # Nightfall Game Manager
 
 [My Notes](notes.md)
-This application is essentially a digital game manager for Mafia and Werewolf style games. It will allow users the ability to play a full functioning in-person game with no cards at all. It will allow users to connect to the same digital room or lobby as one another. It will let users pick their own set of cards or roles depending on player count, and then autoamitically deal those cards. It will also allow users to vote for specific people they want out each day cycle. Ultimately, this applicaiton will make playing your favorite party game even more enjoyable.
+This application is essentially a digital game manager for Mafia and Werewolf style party games. It will allow users the ability to play a full functioning in-person game with no cards at all. lets users connect to the same digital room or lobby as one another. It will let users pick their own set of cards or roles depending on player count, and then autoamitically deal those cards out, one to each player. It will also allow users to vote for specific people they want out each day cycle. The game has a typical day/night cycle, where roles are able to use their powers every night, and understanding happens in the day. Similarly in the day the town (group) had the ability to vote someone out who they think may be the killer(s). Ultimately, this applicaiton will make playing your favorite party game even more enjoyable.
 
-To see the full details and how the game is played here: [(https://en.wikipedia.org/wiki/Mafia_(party_game))]
+To see the full details, and learn how the game is played: [here](https://en.wikipedia.org/wiki/Mafia_(party_game))
 
 > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
