@@ -18,7 +18,7 @@ Gathering your friends together for an awesome night of social deduction and spo
 
 ### Key features
 
-- Secure login and authentication over HTTPS
+- Login and authentication over HTTPS
 - Selectable game host/narrator option for one player
 - Room creation and custom role configuration for game host/narrator
 - Unique lobby join code generation for connecting mobile devices
@@ -49,7 +49,7 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Git commit requirement) 
+- [x] I completed the prerequisites for this deliverable (Git commit requirement) 
     - *Couldn't spread all of my commits across multiple days because I just figure out about that requirement today. I was still working on AWS setup before today, also wasn't sure if I was going to stay in the class.*
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
