@@ -1,5 +1,5 @@
 # CS 260 Notes
-**MY VERY FIRST CHANGE**
+I love web programming
 
 This file represents what I have learned about web programming.
 
