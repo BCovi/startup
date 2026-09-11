@@ -49,7 +49,8 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Git commit requirement) - Couldn't spread all of my commits across multiple days because I just figure out about that requirement today. I was still working on AWS setup before today, also wasn't sure if I was going to stay in the class.
+- [ ] I completed the prerequisites for this deliverable (Git commit requirement) 
+    - *Couldn't spread all of my commits across multiple days because I just figure out about that requirement today. I was still working on AWS setup before today, also wasn't sure if I was going to stay in the class.*
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
