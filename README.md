@@ -43,12 +43,11 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Application styling that looks clean on mobile devices and desktop screens. Uses dark thematic styling with fitting colors, high contrast for night/day phases, and simple card reveal visual.
 - **React** -  Provides the login screen, lobby setup, secret role display, and the voting page. I will use React for switching between these different screens and building the UI components.
 - **Service** - Backend service with endpoints for:
-    -Creating lobbies and generating unique room join codes
-    -User login
-    -Retrieving Game Phase Changes
-    -Retrieving active voting tallies
-    -Fetching custom, randomly generated player avatars using the [DiceBear API](https://www.dicebear.com/)
-
+    - Creating lobbies and generating unique room join codes
+    - User login
+    - Retrieving Game Phase Changes
+    - Retrieving active voting tallies
+    - Fetching custom, randomly generated player avatars using the [DiceBear API](https://www.dicebear.com/)
 - **DB/Login** - Stores user profiles, match history, and player win/loss records. Passwords securely hashed and stored; users must be authenticated to join or host games.
 - **WebSocket** - As players join lobbies, lock in day votes, or their player gets killed, their actions are broadcast in real time to all other connected devices to synchronize the game
 
