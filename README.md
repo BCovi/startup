@@ -26,9 +26,15 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login and authentication over HTTPS
+- Selectable game host/narrator option for one player
+- Room creation and custom role configuration for game host/narrator
+- Unique lobby join code generation for connecting mobile devices
+- Secret, automated role distribution with hidden card reveal mechanics
+- Synchronized real-time game loop across all connected devices
+- Night action interface for special player roles
+- Interactive daytime voting with live tallies and elimination results
+- Storage of match history and user game statistics
 
 ### Technologies
 
