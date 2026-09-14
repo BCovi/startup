@@ -29,6 +29,15 @@ This file represents what I have learned about web programming.
 - IP Address: A unique numeric string identifying a specific device or server on a network, required to make direct network connections.
 - Domain Name: A human-friendly text-based name (like amazon.com or cs260.click) that serves as an easy-to-remember alias for a server's IP address.
 - DNS (Domain Name System): The global directory and infrastructure network that translates human-readable domain names into computer-friendly IP addresses (acting like a phone book).
+### Caddy:
+- Definition: An open-source web server written in Go that automatically handles HTTPS using LetsEncrypt.
+- Gateway/Reverse Proxy: Routes incoming subdomain requests (like simon.yourdomain) to internal Node.js backend services.
+- Key Files:
+    - /Caddyfile: The configuration file for routing requests.
+    - /public_html: A link to /usr/share/caddy where static HTML files are stored and served.
+- Proxy:
+    - Forward Proxy: Sits in front of clients to forward requests to external servers (used for filtering or anonymity).
+    - Reverse Proxy: Sits in front of servers to intercept internet traffic and route it to internal servers (used by Caddy for protection and load balancing).
 
 ## HTML
 
