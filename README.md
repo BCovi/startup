@@ -61,7 +61,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Rented EC2 server** - I completed this part of the deliverable. (Rented through AWS)
+- [x] **Rented EC2 server** - I completed this part of the deliverable. (Rented through AWS, t3.micro)
 - [x] **Leased domain name** - I completed this part of the deliverable (nightfallapp.click)
 - [x] **Server accessible** from my domain: [https://nightfallapp.click](https://nightfallapp.click) - I completed this part of the deliverable, and the Server is secure.
 
