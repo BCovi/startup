@@ -62,6 +62,13 @@ This file represents what I have learned about web programming.
 - Provides structure and content to web applications using standard container elements (like `body`, `header`, `footer`, `main`, `section`, `aside`, `p`, `table`, `ol`/`ul`, `div`, and `span`).
 - Proper semantic element usage ensures web pages make logical sense to developers and are correctly parsed by search engine crawlers and screen readers.
 - Block elements (like `div` and `p`) create distinct layout blocks in the document flow, while inline elements (like `b` and `span`) sit inside block elements without disrupting text flow.
+### Input
+*More info that might be useful on the page*
+- The <form> element acts as a container for collecting and submitting user data, using action (destination URL) and method (GET appends data to the URL; POST sends data in the request body).
+- Inputs inside a form require a name attribute to serve as the key when sending key-value data pairs to the server.
+- The <input> element uses the type attribute to define controls such as text, password, email, checkbox (inclusive choices), radio (exclusive choices), date, and color.
+- Labels (<label>) improve accessibility and usability by linking to input fields via the for attribute matching the input's id.
+- HTML5 provides built-in browser validation through input types (email, url, number), as well as attributes like required, minlength, and pattern (regular expressions).
 
 
 
