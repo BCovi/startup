@@ -46,8 +46,24 @@ This file represents what I have learned about web programming.
 - Caddy Automation: Automatically requests, installs, and renews Let's Encrypt certificates when uncertified domains receive HTTPS requests.
 
 ## HTML
+### HTML Introducution
+- Purpose: Provides the foundational content structure of web pages, separate from styling (CSS) and interactivity (JavaScript).
+- Elements & Tags: HTML uses elements enclosed in tags (e.g., <p>...</p>) to define structure. Closing tags include a forward slash.
+- Attributes: Placed inside the opening tag to describe specific details, using name/value pairs (e.g., id="unique", class="group").
+- Page Structure:
+    - <html>: The top-level container for the document.
+    - <head>: Contains metadata and the page <title>.
+    - <body>: Contains the entire visible content of the page.
+- Hyperlinks: Created using the anchor element (<a>) with the href attribute defining the destination address.
+- Comments: Written as <!-- comment here --> and are completely ignored by the browser.
+- Default File: Web servers automatically serve index.html when a directory is requested without a specific file name.
+- Special Characters: Reserved characters must be escaped using entity syntax (e.g., using &lt; instead of <).
+### Structure
+- Provides structure and content to web applications using standard container elements (like `body`, `header`, `footer`, `main`, `section`, `aside`, `p`, `table`, `ol`/`ul`, `div`, and `span`).
+- Proper semantic element usage ensures web pages make logical sense to developers and are correctly parsed by search engine crawlers and screen readers.
+- Block elements (like `div` and `p`) create distinct layout blocks in the document flow, while inline elements (like `b` and `span`) sit inside block elements without disrupting text flow.
 
-Interesting things I have learned about HTML
+
 
 ## React
 
