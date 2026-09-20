@@ -69,6 +69,13 @@ This file represents what I have learned about web programming.
 - The <input> element uses the type attribute to define controls such as text, password, email, checkbox (inclusive choices), radio (exclusive choices), date, and color.
 - Labels (<label>) improve accessibility and usability by linking to input fields via the for attribute matching the input's id.
 - HTML5 provides built-in browser validation through input types (email, url, number), as well as attributes like required, minlength, and pattern (regular expressions).
+### Media
+- HTML includes media elements for external files (`img`, `audio`, `video`) and internal vector/drawing graphics (`svg`, `canvas`).
+- External Media Paths: Attributes use URLs that can be full paths or relative paths (`images/photo.jpg`), where relative paths are preferred to keep code portable.
+- Images & Accessibility: The `<img>` tag uses `src` to reference the image file and `alt` to provide descriptive text for accessibility and screen readers.
+- Audio & Video: Use `<audio>` and `<video>` tags with `src` and optional attributes like `controls`, `autoplay`, and `loop`; external domains may require `crossorigin="anonymous"`.
+- SVG (Scalable Vector Graphics): Renders vector graphics inline directly within HTML markup using XML tags like `<svg>` and `<circle>`.
+- Canvas: Provides a blank standard container (`<canvas>`) meant for 2D drawing and animations created dynamically via JavaScript code (`getContext('2d')`).
 
 
 
