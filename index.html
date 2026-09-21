@@ -3,14 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nightfall</title>
+    <title>Nightfall - Home</title>
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
+    <!-- Navigation Header -->
     <header>
-      <h1>Nightfall Game Manager</h1>
-      <p1>This is the spot where the main login page will go. Player match history will also go here (database). </p1>
-
+      <h1>Nightfall</h1>
       <nav>
         <menu>
           <li><a href="index.html">Home</a></li>
@@ -23,15 +22,109 @@
     </header>
 
     <main>
-      <!-- Nightfall-specific content and placeholders will go here -->
+      <!-- Hero Section & App Description -->
+      <section id="hero">
+        <h2>Welcome to the Nightfall Game Manager</h2>
+        <p>
+          The ultimate digital game manager for social deduction party games like Werewolf and Mafia. 
+          No physical cards, no manual role setup, just seamless scheming from your phone.
+        </p>
+
+        <!-- Application Image Requirement -->
+        <div class="banner-container">
+          <img 
+            src="placeholder.png" 
+            alt="Nightfall full moon over a spooky forest" 
+            width="350" 
+          />
+        </div>
+      </section>
+
+      <hr />
+
+      <!-- Login Placeholder Requirement -->
+      <section id="authentication">
+        <h3>Login to Play</h3>
+        <form action="lobby.html" method="get">
+          <div>
+            <label for="email">Email:</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="player@email.com" 
+              required 
+            />
+          </div>
+          <div>
+            <label for="password">Password:</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="password" 
+              required 
+            />
+          </div>
+          <br />
+          <button type="submit">Login</button>
+          <button type="button">Create Account</button>
+        </form>
+
+        <!-- User Name Display Requirement (Simulated logged-in state) -->
+        <p><em>(Once authenticated, this will display: "Welcome back, Braden!")</em></p>
+      </section>
+
+      <hr />
+
+      <!-- Database Data Placeholder Requirement -->
+      <section id="global-leaderboard">
+        <h3>Global Leaderboard</h3>
+        <p>Top players across all hosted matches (Pulled from Database) [Database Place Holder]:</p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Total Wins</th>
+              <th>Win Rate</th>
+              <th>Most Played Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Braden</td>
+              <td>28</td>
+              <td>65%</td>
+              <td>Werewolf</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sarah</td>
+              <td>21</td>
+              <td>55%</td>
+              <td>Seer</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Mike</td>
+              <td>12</td>
+              <td>40%</td>
+              <td>Villager</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </main>
 
+    <!-- Footer Requirement -->
     <footer>
       <hr />
       <span>Braden Covington</span>
       <br />
-      <!-- Replace the URL below with your actual startup repository link -->
-      <a href="https://github.com/BCovi/startup">GitHub</a>
+      <a href="https://github.com/BCovi/startup">GitHub Repository</a>
     </footer>
   </body>
 </html>

@@ -1,15 +1,119 @@
-<nav>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nightfall</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <header>
+      <h1>Nightfall</h1>
+      <nav>
         <menu>
           <li><a href="index.html">Home</a></li>
           <li><a href="lobby.html">Lobby</a></li>
           <li><a href="game.html">Game</a></li>
           <li><a href="about.html">About</a></li>
         </menu>
-</nav>
-<main>
-  <h2>Active Game Phase</h2>
-  <p1>This is the page that will house dynamic options based on the phase of the game. It will 1.) Show users their role (card) 
-    2.)Allow a night phase that won't do much for most users, but change the screen. 
-    3.)A voting phase during the day. All of these phases will be triggered by the narrarator. 
-    Most work here.</p1>
-</main>
+      </nav>
+      <hr />
+    </header>
+
+    <main>
+      <h2>Game Room: Active</h2>
+      <p>Current Phase: <span class="phase-placeholder">Daytime</span></p>
+      
+      <!-- Secret Role Reveal -->
+<section id="role-reveal">
+  <h3>Your Secret Role</h3>
+  
+  <div class="card-container">
+    <p><em>Keep your screen hidden from others!</em></p>
+    <button type="button">Tap to Reveal Card</button>
+    
+    <!-- This text will be hidden by default later using CSS/React -->
+    <div class="revealed-role">
+      <h4>You are a: <strong>Werewolf</strong></h4>
+      <p>Goal: Eliminate the town without getting caught.</p>
+    </div>
+  </div>
+</section>
+
+<hr />
+      <!-- 1. NARRATOR VIEW -->
+      <section id="narrator-view">
+        <h3>Narrator Controls</h3>
+        <menu>
+          <li><button>Advance to Night</button></li>
+          <li><button>Advance to Day</button></li>
+          <li><button>Advance to Voting</button></li>
+        </menu>
+        
+        <h4>Manual Actions</h4>
+        <form action="game.html" method="get">
+          <label for="kill-player">Eliminate Player:</label>
+          <select id="kill-player" name="eliminated">
+            <option value="" disabled selected>Select a player...</option>
+            <option value="player1">John</option>
+            <option value="player2">Sarah</option>
+            <option value="player3">Mike</option>
+          </select>
+          <button type="submit">Eliminate</button>
+        </form>
+      </section>
+
+      <hr />
+
+      <!-- 2. ALIVE PLAYER VIEW -->
+      <section id="alive-view">
+  <h3>Daytime Voting</h3>
+  
+  <p><strong>Time Remaining: <span class="timer-placeholder">00:45</span></strong></p>
+
+  <p>Select a player to eliminate:</p>
+  <form action="game.html" method="get">
+    <menu>
+      <li><button type="submit" name="vote" value="player1">John</button></li>
+      <li><button type="submit" name="vote" value="player2">Sarah</button></li>
+      <li><button type="submit" name="vote" value="player3">Mike</button></li>
+    </menu>
+  </form>
+
+  <h4>Live Tally</h4>
+  <ul>
+    <li><strong>John:</strong> 2 votes (Mike, Sarah)</li>
+    <li><strong>Sarah:</strong> 1 vote (John)</li>
+    <li><strong>Mike:</strong> 0 votes</li>
+  </ul>
+</section>
+
+      <hr />
+
+      <!-- 3. DEAD PLAYER VIEW -->
+      <section id="dead-view">
+        <h3>You have been eliminated</h3>
+        <p>You can no longer vote. Please wait quietly for the game to conclude.</p>
+      </section>
+
+      <hr />
+      
+      <!-- WebSocket Data Placeholder (Rubric Requirement) -->
+      <section id="live-updates">
+        <h3>Live Game Feed</h3>
+        <ul>
+          <li><em>Sarah locked in a vote...</em></li>
+          <li><em>John locked in a vote...</em></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <hr />
+      <span>Braden Covington</span>
+      <br />
+      <!-- Ensure this URL points to your actual startup repository -->
+      <a href="https://github.com/yourusername/startup">GitHub</a>
+    </footer>
+  </body>
+</html>
