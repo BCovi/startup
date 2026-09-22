@@ -1,5 +1,9 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nightfall - Lobby</title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nightfall</title>
     <link rel="icon" href="favicon.ico" />
   </head>
   <body>
@@ -53,69 +57,43 @@
 
         <div id="host-controls">
           <h3>Narrator Role Setup</h3>
-          <p>Configure the deck for your game <i>(Later this wil be based on an active player count)</i>:</p>
-          
           <form action="game.html" method="get">
-            <div>
-              <label for="werewolf-count">Werewolves:</label>
-              <input 
-                type="number" 
-                id="werewolf-count" 
-                name="werewolf-count" 
-                value="1" 
-                min="1" 
-                max="5" 
-                required 
-              />
-            </div>
-            <br>
-            <div>
-              <label for="seer-count">Seers:</label>
-              <input 
-                type="number" 
-                id="seer-count" 
-                name="seer-count" 
-                value="1" 
-                min="1" 
-                max="5" 
-                required 
-              />
-            </div>
-            <br>
-            <div>
-              <label for="doctor-count">Doctors:</label>
-              <input 
-                type="number" 
-                id="doctor-count" 
-                name="doctor-count" 
-                value="1" 
-                min="1" 
-                max="5" 
-                required 
-              />
-            </div>
-            <br>
-            <div>
-              <label for="villager-count">Villagers:</label>
-              <input 
-                type="number" 
-                id="villager-count" 
-                name="villager-count" 
-                value="1" 
-                min="1" 
-                max="5" 
-                required 
-              />
-            </div>
-            
-            <br>
+    
+            <!-- 1. The fieldset wraps the related role inputs -->
+            <fieldset>
+              <!-- 2. Legend goes FIRST inside fieldset -->
+              <legend>Select Role Quantities</legend>
+
+              <!-- 3. Each input has a matching <label> -->
+              <p>
+                <label for="mafia-count">Mafia / Werewolves:</label>
+                <input type="number" id="mafia-count" name="mafia" min="1" max="10" value="2" />
+              </p>
+
+              <p>
+                <label for="doctor-count">Doctor / Medic:</label>
+                <input type="number" id="doctor-count" name="doctor" min="0" max="5" value="1" />
+              </p>
+
+              <p>
+                <label for="detective-count">Detective / Sheriff:</label>
+                <input type="number" id="detective-count" name="detective" min="0" max="5" value="1" />
+              </p>
+
+              <p>
+                <label for="villager-count">Town / Villagers:</label>
+                <input type="number" id="villager-count" name="villager" min="1" max="20" value="4" />
+              </p>
+            </fieldset>
+
+            <!-- 4. Submit button sits outside the fieldset, inside the form -->
+            <br />
             <button type="submit">Start Game</button>
           </form>
-
         </div>
       </section>
     </main>
-    <!-- Footer Requirement -->
+    <!-- Footer -->
     <footer>
       <hr />
       <span>Braden Covington</span>
