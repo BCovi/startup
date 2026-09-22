@@ -1,4 +1,9 @@
-<header>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nightfall - Lobby</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <header>
       <h1>Nightfall</h1>
       <nav>
         <menu>
@@ -10,9 +15,21 @@
       </nav>
       <hr />
     </header>
-<main>
-  <h2>Game Lobby</h2>
-  <p1> This is the page for the game lobby. This will essentially hold the page for joining games and making games as the owner. 
-    The owner will also be able to pick cards from here and start the game.
-  </p1>
-</main>
+
+    <main>
+      <!-- Join or Create a Room -->
+      <section id="lobby-entry">
+        <h2>Join a Game</h2>
+        <form action="lobby.html" method="get">
+          <label for="room-code">Room Code:</label>
+          <input type="text" id="room-code" name="room-code" placeholder="e.g. ABCD" />
+          <button type="submit">Join Room</button>
+        </form>
+
+        <h2>Host a Game</h2>
+        <form action="lobby.html" method="get">
+          <button type="submit">Create New Room (Become Narrator)</button>
+        </form>
+      </section>
+
+      <hr />
