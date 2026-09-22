@@ -51,6 +51,21 @@
         </menu>
         
         <h4>Manual Actions</h4>
+        <!-- Seer Tool for narrator -->
+        <form action="game.html" method="get">
+          <label for="seer-check">Seer Investigation:</label>
+          <select id="seer-check" name="seer-check" required>
+            <option value="">Select target player...</option>
+            <option value="john">John</option>
+            <option value="sarah">Sarah</option>
+            <option value="mike">Mike</option>
+          </select>
+          <button type="submit">Inspect Role</button>
+        </form>
+    
+    <!-- Placeholder for the result -->
+    <p><em>Inspected Role Result (example): Sarah is a Werewolf</em></p>
+        <!-- Eliminate Tool for narrator -->
         <form action="game.html" method="get">
           <label for="kill-player">Eliminate Player:</label>
           <select id="kill-player" name="eliminated">
@@ -63,7 +78,7 @@
         </form>
       </section>
 
-      <hr />
+      <hr>
 
       <!-- 2. ALIVE PLAYER VIEW -->
       <section id="alive-view">
