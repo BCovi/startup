@@ -23,14 +23,14 @@
     <main>
       <h2>Game Room: Active</h2>
       <p>Current Phase: <span class="phase-placeholder">Daytime</span></p>
-      
+
       <!-- Secret Role Reveal -->
 <section id="role-reveal">
   <h3>Your Secret Role</h3>
   
   <div class="card-container">
     <p><em>Keep your screen hidden from others!</em></p>
-    <button type="button">Tap to Reveal Card</button>
+    <button type="button">Tap to Reveal Card <i>(not functional yet)</i></button>
     
     <!-- This text will be hidden by default later using CSS/React -->
     <div class="revealed-role">
@@ -93,7 +93,13 @@
       <!-- 3. DEAD PLAYER VIEW -->
       <section id="dead-view">
         <h3>You have been eliminated</h3>
-        <p>You can no longer vote. Please wait quietly for the game to conclude.</p>
+        <img
+         src="https://images.unsplash.com/vector-1774963118991-70e78d88ca21?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+        width="250"
+        />
+        <p>You can no longer vote. <br>
+          <i>Please wait quietly for the game to conclude.</i>
+        </p>
       </section>
 
       <hr />
@@ -113,7 +119,7 @@
       <span>Braden Covington</span>
       <br />
       <!-- Ensure this URL points to your actual startup repository -->
-      <a href="https://github.com/yourusername/startup">GitHub</a>
+      <a href="https://github.com/Bcovi/startup">GitHub</a>
     </footer>
   </body>
 </html>
