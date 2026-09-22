@@ -69,19 +69,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] *Prerequisite: Simon HTML deployed* - Deployed Simon HTML to production environment.
-- [x] *Prerequisite: GitHub link on home page* - Added footer on all pages with link to repository.
-- [x] *Prerequisite: Notes in README.md* - Documented completed deliverables below.
-- [x] *Prerequisite: Git commits* - Created multiple commits across multiple days demonstrating ownership.
-- [x] *HTML pages* - Created index.html, lobby.html, game.html, and about.html for application structure.
-- [x] *Proper HTML element usage* - Used standard tags including body, nav, main, header, section, form, and footer.
-- [x] *Links* - Built navigation menu linking all four pages. Navigation is available on every page.
-- [x] *Text* - Added descriptions of the app and how to play it on about and index, along with text to help players move throughout pages.
-- [x] *3rd party API placeholder* - Embedded an example of DiceBear avatar API call on the about page. Just a single call to show it, but it will be used on other pages when applied.
-- [x] *Images* - Added a themed banner image on the index page, and game elimination skull icon on the game page.
-- [x] *Login placeholder* - Created login form with username, password, buttons, and state note.
-- [x] *DB data placeholder* - Created global leaderboard table populated with sample match statistics. (obviously not real data yet)
-- [x] *WebSocket placeholder* - Added live player room list in lobby and live vote tally on game view.
+- [x] I completed the prerequisites for this deliverable. I deployed simon to the production environment. I linked my github page prominently on the application home page. I documented what I added and modified with this deliverable below. I had many git commits across multiple days.
+- [x] **HTML pages** - Created index.html, lobby.html, game.html, and about.html for application structure.
+- [x] **Proper HTML element usage** - Used standard tags including body, nav, main, header, section, form, and footer across all pages.
+- [x] **Links** - Built navigation menu linking all four pages. Navigation is available on every page.
+- [x] **Text** - Added descriptions of the app and how to play it on about and index, along with text to help players move throughout pages.
+- [x] **3rd party API placeholder** - Embedded an example of DiceBear avatar API call on the about page. Just a single call to show it, but it will be used on other pages when applied.
+- [x] **Images** - Added a themed banner image on the index page, and game elimination skull icon on the game page. Also an image from DiceBear API on the about page.
+- [x] **Login placeholder** - Created login form with username, password, buttons, and state note on the index page.
+- [x] **DB data placeholder** - Created global leaderboard table populated with sample match statistics on the index page. (obviously not real data yet)
+- [x] **WebSocket placeholder** - Added live player room list in lobby and live vote tally on game view on the lobby and game pages.
 
 ## 🚀 CSS deliverable
 
