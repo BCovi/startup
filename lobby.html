@@ -13,7 +13,7 @@
           <li><a href="about.html">About</a></li>
         </menu>
       </nav>
-      <hr />
+      <hr>
     </header>
 
     <main>
@@ -32,7 +32,7 @@
         </form>
       </section>
 
-      <hr />
+      <hr>
 
       <!-- Active Room (What users see after joining/creating) -->
       <section id="active-room">
@@ -49,5 +49,69 @@
             <li>Mike <i>(Joined 12s ago...)</i></li>
           </ul>
         </div>
+        <hr>
 
-        <hr />
+        <div id="host-controls">
+          <h3>Narrator Role Setup</h3>
+          <p>Configure the deck for your game:</p>
+          
+          <form action="game.html" method="get">
+            <div>
+              <label for="werewolf-count">Werewolves:</label>
+              <input 
+                type="number" 
+                id="werewolf-count" 
+                name="werewolf-count" 
+                value="1" 
+                min="1" 
+                max="5" 
+                required 
+              />
+            </div>
+            <br>
+            <div>
+              <label for="seer-count">Seers:</label>
+              <input 
+                type="number" 
+                id="seer-count" 
+                name="seer-count" 
+                value="1" 
+                min="1" 
+                max="5" 
+                required 
+              />
+            </div>
+            <br>
+            <div>
+              <label for="doctor-count">Doctors:</label>
+              <input 
+                type="number" 
+                id="doctor-count" 
+                name="doctor-count" 
+                value="1" 
+                min="1" 
+                max="5" 
+                required 
+              />
+            </div>
+            <br>
+            <div>
+              <label for="villager-count">Villagers:</label>
+              <input 
+                type="number" 
+                id="villager-count" 
+                name="villager-count" 
+                value="1" 
+                min="1" 
+                max="5" 
+                required 
+              />
+            </div>
+            
+            <br>
+            <button type="submit">Start Game</button>
+          </form>
+
+        </div>
+      </section>
+    </main>
