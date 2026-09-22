@@ -69,16 +69,19 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] *Prerequisite: Simon HTML deployed* - Deployed Simon HTML to production environment.
+- [x] *Prerequisite: GitHub link on home page* - Added footer on all pages with link to repository.
+- [x] *Prerequisite: Notes in README.md* - Documented completed deliverables below.
+- [x] *Prerequisite: Git commits* - Created multiple commits across multiple days demonstrating ownership.
+- [x] *HTML pages* - Created index.html, lobby.html, game.html, and about.html for application structure.
+- [x] *Proper HTML element usage* - Used standard tags including body, nav, main, header, section, form, and footer.
+- [x] *Links* - Built navigation menu linking all four pages. Navigation is available on every page.
+- [x] *Text* - Added descriptions of the app and how to play it on about and index, along with text to help players move throughout pages.
+- [x] *3rd party API placeholder* - Embedded an example of DiceBear avatar API call on the about page. Just a single call to show it, but it will be used on other pages when applied.
+- [x] *Images* - Added a themed banner image on the index page, and game elimination skull icon on the game page.
+- [x] *Login placeholder* - Created login form with username, password, buttons, and state note.
+- [x] *DB data placeholder* - Created global leaderboard table populated with sample match statistics. (obviously not real data yet)
+- [x] *WebSocket placeholder* - Added live player room list in lobby and live vote tally on game view.
 
 ## 🚀 CSS deliverable
 
