@@ -17,7 +17,7 @@
           <li><a href="about.html">About</a></li>
         </menu>
       </nav>
-      <hr />
+      <hr>
     </header>
 
     <main>
@@ -40,7 +40,7 @@
   </div>
 </section>
 
-<hr />
+<hr>
       <!-- 1. NARRATOR VIEW -->
       <section id="narrator-view">
         <h3>Narrator Controls</h3>
@@ -92,18 +92,23 @@
       <li><button type="submit" name="vote" value="player1">John</button></li>
       <li><button type="submit" name="vote" value="player2">Sarah</button></li>
       <li><button type="submit" name="vote" value="player3">Mike</button></li>
+      <li><button type="submit" name="vote" value="player0">SKIP VOTE</button></li>
     </menu>
   </form>
 
+  <!-- Another Use of websocket to continually updat the voting counts.-->
   <h4>Live Tally</h4>
-  <ul>
-    <li><strong>John:</strong> 2 votes (Mike, Sarah)</li>
-    <li><strong>Sarah:</strong> 1 vote (John)</li>
-    <li><strong>Mike:</strong> 0 votes</li>
-  </ul>
-</section>
+<div id="live-tally">
+    <h3>Live Tally (WebSocket Realtime Updates)</h3>
+    <ul>
+      <li><strong>John:</strong> 2 votes (Mike, Sarah)</li>
+      <li><strong>Sarah:</strong> 1 vote (John)</li>
+      <li><strong>Mike:</strong> 0 votes</li>
+    </ul>
+  </div>
+  </section>
 
-      <hr />
+      <hr>
 
       <!-- 3. DEAD PLAYER VIEW -->
       <section id="dead-view">
@@ -117,20 +122,11 @@
         </p>
       </section>
 
-      <hr />
+      <hr>
       
-      <!-- WebSocket Data Placeholder (Rubric Requirement) -->
-      <section id="live-updates">
-        <h3>Live Game Feed</h3>
-        <ul>
-          <li><em>Sarah locked in a vote...</em></li>
-          <li><em>John locked in a vote...</em></li>
-        </ul>
-      </section>
     </main>
-
     <footer>
-      <hr />
+      <hr>
       <span>Braden Covington</span>
       <br />
       <!-- Ensure this URL points to your actual startup repository -->
