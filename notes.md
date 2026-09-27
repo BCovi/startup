@@ -111,7 +111,21 @@ This file represents what I have learned about web programming.
 - Keyframe Logic: Specifies styles at key points; `from` (0%) and `to` (100%) represent start and end, while percentage values (e.g., `50%`, `95%`) define intermediate steps.
 - Property Control: Controls playback using `animation-iteration-count` (e.g., `infinite` or specific numbers) and `animation-timing-function`.
 - Interpolation: Browsers automatically calculate and smoothly transition frames between keyframe states.
-
+### Responsive Design
+- Definition: Designing web applications to dynamically reconfigure layout and styling based on device screen size and orientation.
+- Viewport Meta Tag: `<meta name="viewport" content="width=device-width, initial-scale=1" />` prevents mobile browsers from auto-scaling desktop layouts.
+- Display Property Modes: Controls layout behavior; `block` (full width), `inline` (content width), `none` (hidden/not rendered), `flex`, and `grid`.
+- Float Property: Moves elements left/right inside containers (`float: right;`), causing inline text to wrap around them automatically.
+- Media Queries: Uses `@media (condition) { ... }` (e.g., `@media (orientation: portrait)` or `@media (max-width: 600px)`) to conditionally apply CSS rules based on screen traits.
+### Grid
+- Display Mode: `display: grid;` turns a container's direct child elements into grid items.
+- Columns & Fractional Units: `grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));` creates auto-filling columns where `1fr` is a dynamic fraction of available space.
+- Rows & Gaps: `grid-auto-rows: 300px;` sets explicit row heights, while `grid-gap: 1em;` defines space between items.
+### Flexbox
+- Container Setup: `display: flex;` activates Flexbox on direct children. `flex-direction: row | column` sets the main layout axis.
+- Flex Sizing (`flex: <grow> <shrink> <basis>`): `flex: 0 80px` locks an element to a fixed height/width (0 growth, 80px basis), while `flex: 1` dynamically expands to fill remaining space.
+- Proportional Ratios: Sibling items with different growth values (e.g., `flex: 1` and `flex: 3`) divide available space proportionally.
+- Responsive Flex & Media Queries: Combining `@media` queries with Flexbox allows dynamic layout shifts (e.g., changing `flex-direction: row` to `column` on portrait screens) or hiding components (`display: none;`).
 
 
 
