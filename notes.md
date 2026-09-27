@@ -48,26 +48,26 @@ This file represents what I have learned about web programming.
 ## HTML
 ### HTML Introducution
 - Purpose: Provides the foundational content structure of web pages, separate from styling (CSS) and interactivity (JavaScript).
-- Elements & Tags: HTML uses elements enclosed in tags (e.g., <p>...</p>) to define structure. Closing tags include a forward slash.
+- Elements & Tags: HTML uses elements enclosed in tags (e.g., `<p>...</p>`) to define structure. Closing tags include a forward slash.
 - Attributes: Placed inside the opening tag to describe specific details, using name/value pairs (e.g., id="unique", class="group").
 - Page Structure:
-    - <html>: The top-level container for the document.
-    - <head>: Contains metadata and the page <title>.
-    - <body>: Contains the entire visible content of the page.
-- Hyperlinks: Created using the anchor element (<a>) with the href attribute defining the destination address.
-- Comments: Written as <!-- comment here --> and are completely ignored by the browser.
+    - `<html>`: The top-level container for the document.
+    - `<head>`: Contains metadata and the page <title>.
+    - `<body>`: Contains the entire visible content of the page.
+- Hyperlinks: Created using the anchor element (`<a>`) with the href attribute defining the destination address.
+- Comments: Written as \<!-- comment here --> and are completely ignored by the browser.
 - Default File: Web servers automatically serve index.html when a directory is requested without a specific file name.
-- Special Characters: Reserved characters must be escaped using entity syntax (e.g., using &lt; instead of <).
+- Special Characters: Reserved characters must be escaped using entity syntax (e.g., using `&lt`; instead of `<`).
 ### Structure
 - Provides structure and content to web applications using standard container elements (like `body`, `header`, `footer`, `main`, `section`, `aside`, `p`, `table`, `ol`/`ul`, `div`, and `span`).
 - Proper semantic element usage ensures web pages make logical sense to developers and are correctly parsed by search engine crawlers and screen readers.
 - Block elements (like `div` and `p`) create distinct layout blocks in the document flow, while inline elements (like `b` and `span`) sit inside block elements without disrupting text flow.
 ### Input
 *More info that might be useful on the page*
-- The <form> element acts as a container for collecting and submitting user data, using action (destination URL) and method (GET appends data to the URL; POST sends data in the request body).
+- The `<form>` element acts as a container for collecting and submitting user data, using action (destination URL) and method (GET appends data to the URL; POST sends data in the request body).
 - Inputs inside a form require a name attribute to serve as the key when sending key-value data pairs to the server.
-- The <input> element uses the type attribute to define controls such as text, password, email, checkbox (inclusive choices), radio (exclusive choices), date, and color.
-- Labels (<label>) improve accessibility and usability by linking to input fields via the for attribute matching the input's id.
+- The `<input>` element uses the type attribute to define controls such as text, password, email, checkbox (inclusive choices), radio (exclusive choices), date, and color.
+- Labels (`<label>`) improve accessibility and usability by linking to input fields via the for attribute matching the input's id.
 - HTML5 provides built-in browser validation through input types (email, url, number), as well as attributes like required, minlength, and pattern (regular expressions).
 ### Media
 - HTML includes media elements for external files (`img`, `audio`, `video`) and internal vector/drawing graphics (`svg`, `canvas`).
@@ -80,9 +80,17 @@ This file represents what I have learned about web programming.
 ## CSS
 ### CSS
 - Rule Syntax: A rule consists of a selector and { property: value; } declarations (always end lines with ;).
-- Inclusion Methods: <link rel="stylesheet" href="..."> in <head> is best practice; inline styles and <style> blocks are lower priority.
+- Inclusion Methods: `<link rel="stylesheet" href="...">` in `<head>` is best practice; inline styles and <style> blocks are lower priority.
 - Specificity Order (Highest to Lowest): Inline Styles > ID (#id) > Class (.class) > Element (p) > Universal (*).Box Model (Inside Out): Content $\rightarrow$ Padding (inner space) $\rightarrow$ Border $\rightarrow$ Margin (outer space).
 - Box Sizing: box-sizing: border-box; includes padding and border in the total width/height, making layout math predictable.
+    - Example Code:
+    ```html
+    <body>
+        <p><span style="color:black">CSS</span></p>
+    </body>
+    ```
+### 
+
 
 
 ## React
