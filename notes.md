@@ -81,7 +81,8 @@ This file represents what I have learned about web programming.
 ### CSS
 - Rule Syntax: A rule consists of a selector and { property: value; } declarations (always end lines with ;).
 - Inclusion Methods: `<link rel="stylesheet" href="...">` in `<head>` is best practice; inline styles and <style> blocks are lower priority.
-- Specificity Order (Highest to Lowest): Inline Styles > ID (#id) > Class (.class) > Element (p) > Universal (*).Box Model (Inside Out): Content $\rightarrow$ Padding (inner space) $\rightarrow$ Border $\rightarrow$ Margin (outer space).
+- Specificity Order (Highest to Lowest): Inline Styles > ID (#id) > Class (.class) > Element (p) > Universal (*). 
+- Box Model (Inside Out): Content $\rightarrow$ Padding (inner space) $\rightarrow$ Border $\rightarrow$ Margin (outer space).
 - Box Sizing: box-sizing: border-box; includes padding and border in the total width/height, making layout math predictable.
     - Example Code:
     ```html
@@ -89,7 +90,28 @@ This file represents what I have learned about web programming.
         <p><span style="color:black">CSS</span></p>
     </body>
     ```
-### 
+### Selectors
+- Basic Selectors: Universal (`*`), Element (`p`), Class (`.class`), ID (`#id`), and Attribute (`[attr="val"]`).
+- Combinators: Descendant (`div p`), Direct Child (`div > p`), General Sibling (`div ~ p`), and Adjacent Sibling (`div + p`).
+- Child vs. Descendant: Direct child (`>`) targets only immediate children, whereas space (` `) targets nested descendants at any depth.
+- Pseudo-Classes: Targets states or positions, such as mouse interaction (`:hover`) or element index (`:nth-child(n)`).
+### Declarations & Styling
+- Common Properties: Sizing (`width`, `height`), spacing (`padding`, `margin`), borders (`border`, `border-radius`), layout (`display`, `position`), and typography (`color`, `font-weight`).
+- Typography Key: Thickness is controlled by `font-weight` (e.g., `400` normal, `700` bold), not "text-weight" or "text-thickness".
+- Relative Sizing: `%` (parent relative), `em` (parent font multiplier), `rem` (root element font multiplier), `vw`/`vh` (% of viewport width/height).
+- Absolute Sizing: `px` (fixed pixels).
+- Color Formats: Keywords (`red`), Hex (`#00FFAA`), RGB (`rgb(r, g, b, alpha)`), and HSL (`hsl(hue, sat%, light%, alpha)`).
+### Fonts
+- Font Families: `serif` (flourished tips), `sans-serif` (clean lines), `fixed`/monospace (equal character width), and `symbol`.
+- `font-family` Order: Accepts a fallback list of fonts; the browser uses the first available one installed or loaded.
+- `@font-face`: CSS rule used to load custom font files directly from a server path.
+- Third-Party Imports: Import hosted options (e.g., Google Fonts) using `@import url(...)` in CSS or `<link rel="stylesheet" href="...">` in HTML `<head>`.
+### Animation
+- Animation Definition: Defined using `@keyframes <name> { ... }` combined with `animation-name` and `animation-duration` properties.
+- Keyframe Logic: Specifies styles at key points; `from` (0%) and `to` (100%) represent start and end, while percentage values (e.g., `50%`, `95%`) define intermediate steps.
+- Property Control: Controls playback using `animation-iteration-count` (e.g., `infinite` or specific numbers) and `animation-timing-function`.
+- Interpolation: Browsers automatically calculate and smoothly transition frames between keyframe states.
+
 
 
 
