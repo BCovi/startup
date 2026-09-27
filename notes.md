@@ -77,6 +77,12 @@ This file represents what I have learned about web programming.
 - SVG (Scalable Vector Graphics): Renders vector graphics inline directly within HTML markup using XML tags like `<svg>` and `<circle>`.
 - Canvas: Provides a blank standard container (`<canvas>`) meant for 2D drawing and animations created dynamically via JavaScript code (`getContext('2d')`).
 
+## CSS
+### CSS
+- Rule Syntax: A rule consists of a selector and { property: value; } declarations (always end lines with ;).
+- Inclusion Methods: <link rel="stylesheet" href="..."> in <head> is best practice; inline styles and <style> blocks are lower priority.
+- Specificity Order (Highest to Lowest): Inline Styles > ID (#id) > Class (.class) > Element (p) > Universal (*).Box Model (Inside Out): Content $\rightarrow$ Padding (inner space) $\rightarrow$ Border $\rightarrow$ Margin (outer space).
+- Box Sizing: box-sizing: border-box; includes padding and border in the total width/height, making layout math predictable.
 
 
 ## React
