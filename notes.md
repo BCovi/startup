@@ -3,8 +3,8 @@ I love web programming
 
 This file represents what I have learned about web programming.
 
-- [My startup](https://startup.cs260.click)
-- [My simon](https://simon.cs260.click)
+- [My startup](https://startup.nightfallapp.click)
+- [My simon](https://simon.nightfallapp.click)
 
 ## Helpful links
 
