@@ -28,8 +28,6 @@
 
     <main>
 
-      <hr>
-
       <!-- Login Placeholder Requirement -->
       <section id="authentication" class="container my-5 d-flex justify-content-center">
         <div class="card shadow-sm border-secondary p-4 text-center" style="max-width: 450px; width: 100%;">
@@ -71,45 +69,53 @@
       <hr>
 
       <!-- Database Data Placeholder Requirement -->
-      <section id="global-leaderboard">
-        <h3>Global Leaderboard</h3>
-        <p>Top players across all hosted matches (Pulled from Database) [Database Place Holder]:</p>
-        <p><I>(Example table of data below)</I></p>
-        
-        <table>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player</th>
-              <th>Total Wins</th>
-              <th>Win Rate</th>
-              <th>Most Played Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Braden</td>
-              <td>28</td>
-              <td>65%</td>
-              <td>Werewolf</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Sarah</td>
-              <td>21</td>
-              <td>55%</td>
-              <td>Seer</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Mike</td>
-              <td>12</td>
-              <td>40%</td>
-              <td>Villager</td>
-            </tr>
-          </tbody>
-        </table>
+      <section id="global-leaderboard" class="container my-5">
+        <div class="card shadow-sm border-secondary p-4">
+          <h3 class="mb-2 text-center">Global Leaderboard</h3>
+          <p class="text-muted text-center mb-1">
+            Top players across all hosted matches (Pulled from Database) [Database Place Holder]:
+          </p>
+          <p class="text-muted small text-center mb-4">
+            <i>(Example table of data below)</i>
+          </p>
+          
+          <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Rank</th>
+                  <th scope="col">Player</th>
+                  <th scope="col">Win Rate</th>
+                  <th scope="col">Total Wins</th>
+                  <th scope="col">Most Played Role</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Braden</td>
+                  <td>65%</td>
+                  <td>28</td>
+                  <td>Werewolf</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Sarah</td>
+                  <td>55%</td>
+                  <td>21</td>
+                  <td>Seer</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Mike</td>
+                  <td>40%</td>
+                  <td>12</td>
+                  <td>Villager</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
     </main>
 
