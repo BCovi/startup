@@ -126,7 +126,26 @@ This file represents what I have learned about web programming.
 - Flex Sizing (`flex: <grow> <shrink> <basis>`): `flex: 0 80px` locks an element to a fixed height/width (0 growth, 80px basis), while `flex: 1` dynamically expands to fill remaining space.
 - Proportional Ratios: Sibling items with different growth values (e.g., `flex: 1` and `flex: 3`) divide available space proportionally.
 - Responsive Flex & Media Queries: Combining `@media` queries with Flexbox allows dynamic layout shifts (e.g., changing `flex-direction: row` to `column` on portrait screens) or hiding components (`display: none;`).
-
+### CSS Frameworks
+- **Purpose:** Packages of pre-built CSS rulesets and JavaScript components that speed up layout development and create consistent web user experiences.
+- **Tailwind vs. Bootstrap:**
+  - **Tailwind:** Utility-first framework applying small, single-purpose classes directly onto HTML elements.
+  - **Bootstrap:** Component-based framework providing complete, pre-styled UI elements via rich CSS class rulesets.
+### Bootstrap
+- **CDN Integration:**
+  - Add the CSS `<link>` tag inside the `<head>` element.
+  - Add the JS bundle `<script>` tag at the **end** of `<body>` for interactive components (carousel, modal, collapse, accordion).
+- **Package Manager:** Can also be downloaded for local serving using Node Package Manager (`npm install bootstrap@5.3.3`).
+- **Styling:** Applied by adding specific class names to HTML elements (e.g., `class="btn btn-primary"`).
+### Tailwind CSS
+- **Core Philosophy:** A utility-first framework providing low-level CSS class primitives (e.g., `bg-blue-400`, `p-4`, `flex`) applied directly inside HTML elements, rather than using pre-styled component classes.
+- **Build Toolchain & Performance:** Scans referenced class names in your markup using a build processor (such as Vite) to dynamically build a custom, purged CSS file containing *only* used styles, preventing CSS bloat.
+- **Component Workflow:** Best paired with web component frameworks (like React) to encapsulate styled markup into reusable components and eliminate repetitive inline class lists.
+### Tailwind vs. Bootstrap
+- **Design Philosophy:** Tailwind uses utility primitives for atomic, granular styling; Bootstrap uses pre-packaged component classes (e.g., `card`, `btn-primary`).
+- **Customization & Freedom:** Tailwind allows complete control over layout, spacing, and colors without file switching; Bootstrap provides faster out-of-the-box UIs but requires CSS overrides for custom branding.
+- **File Size:** Tailwind generates smaller production CSS bundles by eliminating unused rules; Bootstrap ships larger static stylesheets containing unused component styles.
+- **Setup & Tooling:** Use the CDN script (`https://cdn.tailwindcss.com`) for rapid prototyping, or install `@tailwindcss/vite` with `@import 'tailwindcss';` for production builds.
 
 
 ## React
