@@ -1,17 +1,20 @@
+/* --- IMPORTED FONTS (Google Fonts) --- */
 @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap&family=Cinzel:wght@400..900&display=swap');
 
+/* --- Use of imported font 1 --- */
 .navbar-brand {
   font-family: 'Creepster', system-ui, cursive;
   font-size: 2rem;
   letter-spacing: 1px;
 }
-
+/* --- Use of imported font 2 --- */
 .nav-link, h1, h2 {
   font-family: 'Cinzel', system-ui, cursive;
   font-size: 1rem;
   letter-spacing: 1px;
 }
 
+/* --- Element Selector --- */
 body {
   background-color: #181a1d;
   color: #e0e6ed;
@@ -21,6 +24,7 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* --- Class Selectors --- */
 .card {
   background-color: #212529;
   border-color: #343a40 !important;
@@ -35,6 +39,13 @@ body {
   color: #eef1f5;
 }
 
+/* --- ID Selector --- */
+#main-nav {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #333333;
+}
+
+/* --- Pseudo Selectors --- */
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   color: #e0e6ed;
   background-color: rgba(255, 255, 255, 0.03);
@@ -50,7 +61,9 @@ body {
   background-color: rgba(255, 255, 255, 0.00);
 }
 
+/* --- Element Selector --- */
 main {
   flex: 1;
 }
 
+/* --- Selectors also used throughout the other CSS files. --- */
