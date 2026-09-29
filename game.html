@@ -121,31 +121,54 @@
       <hr>
 
       <!-- 2. ALIVE PLAYER VIEW -->
-      <section id="alive-view">
-  <h3>Daytime Voting</h3>
-  
-  <p><strong>Time Remaining: <time datetime="PT45S">00:45</time></strong></p>
+      <section id="alive-view" class="card bg-dark text-light border-secondary shadow p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
+          <h2 class="h4 mb-0">Daytime Voting</h2>
+          <span class="badge bg-danger fs-6 px-3 py-2 border border-light-subtle shadow-sm">
+            <time datetime="PT45S">00:45</time>
+          </span>
+        </div>
 
-  <p>Select a player to eliminate:</p>
-  <form action="game.html" method="get">
-    <menu>
-      <li><button type="submit" name="vote" value="player1">John</button></li>
-      <li><button type="submit" name="vote" value="player2">Sarah</button></li>
-      <li><button type="submit" name="vote" value="player3">Mike</button></li>
-      <li><button type="submit" name="vote" value="player0">SKIP VOTE</button></li>
-    </menu>
-  </form>
+        <p class="text-white-50 small mb-3">
+          Select a player to cast your vote for elimination:<br>
+          <span class="fst-italic text-white-50">(WebSocket list of players will update live)</span>
+        </p>
 
-  <!-- Another Use of websocket to continually updat the voting counts.-->
-  <div id="live-tally">
-    <h3>Live Tally (WebSocket Realtime Updates)</h3>
-    <ul>
-      <li><strong>John:</strong> 2 votes (Mike, Sarah)</li>
-      <li><strong>Sarah:</strong> 1 vote (John)</li>
-      <li><strong>Mike:</strong> 0 votes</li>
-    </ul>
-  </div>
-  </section>
+        <!-- Voting Buttons -->
+        <form action="game.html" method="get" class="mb-4">
+          <div class="d-grid gap-2 d-sm-flex flex-wrap">
+            <button type="submit" name="vote" value="player1" class="btn btn-outline-light flex-fill py-2 fw-semibold">John</button>
+            <button type="submit" name="vote" value="player2" class="btn btn-outline-light flex-fill py-2 fw-semibold">Sarah</button>
+            <button type="submit" name="vote" value="player3" class="btn btn-outline-light flex-fill py-2 fw-semibold">Mike</button>
+            <button type="submit" name="vote" value="player0" class="btn btn-outline-secondary flex-fill py-2 fw-semibold">SKIP VOTE</button>
+          </div>
+        </form>
+
+        <!-- Real-Time Live Tally Box -->
+        <div id="live-tally" class="border border-secondary rounded p-3 bg-black bg-opacity-40">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="h6 mb-0 text-uppercase tracking-wide text-white-50">Live Tally</h3>
+            <span class="badge bg-info bg-opacity-10 text-info border border-info border-opacity-25 small">
+              (WebSocket Realtime)
+            </span>
+          </div>
+
+          <ul class="list-group list-group-flush bg-transparent">
+            <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
+              <span><strong>John</strong> <span class="text-white-50 small ms-1">(Mike, Sarah)</span></span>
+              <span class="badge bg-danger rounded-pill">2 votes</span>
+            </li>
+            <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
+              <span><strong>Sarah</strong> <span class="text-white-50 small ms-1">(John)</span></span>
+              <span class="badge bg-warning text-dark rounded-pill">1 vote</span>
+            </li>
+            <li class="list-group-item bg-transparent text-light border-0 d-flex justify-content-between align-items-center px-0 py-2">
+              <span><strong>Mike</strong></span>
+              <span class="badge bg-secondary rounded-pill">0 votes</span>
+            </li>
+          </ul>
+        </div>
+      </section>
 
       <hr>
 
