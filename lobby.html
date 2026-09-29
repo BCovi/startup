@@ -31,18 +31,46 @@
 
     <main>
       <!-- Join or Create a Room -->
-      <section id="lobby-entry">
-        <h2>Join a Game</h2>
-        <form action="lobby.html" method="get">
-          <label for="room-code">Room Code:</label>
-          <input type="text" id="room-code" name="room-code" placeholder="e.g. ABCD" />
-          <button type="submit">Join Room</button>
-        </form>
+      <section id="lobby-entry" class="container my-5">
+        <div class="row g-4">
+          
+          <!-- Join a Game Card -->
+          <div class="col-md-6">
+            <div class="card shadow-sm border-secondary h-100 p-4">
+              <h2 class="h4 card-title mb-3">Join a Game</h2>
+              <form action="lobby.html" method="get">
+                <div class="mb-3">
+                  <label for="room-code" class="form-label">Room Code:</label>
+                  <input 
+                    type="text" 
+                    id="room-code" 
+                    name="room-code" 
+                    class="form-control text-uppercase" 
+                    placeholder="e.g. ABCD" 
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary w-100 fw-semibold">Join Room</button>
+              </form>
+            </div>
+          </div>
 
-        <h2>Host a Game</h2>
-        <form action="lobby.html" method="get">
-          <button type="submit">Create New Room (Become Narrator)</button>
-        </form>
+          <!-- Host a Game Card -->
+          <div class="col-md-6">
+            <div class="card shadow-sm border-secondary h-100 p-4 d-flex flex-column justify-content-between">
+              <div>
+                <h2 class="h4 card-title mb-3">Host a Game</h2>
+                <p class="text-white-50 small mb-4">
+                  Start a new session as the Narrator to manage roles and lead the match.
+                </p>
+              </div>
+              <form action="lobby.html" method="get">
+                <button type="submit" class="btn btn-success w-100 fw-semibold mt-auto py-2">
+                  Create New Room (Become Narrator)
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
 
       <hr>
