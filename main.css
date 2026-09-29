@@ -7,9 +7,40 @@
 }
 
 body {
+  background-color: #181a1d;
+  color: #e0e6ed;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.card {
+  background-color: #212529;
+  border-color: #343a40 !important;
+  color: #e0e6ed;
+}
+
+.form-label {
+  color: #cfd8dc;
+}
+
+.table {
+  color: #e0e6ed;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  color: #e0e6ed;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.table-striped > tbody > tr:nth-of-type(even) > * {
+  color: #e0e6ed;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.table-hover > tbody > tr:hover > * {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.00);
 }
 
 main {
