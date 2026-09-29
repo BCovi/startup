@@ -1,0 +1,21 @@
+/* Card Container Hover Glow */
+.card-container {
+  max-width: 1000px;
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-container:hover {
+  border-color: rgba(220, 53, 69, 0.6) !important;
+  box-shadow: 0 0 15px rgba(220, 53, 69, 0.2);
+}
+
+/* Reveal Button Hover */
+.role-toggle-btn {
+  transition: transform 0.2s ease;
+}
+
+.role-toggle-btn:hover {
+  transform: translateY(-2px);
+  transform: scale(1.1)
+}

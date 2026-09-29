@@ -30,24 +30,38 @@
     </header>
 
     <main>
-      <h2>Game Room: Active</h2>
-      <p>Current Phase: <span class="phase-placeholder">Daytime</span></p>
+      <!-- Phase & Room Header Banner -->
+      <div class="d-flex justify-content-between align-items-center bg-black bg-opacity-40 border border-secondary rounded p-3 mb-4 shadow-sm">
+        <div>
+          <h1 class="h4 mb-0 fw-bold">Game Room: <span class="text-success">Active</span></h1>
+          <small class="text-white-50">Room Code: #8492</small>
+        </div>
+        <div>
+          <span class="badge bg-warning text-dark fs-6 px-3 py-2 border border-light-subtle shadow-sm">
+            ☀️ Daytime Phase
+          </span>
+        </div>
+      </div>
 
       <!-- Secret Role Reveal -->
-<section id="role-reveal">
-  <h3>Your Secret Role</h3>
-  
-  <div class="card-container">
-    <p><em>Keep your screen hidden from others!</em></p>
-    <button type="button">Tap to Reveal Card <i>(not functional yet)</i></button>
-    
-    <!-- This text will be hidden by default later using CSS/React -->
-    <div class="revealed-role">
-      <h4>You are a: <strong>Werewolf</strong></h4>
-      <p>Goal: Eliminate the town without getting caught.</p>
-    </div>
-  </div>
-</section>
+      <section id="role-reveal" class="card bg-dark text-light border-secondary shadow p-4 mb-4 text-center">
+        <h2 class="h5 text-uppercase tracking-wide text-white-50 mb-1">Your Secret Role</h2>
+        <p class="small text fst-italic mb-3">Keep your screen hidden from others!</p>
+
+        <div class="card-container mx-auto p-4 border border-secondary rounded bg-black bg-opacity-50 shadow-sm">
+          <button type="button" class="btn btn-outline-warning btn-sm mb-3 px-3 py-2 role-toggle-btn">
+            👁️ Tap to Reveal Card <i>(not functional yet)</i>
+          </button>
+
+          <div class="revealed-role mt-2">
+            <div class="text-uppercase small text-white-50 mb-1">You are a</div>
+            <h3 class="display-5 fw-bold text-danger mb-2">Werewolf 🐺</h3>
+            <p class="card-text text-white-50 fs-6 mb-0">
+              <strong>Goal:</strong> Eliminate the town without getting caught.
+            </p>
+          </div>
+        </div>
+      </section>
 
 <hr>
       <!-- 1. NARRATOR VIEW -->
