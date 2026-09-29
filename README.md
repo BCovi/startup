@@ -12,7 +12,7 @@ Gathering your friends together for an awesome night of social deduction and spo
 
 ### Design
 
-![Design image](FrontPage.png)![Design image](MiddlePage.png)![Design image](VotingPage.png)
+![Design image](Images/FrontPage.png)![Design image](Images/MiddlePage.png)![Design image](Images/VotingPage.png)
 
 
 
