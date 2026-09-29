@@ -18,3 +18,7 @@
 .role-toggle-btn:hover {
   transform: translateY(-2px) scale(1.1);
 }
+
+.skull-icon {
+  max-height: 200px;
+}
