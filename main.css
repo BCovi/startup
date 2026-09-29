@@ -1,8 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap&family=Cinzel:wght@400..900&display=swap');
 
 .navbar-brand {
   font-family: 'Creepster', system-ui, cursive;
   font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.nav-link, h1, h2 {
+  font-family: 'Cinzel', system-ui, cursive;
+  font-size: 1rem;
   letter-spacing: 1px;
 }
 
@@ -12,6 +18,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Inter', sans-serif;
 }
 
 .card {
