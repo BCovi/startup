@@ -20,3 +20,10 @@
 .avatar-preview:hover {
   transform: scale(1.2);
 }
+
+/* Reduce hero image height on mobile viewports */
+@media (max-width: 576px) {
+  .hero-img {
+    max-height: 200px;
+  }
+}
