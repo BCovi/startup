@@ -29,6 +29,7 @@
       </nav>
     </header>
 
+
     <main>
       <!-- Join or Create a Room -->
       <section id="lobby-entry" class="container my-5">
@@ -76,32 +77,41 @@
       <hr>
 
       <!-- Active Room (What users see after joining/creating) -->
-      <section id="active-room">
-        <h2>Room Code: ABCD</h2>
-        
-        <!-- WebSocket Data Placeholder -->
-        <div id="live-players">
-          <h3>Connected Players (WebSocket Placeholder; will update automatically)</h3>
-          <p>Total Players: 3</p>
-          <p><i>Dicebear generated user avatars might go here as well.</i></p>
-          <ul>
-            <li>Braden (Narrator)</li>
-            <li>Sarah <i>(Joined just now...)</i></li>
-            <li>Mike <i>(Joined 12s ago...)</i></li>
+      <section id="active-room" class="container my-5">
+        <div class="text-center mb-4">
+          <h2 class="display-6">Room Code: <span class="text-warning fw-bold">ABCD</span></h2>
+        </div>
+
+        <!-- Connected Players Card -->
+        <div id="live-players" class="card shadow-sm border-secondary mb-5">
+          <div class="card-header border-secondary text-center py-3">
+            <h3 class="h4 mb-1">Connected Players (3)</h3>
+            <p class="text-white-50 small mb-0">(WebSocket Placeholder; will update automatically)</p>
+            <p class="text-white-50 small mb-0"><i>Dicebear generated user avatars might go here as well.</i></p>
+          </div>
+          
+          <ul class="list-group list-group-flush text-center fs-5">
+            <li class="list-group-item bg-transparent text-light py-3 border-secondary">
+              👑 Braden <span class="badge bg-success ms-2">Narrator</span>
+            </li>
+            <li class="list-group-item bg-transparent text-light py-3 border-secondary">
+              Sarah <span class="text-white-50 fs-6"><i>(Joined just now...)</i></span>
+            </li>
+            <li class="list-group-item bg-transparent text-light py-3 border-secondary">
+              Mike <span class="text-white-50 fs-6"><i>(Joined 12s ago...)</i></span>
+            </li>
           </ul>
         </div>
-        <hr>
 
         <div id="host-controls">
           <h3>Narrator Role Setup</h3>
           <form action="game.html" method="get">
     
-            <!-- 1. The fieldset wraps the related role inputs -->
+            
             <fieldset>
-              <!-- 2. Legend goes FIRST inside fieldset -->
+              
               <legend>Select Role Quantities</legend>
 
-              <!-- 3. Each input has a matching <label> -->
               <p>
                 <label for="mafia-count">Mafia / Werewolves:</label>
                 <input type="number" id="mafia-count" name="mafia" min="1" max="10" value="2" />
@@ -123,7 +133,6 @@
               </p>
             </fieldset>
 
-            <!-- 4. Submit button sits outside the fieldset, inside the form -->
             <br />
             <button type="submit">Start Game</button>
           </form>
