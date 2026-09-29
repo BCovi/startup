@@ -29,26 +29,28 @@
       </nav>
     </header>
 
-    <main>
-      <!-- Application Description (Textual Content) -->
-      <section id="about-game">
-        <h2>About Nightfall</h2>
-        <p>
+    <!-- Main Content Container -->
+    <main class="container my-5" style="max-width: 850px;">
+      <!-- Application Description -->
+      <section id="about-game" class="card bg-dark text-light border-secondary shadow-sm p-4 mb-4">
+        <h1 class="display-6 mb-3 border-bottom border-secondary pb-2">About Nightfall</h1>
+        <p class="lead">
           Nightfall is a digital game manager for social deduction games like Mafia and Werewolf.
         </p>
-        <div class="banner-container">
+        
+        <!-- Responsive Forest Banner Image -->
+        <div class="banner-container text-center my-3">
           <img 
             src="Images/forest_main.jpg" 
             alt="Nightfall full moon over a spooky forest" 
-            width="600"
-            height="300" 
+            class="img-fluid rounded shadow border border-secondary hero-img"
           />
         </div>
-        <p>
+        
+        <p class="text-white-50 fs-5 mt-2 mb-0">
           Gather your friends, have everyone join the same digital room on their phones, and let the app handle the heavy lifting. Nightfall automatically distributes secret roles, coordinates night actions, and tallies daytime votes. No physical cards, no peeking, and no confusion.
         </p>
       </section>
-
       <hr />
     <!-- 3rd Party API Placeholder -->
       <section id="api-placeholder">
