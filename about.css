@@ -12,3 +12,11 @@
   transform: scale(1.01);
   filter: brightness(1.1);
 }
+
+.avatar-preview {
+  transition: transform 0.25s ease;
+}
+
+.avatar-preview:hover {
+  transform: scale(1.2);
+}
