@@ -84,13 +84,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Visually appealing colors and layout. No overflowing elements.** - I did not complete this part of the deliverable.
-- [ ] **Use of a CSS framework** - I did not complete this part of the deliverable.
-- [ ] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
-- [ ] **Use of a imported font** - I did not complete this part of the deliverable.
-- [ ] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable - Deployed Simon CSS, linked my GitHub repository prominently in the footer (source), and maintained consistent Git commits.
+- [x] **Visually appealing colors and layout. No overflowing elements.** - Applied a dark thematic palette fitting for a werewolf/mafia game. Elements do not overflow on smaller viewports, and table content scrolling is contained locally using responsive table containers.
+- [x] **Use of a CSS framework** - Heavily integrated Bootstrap across all pages for navigation bars, cards, buttons, form inputs, and responsive grid layouts.
+- [x] **All visual elements styled using CSS** - Every element across all four pages is styled using a combination of Bootstrap classes and custom CSS files (`main.css`, `lobby.css`, `game.css`, `about.css`).
+- [x] **Responsive to window resizing using flexbox and/or grid display** - Layouts automatically flex, stack, and align cleanly across desktop and mobile screens using Bootstrap's built-in flexbox grid.
+- [x] **Use of a imported font** - Imported two custom Google Fonts in `main.css` (`Creepster` for the brand logo and `Cinzel` for headings and navigation links).
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - Implemented all four selector types across stylesheets, with explicit coverage in `main.css`: element (`body`, `main`), class (`.card`, `.nav-link`), ID (`#main-nav`), and pseudo-class (`:hover`, `tr:nth-of-type(even)`).
 
 ## 🚀 React part 1: Routing deliverable
 
