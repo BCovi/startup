@@ -103,38 +103,71 @@
           </ul>
         </div>
 
-        <div id="host-controls">
-          <h3>Narrator Role Setup</h3>
-          <form action="game.html" method="get">
-    
-            
-            <fieldset>
-              
-              <legend>Select Role Quantities</legend>
+        <!-- Narrator Role Setup -->
+        <div id="host-controls" class="card shadow-sm border-secondary p-4">
+          <h3 class="h4 card-title border-bottom border-secondary pb-2 mb-3">Narrator Role Setup (Host Only)</h3>
 
-              <p>
-                <label for="mafia-count">Mafia / Werewolves:</label>
-                <input type="number" id="mafia-count" name="mafia" min="1" max="10" value="2" />
-              </p>
+            <form action="game.html" method="get">
+              <fieldset class="row g-3 text-center mb-4">
+              <legend class="h6 text-white-50 mb-3 text-start">Select Role Quantities</legend>
 
-              <p>
-                <label for="doctor-count">Doctor / Medic:</label>
-                <input type="number" id="doctor-count" name="doctor" min="0" max="5" value="1" />
-              </p>
+              <div class="col-6 col-md-3">
+                <label for="mafia-count" class="form-label">Mafia / Werewolves</label>
+                <input 
+                  type="number" 
+                  id="mafia-count" 
+                  name="mafia" 
+                  min="1" 
+                  max="10" 
+                  value="2" 
+                  class="form-control text-center mx-auto" 
+                  style="max-width: 90px;" 
+                />
+              </div>
 
-              <p>
-                <label for="detective-count">Detective / Sheriff:</label>
-                <input type="number" id="detective-count" name="detective" min="0" max="5" value="1" />
-              </p>
+              <div class="col-6 col-md-3">
+                <label for="doctor-count" class="form-label">Doctor / Medic</label>
+                <input 
+                  type="number" 
+                  id="doctor-count" 
+                  name="doctor" 
+                  min="0" 
+                  max="5" 
+                  value="1" 
+                  class="form-control text-center mx-auto" 
+                  style="max-width: 90px;" 
+                />
+              </div>
 
-              <p>
-                <label for="villager-count">Town / Villagers:</label>
-                <input type="number" id="villager-count" name="villager" min="1" max="20" value="4" />
-              </p>
+              <div class="col-6 col-md-3">
+                <label for="detective-count" class="form-label">Detective / Sheriff</label>
+                <input 
+                  type="number" 
+                  id="detective-count" 
+                  name="detective" 
+                  min="0" 
+                  max="5" 
+                  value="1" 
+                  class="form-control text-center mx-auto" 
+                  style="max-width: 90px;" 
+                />
+              </div>
+
+              <div class="col-6 col-md-3">
+                <label for="villager-count" class="form-label">Town / Villagers</label>
+                <input 
+                  type="number" 
+                  id="villager-count" 
+                  name="villager" 
+                  min="1" 
+                  max="20" 
+                  value="4" 
+                  class="form-control text-center mx-auto" 
+                  style="max-width: 90px;" 
+                />
+              </div>
             </fieldset>
-
-            <br />
-            <button type="submit">Start Game</button>
+            <button type="submit" class="btn btn-danger w-100 fw-semibold py-2 fs-5">Start Game</button>
           </form>
         </div>
       </section>
