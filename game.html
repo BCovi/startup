@@ -172,19 +172,39 @@
 
       <hr>
 
-      <!-- 3. DEAD PLAYER VIEW -->
-      <section id="dead-view">
-        <h3>You have been eliminated</h3>
-        <img
-         src="Images/skull_icon.png"
-         alt="Skull Image"
-         width="250"
-        />
-        <p>You can no longer vote. <br>
-          <i>Please wait quietly for the game to conclude.</i>
-        </p>
-      </section>
+      <!-- 3. DEAD / ELIMINATED PLAYER VIEW -->
+      <section id="dead-view" class="card bg-dark text-light border-danger shadow-lg p-4 p-md-5 mb-4 text-center">
+        <div class="py-4 py-md-5">
+          <!-- Eerie Skull Icon -->
+          <div class="mb-3">
+            <img src="Images/skull_icon.png" alt="Eliminated" class="img-fluid" style="max-height: 200px;">
+          </div>
 
+          <h2 class="display-6 fw-bold text-danger text-uppercase mb-2">You Have Been Eliminated</h2>
+          <div class="mb-4">
+            <span class="badge bg-danger bg-opacity-25 text-danger border border-danger border-opacity-50 px-3 py-2 fs-6">
+              Spectator Mode Active
+            </span>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+              <p class="text-white-50 fs-5 mb-4">
+                Silence! Dead players must remain quiet and may not vote or participate in town discussions.
+              </p>
+
+              <!-- Past Role Reminder Card -->
+              <div class="border border-secondary rounded p-3 bg-black bg-opacity-50 text-start">
+                <div class="text-white-50 small text-uppercase fw-semibold mb-1">Your Former Role</div>
+                <div class="pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
+                  <span class="fw-bold text-light">Werewolf 🐺</span>
+                  <span class="text-white-50 small">Eliminated</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <hr>
       
     </main>
