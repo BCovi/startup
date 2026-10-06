@@ -179,6 +179,25 @@ This file represents what I have learned about web programming.
   - `npm install <package>`: Installs dependencies into `node_modules`.
 - **Dependencies & Git:** The `node_modules` folder gets very large and **must** be listed in `.gitignore`. Running `npm install` reconstructs `node_modules` from `package.json`.
 
+### Debugging JavaScript
 
+- **Console Debugging:** Use `console.log()` to output variable values and execution state directly to the browser console (`F12` $\rightarrow$ **Console** tab).
+- **Interactive Console:** Inspect or temporarily override variables (e.g., `varCount = 50`) and execute raw JavaScript snippets live in the browser console.
+- **Browser Breakpoints:** In the DevTools **Sources** tab, click on line numbers in `.js` files to add breakpoints, allowing you to pause code execution, inspect scope variables, set watches, and step through lines step-by-step.
 
+### Debugging Node.js
 
+- **VS Code Debugger:** Run Node.js scripts using VS Code's native debugger (`F5` $\rightarrow$ select **Node.js**).
+- **Breakpoints & Controls:**
+  * Click to the left of line numbers to set red-dot breakpoints.
+  * Inspect variable values in the sidebar or by hovering over variables.
+  * Use `F10` (step over), `F11` (step into), `F5` (continue execution), and `Shift + F5` (stop debugging).
+- **Automatic Reloading (`--watch`):**
+  * Execute scripts with `node --watch main.js` to automatically restart Node when files change.
+  * Add `"runtimeArgs": ["--watch"]` in `.vscode/launch.json` to enable watch mode during VS Code debugging sessions.
+
+### Web Frameworks
+
+- **Purpose:** Frameworks simplify application development by providing tools for common tasks like modularizing code, creating Single Page Applications (SPAs), and managing reactivity.
+- **Component-Based Architecture:** Modern frameworks often combine HTML, CSS, and JavaScript into hybrid file formats (like React JSX or Vue SFC), shifting focus from separate files to functional, reusable components.
+- **Key Framework Tasks:** They abstract away low-level DOM manipulation, simplify state-driven UI updates, and improve overall developer productivity and code maintainability.
