@@ -225,3 +225,43 @@ This file represents what I have learned about web programming.
 - **Project Structure:** 
   * `index.html` loads `src/main.jsx`, which mounts `src/App.jsx` into `#root`.
   * Code files use `.jsx` extensions for proper JSX transpilation and IDE support.
+
+### React Notes
+
+- **Two Core Pillars:**
+  * **JSX:** Syntax for writing HTML-like UI markup directly inside JavaScript.
+  * **State:** Component data that automatically triggers a page re-render whenever it changes.
+
+- **JSX vs. `React.createElement` (Babel Transpilation):**
+  * Babel converts JSX into standard `React.createElement()` calls that the browser executes to create DOM elements.
+  * **`React.createElement` Syntax:** `React.createElement(tag, props, ...children)`
+    * Example: `React.createElement('ol', { style: { color: 'blue' } }, React.createElement('li', null, 'BYU'))`
+  * **JSX Syntax:** `<ol style={{ color: 'blue' }}><li>BYU</li></ol>`
+    * **Inline Styles:** Use double curly braces `style={{ color: 'blue' }}`.
+    * **JavaScript Expressions:** Embedded using single curly braces (e.g., `Item {i}` or `{3 + i}`).
+
+- **State (`React.useState`):**
+  * **Syntax:** `const [value, setValue] = React.useState(initialValue)`
+  * **Tuple Structure:** Returns the current state variable (`value`) and a setter function (`setValue`).
+  * **Reactivity:** Calling the setter function updates the state and forces React to automatically re-render the component.
+
+- **DOM Mounting:**
+  * Uses `createRoot(document.getElementById('root')).render(<App />)` to attach the React component tree into the HTML `<div id="root">`.
+
+### React Components
+
+- **Definition:** A React component is a JavaScript function that returns JSX, transpiled by Babel to build modular UI elements.
+- **Component Tree:** Components can render child components, forming a nested tree starting from a single root component (`<App />`).
+
+- **Props (Properties):**
+  * Inputs passed from a parent component as element attributes (e.g., `<Demo who="world" />`).
+  * Accessed inside the child component using `props.who`.
+
+- **State & Reactivity:**
+  * **State Creation:** Declared with `React.useState(initialValue)`, which returns `[value, setValue]`.
+  * **Re-rendering:** Changing state via `setValue()` forces React to re-execute the component and update the UI.
+  * **Virtual DOM & Diffing:** React compares updated JSX against the previous version ("diffing") and updates only the changed elements in the actual browser DOM.
+
+- **Styling Components:**
+  * **CSS Classes:** Use `className` instead of `class` because `class` is a reserved JavaScript keyword.
+  * **Dynamic Inline Styles:** Pass a JavaScript object using double curly braces (e.g., `style={{ color: color }}`).
