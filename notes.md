@@ -201,3 +201,27 @@ This file represents what I have learned about web programming.
 - **Purpose:** Frameworks simplify application development by providing tools for common tasks like modularizing code, creating Single Page Applications (SPAs), and managing reactivity.
 - **Component-Based Architecture:** Modern frameworks often combine HTML, CSS, and JavaScript into hybrid file formats (like React JSX or Vue SFC), shifting focus from separate files to functional, reusable components.
 - **Key Framework Tasks:** They abstract away low-level DOM manipulation, simplify state-driven UI updates, and improve overall developer productivity and code maintainability.
+
+### Web Application Toolchains
+
+- **Concept:** A linked pipeline of specialized tools where the output of one tool becomes the input for the next (e.g., source code to binary executable).
+- **Compilation Toolchain Steps (Diagram):**
+  1. **Source Code:** Raw human-readable program files.
+  2. **Preprocessor:** Prepares code (resolving directives/imports) before compilation.
+  3. **Compiler:** Translates high-level code into assembly/intermediate code.
+  4. **Assembler:** Converts assembly into machine-level object code.
+  5. **Linker:** Combines object files and external libraries into a single file.
+  6. **Executable Binary:** The final runnable application.
+* **Web Toolchain Utilities:** Uses specialized tools (linters, transpilers, bundlers, minifiers) to convert, package, optimize, and deploy source code into web-ready assets.
+
+### Vite
+
+- **Overview:** Modern, fast build tool and development server for frontend frameworks like React.
+- **Key Commands:**
+  * `npm create vite@latest <app-name> -- --template react`: Initializes a new React project.
+  * `npm run dev`: Starts local development server with hot reloading.
+  * `npm run build`: Transpiles, minifies, and bundles assets into the `/dist` folder for production.
+- **Dev Server Controls:** Press `o` to open in browser, `h` for help, and `q` to stop the server.
+- **Project Structure:** 
+  * `index.html` loads `src/main.jsx`, which mounts `src/App.jsx` into `#root`.
+  * Code files use `.jsx` extensions for proper JSX transpilation and IDE support.
