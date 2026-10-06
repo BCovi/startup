@@ -1,0 +1,31 @@
+{
+  "name": "startup",
+  "version": "1.0.0",
+  "description": "This application is essentially a digital game manager for Mafia and Werewolf-style party games. It lets users play a fully functional in-person game with no cards at all. It will let users connect to the same digital room or lobby as one another. It also lets users pick their own set of cards or roles depending on player count, and then automatically deals those cards out, one to each player. It will also allow users to vote for specific players they want out each day cycle. The game has a typical day/night cycle, where roles are able to use their abilities every night, and the reveal happens during the day. Similarly, during the day, the town (group) has the ability to vote someone out who they think may be the killer(s). Ultimately, this application will make playing your favorite party game even more enjoyable.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BCovi/startup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/BCovi/startup/issues"
+  },
+  "homepage": "https://github.com/BCovi/startup#readme",
+  "devDependencies": {
+    "vite": "^8.3.3"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "react": "^19.3.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^7.18.4"
+  }
+}
