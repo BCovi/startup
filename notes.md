@@ -265,3 +265,17 @@ This file represents what I have learned about web programming.
 - **Styling Components:**
   * **CSS Classes:** Use `className` instead of `class` because `class` is a reserved JavaScript keyword.
   * **Dynamic Inline Styles:** Pass a JavaScript object using double curly braces (e.g., `style={{ color: color }}`).
+
+### React Router Notes
+
+- **Single-Page Application (SPA) Concept:**
+  * Loads one HTML page and uses JavaScript to manipulate the DOM to display different views.
+  * Retains app state and prevents full page reloads when navigating.
+
+- **Package:** `react-router-dom` provides client-side routing.
+
+- **Core Components:**
+  * **`<BrowserRouter>`:** Encapsulates the app and connects routing to the browser's location history.
+  * **`<NavLink>` / `<Link>`:** Navigation element that updates the URL without reloading the page (uses `to="/path"`).
+  * **`<Routes>`:** Container that holds route definitions and displays the matching route component.
+  * **`<Route>`:** Maps a URL path to a React component using props: `<Route path="/green" element={<Page />} />`.
