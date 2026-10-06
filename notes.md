@@ -149,5 +149,36 @@ This file represents what I have learned about web programming.
 
 
 ## React
+### JavaScript Introduction
 
-Interesting things I have learned about React
+- **Core Characteristics:** Weakly typed, interpreted scripting language running natively in browsers and Node.js. Officially named ECMAScript.
+- **Execution & Errors:** Interpreted at runtime rather than pre-compiled, so syntax or variable errors are only caught when the code executes.
+- **Basic Syntax:**
+  - End statements with semicolons (`;`).
+  - Code blocks and scope use curly braces (`{ }`).
+  - Single-line (`//`) and multi-line (`/* ... */`) comments.
+- **Environment & Tools:** Test code using the browser developer console (`F12` $\rightarrow$ Console) or interactive playgrounds.
+
+### Adding JavaScript to HTML
+
+- **Three Methods to Include JavaScript:**
+  1. **External Script:** Links an external `.js` file via `<script src="index.js"></script>` (best practice for organization).
+  2. **Internal Script:** Writes JavaScript directly inside `<script>` tags within the HTML document.
+  3. **Inline Event Attributes:** Executes code directly inside HTML element attributes like `onclick="sayHello()"`.
+- **Event Listeners:** Special attributes like `onclick` automatically create listeners for DOM events to trigger JavaScript functions or code snippets.
+
+### Node.js
+
+- **Overview:** JavaScript runtime built on Chrome's V8 engine that allows JS to run on servers outside the browser.
+- **Basic Execution:**
+  - `node -v`: Displays installed Node version (run in system terminal, not REPL).
+  - `node index.js`: Runs a specific JavaScript file.
+- **Node Package Manager (NPM):**
+  - Bundled with Node; manages external packages and libraries.
+  - `npm init -y`: Initializes a project and creates a `package.json` file.
+  - `npm install <package>`: Installs dependencies into `node_modules`.
+- **Dependencies & Git:** The `node_modules` folder gets very large and **must** be listed in `.gitignore`. Running `npm install` reconstructs `node_modules` from `package.json`.
+
+
+
+
