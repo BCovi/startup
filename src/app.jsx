@@ -39,7 +39,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
 
-        <footer className="bg-dark text-white-50 py-3 mt-auto">
+        <footer className=" bg-dark text-white-50 py-3 mt-auto">
           <div className="container-fluid px-4 d-flex justify-content-between align-items-center">
             <span>Braden Covington</span>
             <a href="https://github.com/BCovi/startup" className="text-white-50 text-decoration-underline" target="_blank">

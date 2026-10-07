@@ -14,6 +14,12 @@
   letter-spacing: 1px;
 }
 
+.app {
+  background-color: #181a1d !important; /* Or whatever deep dark hex code your original site used */
+  min-height: 100vh;
+}
+
+
 /* --- Element Selector --- */
 body {
   background-color: #181a1d;
