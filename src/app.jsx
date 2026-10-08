@@ -18,11 +18,11 @@ export default function App() {
         <nav id="main-nav" className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
           <div className="container-fluid">
             {/* 1. Changed <a> to <NavLink> and href to 'to' */}
-            <NavLink className="navbar-brand" to="">Nightfall</NavLink>
+            <NavLink className="navbar-brand" to="/">Nightfall</NavLink>
           
             <div className="navbar-nav ms-auto flex-row gap-3">
               {/* 2. Removed the hardcoded 'active' class (NavLink adds it automatically when you are on that page!) */}
-              <NavLink className="nav-link" to="">Home</NavLink>
+              <NavLink className="nav-link" to="/">Home</NavLink>
               <NavLink className="nav-link" to="lobby">Lobby</NavLink>
               <NavLink className="nav-link" to="game">Game</NavLink>
               <NavLink className="nav-link" to="about">About</NavLink>

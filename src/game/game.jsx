@@ -184,7 +184,7 @@ export function Game() {
         <div className="py-4 py-md-5">
           {/* Eerie Skull Icon */}
           <div className="mb-3">
-            <img src="skull_icon.png" className="skull-icon" alt="Eliminated player skull icon" />
+            <img src="/skull_icon.png" className="skull-icon" alt="Eliminated player skull icon" />
           </div>
 
           <h2 className="display-6 fw-bold text-danger text-uppercase mb-2">You Have Been Eliminated</h2>

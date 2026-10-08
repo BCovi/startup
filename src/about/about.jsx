@@ -14,7 +14,7 @@ export function About() {
         {/* Responsive Forest Banner Image */}
         <div className="banner-container text-center my-3">
           <img 
-            src="forest_main.jpg" 
+            src="/forest_main.jpg" 
             alt="Nightfall full moon over a spooky forest" 
             className="img-fluid rounded shadow border border-secondary hero-img"
           />
