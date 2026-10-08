@@ -1,7 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './lobby.css';
 
 export function Lobby() {
+  const navigate = useNavigate();
+
+  const handleStartGame = (e) => {
+    e.preventDefault();
+    navigate('/game');
+  };
+
   return (
     <main className="container-fluid flex-grow-1">
       {/* Join or Create a Room */}
@@ -12,7 +20,7 @@ export function Lobby() {
           <div className="col-md-6">
             <div className="card shadow-sm border-secondary h-100 p-4">
               <h2 className="h4 card-title mb-3">Join a Game</h2>
-              <form action="lobby.html" method="get">
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div className="mb-3">
                   <label htmlFor="room-code" className="form-label">Room Code:</label>
                   <input 
@@ -37,7 +45,7 @@ export function Lobby() {
                   Start a new session as the Narrator to manage roles and lead the match.
                 </p>
               </div>
-              <form action="lobby.html" method="get">
+              <form onSubmit={(e) => e.preventDefault()}>
                 <button type="submit" className="btn btn-success w-100 fw-semibold mt-auto py-2">
                   Create New Room (Become Narrator)
                 </button>
@@ -80,7 +88,7 @@ export function Lobby() {
         <div id="host-controls" className="card shadow-sm border-secondary p-4">
           <h3 className="h4 card-title border-bottom border-secondary pb-2 mb-3">Narrator Role Setup (Host Only)</h3>
 
-          <form action="game.html" method="get">
+          <form onSubmit={handleStartGame}>
             <fieldset className="row g-3 text-center mb-4">
               <legend className="h6 text-white-50 mb-3 text-start">Select Role Quantities</legend>
 
