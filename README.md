@@ -96,10 +96,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverables, including committing regularly to GitHub, deploying Simon React P1, and github link.
+- [x] **Bundled using Vite** - Installed Vite, set up build scripts in `package.json`, organized code into `src/` and `public/`, and deployed the bundle using `deployReact.sh`.
+- [x] **Components** - Converted my static HTML pages into modular React components (`Home`, `Lobby`, `Game`, `About`) and wrapped them in a main layout with `App.jsx`.
+- [x] **Router** - Implemented React Router (`BrowserRouter`, `Routes`, `Route`, `NavLink`, and `useNavigate`) in `App.jsx` so header navigation and form actions transition instantly without browser page reloads.
 
 ## 🚀 React part 2: Reactivity deliverable
 
