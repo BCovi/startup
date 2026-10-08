@@ -12,7 +12,7 @@ export function Game() {
         </div>
         <div>
           <span className="badge bg-warning text-dark fs-6 px-3 py-2 border border-light-subtle shadow-sm">
-            ☀️️ Daytime Phase
+            ☀ Daytime Phase
           </span>
         </div>
       </div>
@@ -92,7 +92,7 @@ export function Game() {
         <h3 className="h5 mb-3 border-bottom border-secondary pb-2">Manual Actions</h3>
 
         {/* Seer Tool for Narrator */}
-        <form action="game.html" method="get" className="mb-3">
+        <form onSubmit={(e) => e.preventDefault()} className="mb-3">
           <label htmlFor="seer-check" className="form-label text-white-50 small">Seer Investigation:</label>
           <div className="input-group">
             <select id="seer-check" name="seer-check" className="form-select bg-dark text-light border-secondary" defaultValue="">
@@ -111,7 +111,7 @@ export function Game() {
         </div>
 
         {/* Eliminate Player Tool for Narrator */}
-        <form action="game.html" method="get">
+        <form onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="kill-player" className="form-label text-white-50 small">Eliminate Player:</label>
           <div className="input-group">
             <select id="kill-player" name="eliminated" className="form-select bg-dark text-light border-secondary" defaultValue="">
@@ -142,7 +142,7 @@ export function Game() {
         </p>
 
         {/* Voting Buttons */}
-        <form action="game.html" method="get" className="mb-4">
+        <form onSubmit={(e) => e.preventDefault()} className="mb-4">
           <div className="d-grid gap-2 d-sm-flex flex-wrap">
             <button type="submit" name="vote" value="player1" className="btn btn-outline-light flex-fill py-2 fw-semibold">John</button>
             <button type="submit" name="vote" value="player2" className="btn btn-outline-light flex-fill py-2 fw-semibold">Sarah</button>
