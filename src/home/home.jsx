@@ -1,14 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Home() {
+  const navigate = useNavigate();
+
+  const handleAuth = (e) => {
+    e.preventDefault();
+    navigate('/lobby');
+  };
+
   return (
     <main>
-
       {/* <!-- Login Placeholder Requirement --> */}
       <section id="authentication" className="container my-5 d-flex justify-content-center">
         <div className="card shadow-sm border-secondary p-4 text-center" style={{ maxWidth: '450px', width: '100%' }}>
           <h3 className="mb-3">Login to Play</h3>
-          <form action="lobby.html" method="get">
+          <form onSubmit={handleAuth}>
             <div className="mb-3 text-start">
               <label htmlFor="email" className="form-label">Email:</label>
               <input 
@@ -33,10 +40,11 @@ export function Home() {
             </div>
             <div className="d-flex gap-2 justify-content-center my-3">
               <button type="submit" className="btn btn-primary px-4">Login</button>
-              <button type="button" className="btn btn-outline-secondary">Create Account</button>
+              <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/lobby')}>
+                Create Account
+              </button>
             </div>
           </form>
-
           {/* <!-- User Name Display Requirement (Simulated logged-in state) --> */}
           <p className="text-muted small mb-0"><em>(Once authenticated, this will display: "Welcome back, User!")</em></p>
         </div>
