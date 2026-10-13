@@ -279,3 +279,40 @@ This file represents what I have learned about web programming.
   * **`<NavLink>` / `<Link>`:** Navigation element that updates the URL without reloading the page (uses `to="/path"`).
   * **`<Routes>`:** Container that holds route definitions and displays the matching route component.
   * **`<Route>`:** Maps a URL path to a React component using props: `<Route path="/green" element={<Page />} />`.
+
+  ## React Pt2
+
+### JavaScript Console
+
+* **Definition**: Runtime debugger console in the browser (distinct from the OS terminal/command line).
+* **`console.log()`**: Outputs values and objects with support for string placeholders (`'%s'`) and CSS styling (`'%c'`).
+* **`console.time()` & `console.timeEnd()`**: Measures code execution duration in milliseconds using matching labels.
+* **`console.count(label)`**: Tracks and logs how many times a specific code block or label executes.
+* **Best Practices**: Quick for small fixes, but IDE debuggers are superior; **must be removed before production deployment.**
+
+### JavaScript Functions
+
+* **First-Class Objects**: Functions can be assigned to variables, passed as parameters, returned from other functions, and stored in arrays or objects.
+* **Syntax & Typing**: Declared using the `function` keyword; parameter and return types are **inferred** (no explicit type declarations).
+* **Default Parameters**: Unsupplied parameters evaluate to `undefined` unless a default value is specified in the function signature (e.g., `title = 'default'`).
+* **Anonymous Functions**: Functions defined without an identifier, commonly assigned to variables or passed inline as arguments (e.g., `const add = function(a, b) { return a + b; }`).
+* **Inner Functions**: Functions declared inside other functions to encapsulate helper logic and restrict scope.
+
+### Arrow Functions
+
+* **Syntax & Returns**: 
+  * Defined with `=>` (fat arrow); always anonymous.
+  * **Implicit Return**: Omit curly braces `{}` and `return` for single expressions (e.g., `() => 3`).
+  * **Explicit Return**: Using curly braces requires an explicit `return`, otherwise it evaluates to `undefined`.
+* **Lexical `this` (MCQ Focus)**: 
+  * Inherits `this` from the **surrounding scope where it was defined** (lexical scoping), unlike regular functions whose `this` is determined dynamically at call-time.
+* **Limitations (When NOT to use)**:
+  * **Object Methods**: `this` will point to the global/undefined object instead of the object instance.
+  * **Constructors**: Cannot be used with the `new` keyword and lack a prototype property.
+  * **Arguments**: Do not have their own `arguments` object (use rest parameters `...args` instead).
+* **Closures & React Usage**: 
+  * Captures the environment/variables at creation time (ideal for factory patterns).
+  * In React, combine with functional state updates (e.g., `setCount(prev => prev + 1)`) to handle asynchronous state safely.
+
+
+
