@@ -346,3 +346,33 @@ This file represents what I have learned about web programming.
 * **`clearInterval()`**: Cancels an active interval timer by passing the reference returned by `setInterval()`.
 * **Asynchronous Flow**: Code execution continues past timer functions; callbacks are queued and run by the runtime after the delay or interval expires.
 
+### React Hooks
+
+* **Rules of Hooks**: Must be called at the top scope of the component (never inside loops or conditionals) to ensure consistent execution order.
+* **`useState`**: Manages local state within functional components.
+* **`useEffect`**: Handles lifecycle events and side effects. 
+  * *Dependencies*: Omit for every render; pass `[]` to run only on initial mount; pass `[var]` to run when specific variables change.
+  * *Cleanup*: Return a cleanup function inside `useEffect` to tear down resources (e.g., closing database connections) when components unmount.
+* **`useContext`**: Eliminates **prop drilling** by providing global data access (such as themes or authentication) directly to deeply nested components without passing props through intermediate middlemen.
+* **`useMemo`**: Caches (memoizes) expensive calculation results between renders based on a dependency array. Providing an empty array `[]` runs the calculation **only once during initial mount** and returns the cached result for all subsequent renders.
+
+### React reactivity
+
+* **Core Pillars**: UI reactivity is driven by three foundational concepts: `props`, `state`, and `render`.
+* **State Management & Rerendering**: React maintains an internal table of state values. When an update method is called, React flags the change and periodically rerenders any component dependent on that state.
+* **Component Architecture**: 
+  * *Parent Components*: Manage and hold the state.
+  * *Child Components*: Receive state values via `props` and receive update functions to modify the parent's state.
+* **Asynchronous Updates**: State updates happen **asynchronously**—calling an update function does not immediately update the variable value on the very next line of code.
+* **Controlled Components**: Binding form elements (`value={state}` with an `onChange` handler) ensures seamless two-way synchronization between user input and component state.
+
+### JSON (JavaScript Object Notation)
+
+* **Data Types**: Supports strings, numbers, booleans, arrays, objects, and `null` (always encoded in UTF-8).
+* **Syntax Rules**: Mandatory double quotes `"` for both keys and string values; trailing commas and comments are strictly forbidden.
+* **JavaScript Conversion**: 
+  * `JSON.stringify()`: Converts a JS object into a JSON string (note: properties with `undefined` or function values are omitted entirely).
+  * `JSON.parse()`: Converts a JSON string back into a JS object.
+* **Dates**: Handled using standard [ISO 8601](https://datatracker.ietf.org/doc/html/rfc8259) formatted strings since JSON has no native date type.
+* **Best Practices**: Keep structures flat, use consistent naming conventions, and return top-level objects rather than raw arrays in API responses.
+
