@@ -314,5 +314,28 @@ This file represents what I have learned about web programming.
   * Captures the environment/variables at creation time (ideal for factory patterns).
   * In React, combine with functional state updates (e.g., `setCount(prev => prev + 1)`) to handle asynchronous state safely.
 
+### JavaScript Arrays
 
+* **Definition**: Dynamic, zero-indexed, mixed-type list objects.
+* **Performance**: `.push()`/`.pop()` are fast (O(1)); `.unshift()`/`.shift()` are slow (O(n) due to re-indexing).
+* **Key Methods**: 
+  * *Transform*: `.map()`, `.filter()`, `.reduce()`, `.sort()` (in-place).
+  * *Test/Search*: `.every()`, `.some()`, `.find()`.
+* **Gotchas**: Copied by **reference**; sparse arrays create empty holes.
+
+### JavaScript Objects and Classes
+
+* **Objects & Literals**: Collections of name-value pairs created via `new Object()` or object-literal syntax (`{ a: 3 }`). Accessed via dot (`obj.prop`) or bracket (`obj['prop']`) notation.
+* **Static Methods**: `Object.entries()` (key-value pairs), `Object.keys()` (keys), and `Object.values()` (values).
+* **Constructors & `this`**: Functions returning an object and called with `new`. The `this` keyword points to the current object instance.
+* **Classes & Private Fields**: Blueprints with an explicit `constructor()`. Prefix fields/methods with `#` to make them private.
+* **Inheritance**: Subclasses use `extends` and `super()` to inherit from parent classes; child methods override parent methods.
+* **Dynamic Manipulation**: Properties and methods can be added, modified, or deleted at runtime on individual instances without altering the class blueprint.
+
+### JavaScript Destructuring
+
+* **Definition**: Process of extracting values from arrays or properties from objects into distinct variables.
+* **Array Destructuring**: Position-based assignment (`const [b, c] = arr;`) with support for rest syntax (`const [b, ...others] = arr;`).
+* **Object Destructuring**: Explicit property matching (`const { prop } = obj;`), variable renaming (`const { prop: alias } = obj;`), and default values (`const { prop = defaultVal } = obj;`).
+* **React Usage**: Heavily used for component parameters (e.g., `function Component({ prop })`) and hook returns (`const [state, setState] = useState()`).
 
