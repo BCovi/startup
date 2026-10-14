@@ -339,3 +339,10 @@ This file represents what I have learned about web programming.
 * **Object Destructuring**: Explicit property matching (`const { prop } = obj;`), variable renaming (`const { prop: alias } = obj;`), and default values (`const { prop = defaultVal } = obj;`).
 * **React Usage**: Heavily used for component parameters (e.g., `function Component({ prop })`) and hook returns (`const [state, setState] = useState()`).
 
+### JavaScript Time and Intervals
+
+* **`setTimeout()`**: Executes a callback function *once* after a specified delay in milliseconds. Does not block subsequent code execution.
+* **`setInterval()`**: Periodically executes a callback function repeatedly at a given millisecond interval.
+* **`clearInterval()`**: Cancels an active interval timer by passing the reference returned by `setInterval()`.
+* **Asynchronous Flow**: Code execution continues past timer functions; callbacks are queued and run by the runtime after the delay or interval expires.
+
