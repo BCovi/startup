@@ -376,3 +376,37 @@ This file represents what I have learned about web programming.
 * **Dates**: Handled using standard [ISO 8601](https://datatracker.ietf.org/doc/html/rfc8259) formatted strings since JSON has no native date type.
 * **Best Practices**: Keep structures flat, use consistent naming conventions, and return top-level objects rather than raw arrays in API responses.
 
+### JavaScript LocalStorage
+
+* **Core API**: Methods include `setItem()`, `getItem()`, `removeItem()`, and `clear()`.
+* **Data Serialization**: Only stores strings. Complex structures (objects/arrays) require `JSON.stringify()` on save and `JSON.parse()` on retrieval.
+* **Limits & Errors**: ~5MB capacity per origin; throws a `QuotaExceededError` when full (use `try...catch` blocks).
+* **Security (XSS)**: Vulnerable to Cross-Site Scripting. **Never** store sensitive data (passwords, PII, auth tokens) here.
+* **Performance**: Synchronous operations block the main thread, which can cause UI lag if overused.
+* **LocalStorage vs. SessionStorage**: LocalStorage persists across browser sessions and restarts; `sessionStorage` clears when the specific tab or session closes.
+
+### JavaScript Promises
+
+* **Core Concept**: Represents the eventual completion or failure of an asynchronous operation, preventing long-running tasks from blocking the single-threaded UI rendering process.
+* **Creation**: Instantiated using the `new Promise()` constructor with an executor function that accepts `resolve` and `reject` callback parameters.
+* **States**: Always exists in one of three states: `pending` (currently running), `fulfilled` (completed successfully via `resolve()`), or `rejected` (failed via `reject()`).
+* **Handlers**: Results are processed using `.then()` for successful fulfillment, `.catch()` for errors and rejections, and `.finally()` for cleanup code that always executes.
+* **Chaining**: Allows sequential asynchronous operations to be linked together cleanly by chaining multiple `.then()` calls one after another.
+
+### JavaScript Async/await
+
+* **Core Concept**: A cleaner syntax wrapper (syntactic sugar) over Promises that allows asynchronous code to be written and read like standard synchronous code.
+* **`async` Keyword**: Placed before a function declaration to designate it as asynchronous, ensuring the function automatically returns a Promise resolving to its return value.
+* **`await` Keyword**: Pauses execution inside an `async` function until a Promise settles (resolves or rejects), directly unwrapping and returning the resulting value.
+* **Error Handling**: Replaces `.catch()` chaining with familiar synchronous `try...catch...finally` blocks to handle rejected promises and exceptions gracefully.
+* **Readability**: Eliminates deeply nested callback and `.then()` chains, keeping sequential asynchronous workflows (such as network fetches and JSON parsing) clean and straightforward.
+
+### JavaScript String
+
+* **Syntax & Creation**: Primitive type defined using single quotes (`'`), double quotes (`"`), or backticks (`` ` ``).
+* **Immutability**: Strings cannot be modified in place. Any operation or direct index assignment (e.g., `str[0] = 'a'`) leaves the original string untouched and returns a new one.
+* **Template Literals**: Backticks (`` ` ``) enable multi-line strings and dynamic string interpolation using `${expression}` syntax.
+* **Common Methods**: Includes built-in utilities like `indexOf()`, `split()`, `slice()`, `trim()`, `replace()`, `toLowerCase()`, and `toUpperCase()`.
+* **Character Access**: Characters are retrieved using bracket notation (`str[index]`) or the `.charAt(index)` method.
+* **Comparison & Length**: Compared lexicographically using case-sensitive Unicode values; the `.length` property returns the count of UTF-16 code units.
+
