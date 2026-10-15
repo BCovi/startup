@@ -436,3 +436,30 @@ This file represents what I have learned about web programming.
 * **Groups & Backreferences**: Parentheses create capturing groups `(...)`, named groups `(?<name>...)`, non-capturing groups `(?:...)`, and backreferences (`\n`) to reference prior matches.
 * **State & `lastIndex`**: Maintains matching state when using `g` or `y` flags via the `lastIndex` property, which tracks the index position for subsequent searches.
 * **Character Shortcuts**: Shorthand character classes like `\d` (digits), `\w` (word characters), and `\s` (whitespace), alongside Unicode property escapes (`\p{...}`).
+
+### JavaScript Rest and Spread
+
+* **Rest Parameter (`...`)**: Combines an unknown number of function arguments into a single array, and must always be placed as the final parameter in a function definition.
+* **Spread Operator (`...`)**: Expands iterables (arrays, strings, sets, or iterators like `matchAll()`) into individual elements or function arguments.
+* **Shallow Copying**: Spread creates a top-level clone of arrays or objects, meaning nested structures are still shared by reference.
+* **Object Merging & Overwriting**: Combines objects using spread where duplicate keys are overwritten by the property from the *last* object spread.
+* **String Conversion**: Converts strings into an array of individual characters (`[...string]`).
+* **Immutability in State**: Widely used in frameworks like React to copy and update state objects without mutating the original reference.
+
+### JavaScript Exceptions
+
+* **Core Syntax**: Handled using `try` (normal execution), `catch (err)` (handles thrown or runtime errors), and `finally` (always executes regardless of outcome).
+* **Throwing Errors**: Triggered via the `throw` keyword; best practice is to always throw instances of the `Error` object (or subclasses) to preserve stack traces rather than raw strings or numbers.
+* **Flow Control Caution**: Exceptions should be reserved for truly exceptional conditions, not normal control flows (like missing optional files or user input validation).
+* **Fallback Pattern**: Wrapping risky actions (like network requests) in a `try` block with a fallback implementation (such as reading from `localStorage`) in the `catch` block.
+* **Custom Error Classes**: Extend the base `Error` class to create domain-specific errors with custom metadata and identifiers.
+* **Error Chaining**: Wrap low-level errors inside new high-level ones using the `{ cause: lowLevelErr }` property to maintain context and stack traces.
+* **Asynchronous Handling**: Promises require `.catch()` chains to handle rejections, while `async/await` code must be wrapped in `try...catch` blocks.
+* **Global Error Catching**: Catch missed errors using window/process listeners like `unhandledrejection` and `uncaughtException`.
+
+### JavaScript Scope
+
+* **Core Definition**: The set of variables visible in the current execution context, divided into Global, Module, Function, and Block scopes.
+* **`var` vs `let`/`const`**: `var` ignores block scope and hoists to function scope; best practice is to avoid it entirely in favor of `let` and `const`.
+* **`this` Keyword**: References the object containing the current execution context (evaluates to `globalThis`, the owning object, or `undefined` in strict mode).
+* **Closures**: Functions that remember and retain access to their surrounding creation state, with arrow functions lexically inheriting `this` from their creation context.
