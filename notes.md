@@ -410,3 +410,29 @@ This file represents what I have learned about web programming.
 * **Character Access**: Characters are retrieved using bracket notation (`str[index]`) or the `.charAt(index)` method.
 * **Comparison & Length**: Compared lexicographically using case-sensitive Unicode values; the `.length` property returns the count of UTF-16 code units.
 
+### JavaScript Types, Operators, Conditionals, and Loops
+
+* **Variables**: Declared using `let` (mutable) or `const` (immutable); `var` is deprecated due to scope issues.
+* **Primitives & Objects**: Includes primitive types (Null, Undefined, Boolean, Number, BigInt, String, Symbol) and common objects (Object, Array, Date, Map, JSON).
+* **Type Coercion & Equality**: Loose equality (`==`) performs automatic type conversion, whereas strict equality (`===`) checks both value and type, making it the preferred standard.
+* **Conditionals**: Handled via standard `if`/`else` structures, ternary operators, and short-circuiting boolean logical operators (`&&`, `||`, `!`).
+* **Loops**: Supports `for`, `while`, `do...while`, `for...in` (iterates over object keys/indexes), and `for...of` (iterates over values), with `break` and `continue` control flow.
+
+### Document Object Model (DOM)
+
+* **Core Concept**: An object-based hierarchical tree representation of HTML elements that the browser uses for rendering and exposes to JavaScript for dynamic manipulation via the global `document` variable.
+* **Node Structure**: Everything in a document—including elements, attributes, text, and comments—forms a node within the DOM tree, with the document node at the root.
+* **Accessing Elements**: Elements are queried using CSS selectors via `document.querySelector()` and `document.querySelectorAll()`, with text and HTML accessed through `.textContent` and `.innerHTML`.
+* **Modifying the DOM**: Elements can be dynamically created with `document.createElement()`, inserted using `.appendChild()`, and removed via `.removeChild()`.
+* **Security Risk**: Directly setting untrusted user data into `.innerHTML` opens the application to Cross-Site Scripting (XSS) injection attacks; inputs should be sanitized or safe DOM methods used instead.
+* **Event Listeners**: Functions attached via `.addEventListener()` (or inline handlers) that respond to user interactions such as mouse clicks, keyboard strokes, focus shifts, and form submissions.
+
+### JavaScript Regular Expressions
+
+* **Core Concept**: Built-in textual pattern matchers used to search, validate, or replace text within strings, created either via regex literals (`/pattern/flags`) or the `RegExp` class constructor.
+* **Key Methods**: Includes `RegExp` methods like `.test()` (returns boolean) and `.exec()` (returns match array), alongside `String` methods such as `.match()`, `.replace()`, `.search()`, and `.split()`.
+* **Advanced Flags**: Modifiers like `g` (global), `i` (case-insensitive), `m` (multiline), `s` (dotAll), `u` (Unicode), and `y` (sticky) that alter matching behavior.
+* **Assertions (Lookarounds)**: Zero-width matching checks based on surrounding context without consuming characters, including positive/negative lookaheads (`(?=...)`, `(?!...)`) and lookbehinds (`(?<=...)`, `(?<!...)`).
+* **Groups & Backreferences**: Parentheses create capturing groups `(...)`, named groups `(?<name>...)`, non-capturing groups `(?:...)`, and backreferences (`\n`) to reference prior matches.
+* **State & `lastIndex`**: Maintains matching state when using `g` or `y` flags via the `lastIndex` property, which tracks the index position for subsequent searches.
+* **Character Shortcuts**: Shorthand character classes like `\d` (digits), `\w` (word characters), and `\s` (whitespace), alongside Unicode property escapes (`\p{...}`).
