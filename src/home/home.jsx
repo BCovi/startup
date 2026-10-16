@@ -26,7 +26,7 @@ export function Home() {
       {/* <!-- Login Placeholder Requirement --> */}
       <section id="authentication" className="container my-5 d-flex justify-content-center">
         <div className="card shadow-sm border-secondary p-4 text-center" style={{ maxWidth: '450px', width: '100%' }}>
-          <h3 className="mb-3">Login to Play</h3>
+          <h3 className="mb-3">{!userName ? 'Welcome to Nightfall' : 'Player Portal'}</h3>
           
           {!userName ? (
             <form onSubmit={handleAuth}>
@@ -36,7 +36,7 @@ export function Home() {
                   type="text" 
                   className="form-control"
                   id="userName" 
-                  placeholder="yourUsername" 
+                  placeholder="your@email.com" 
                   value={userNameInput}
                   onChange={(e) => setUserNameInput(e.target.value)}
                   required 
@@ -54,7 +54,7 @@ export function Home() {
               </div>
               <div className="d-flex gap-2 justify-content-center my-3">
                 <button type="submit" className="btn btn-primary px-4">Login</button>
-                <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/lobby')}>
+                <button type="submit" className="btn btn-outline-secondary">
                   Create Account
                 </button>
               </div>
