@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function Home() {
@@ -7,6 +7,12 @@ export function Home() {
   const [userNameInput, setUserNameInput] = useState('');
   // State for the currently authenticated user loaded from localStorage
   const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
+
+  const [leaderboardData, setLeaderboardData] = useState([
+    { rank: 1, player: 'Braden', winRate: '65%', wins: 28, role: 'Werewolf' },
+    { rank: 2, player: 'Sarah', winRate: '55%', wins: 21, role: 'Seer' },
+    { rank: 3, player: 'Mike', winRate: '40%', wins: 12, role: 'Villager' },
+  ]);
 
   const handleAuth = (e) => {
     e.preventDefault();
@@ -20,6 +26,20 @@ export function Home() {
     setUserName('');
     setUserNameInput('');
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLeaderboardData((prevData) =>
+        prevData.map((row) =>
+          row.player === 'Braden'
+            ? { ...row, wins: row.wins + 1 }
+            : row
+        )
+      );
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <main>
@@ -100,27 +120,15 @@ export function Home() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Braden</td>
-                  <td>65%</td>
-                  <td>28</td>
-                  <td>Werewolf</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Sarah</td>
-                  <td>55%</td>
-                  <td>21</td>
-                  <td>Seer</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Mike</td>
-                  <td>40%</td>
-                  <td>12</td>
-                  <td>Villager</td>
-                </tr>
+                {leaderboardData.map((row) => (
+                  <tr key={row.rank}>
+                    <td>{row.rank}</td>
+                    <td>{row.player}</td>
+                    <td>{row.winRate}</td>
+                    <td>{row.wins}</td>
+                    <td>{row.role}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
