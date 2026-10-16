@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function Home() {
   const navigate = useNavigate();
+  // State for what is currently being typed in the input box
+  const [userNameInput, setUserNameInput] = useState('');
+  // State for the currently authenticated user loaded from localStorage
+  const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
 
   const handleAuth = (e) => {
     e.preventDefault();
-    navigate('/lobby');
+    if (!userNameInput) return;
+    localStorage.setItem('userName', userNameInput);
+    setUserName(userNameInput);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('userName');
+    setUserName('');
+    setUserNameInput('');
   };
 
   return (
@@ -15,38 +27,51 @@ export function Home() {
       <section id="authentication" className="container my-5 d-flex justify-content-center">
         <div className="card shadow-sm border-secondary p-4 text-center" style={{ maxWidth: '450px', width: '100%' }}>
           <h3 className="mb-3">Login to Play</h3>
-          <form onSubmit={handleAuth}>
-            <div className="mb-3 text-start">
-              <label htmlFor="email" className="form-label">Email:</label>
-              <input 
-                type="email" 
-                className="form-control"
-                id="email" 
-                name="email" 
-                placeholder="player@email.com" 
-                required 
-              />
+          
+          {!userName ? (
+            <form onSubmit={handleAuth}>
+              <div className="mb-3 text-start">
+                <label htmlFor="userName" className="form-label">Username:</label>
+                <input 
+                  type="text" 
+                  className="form-control"
+                  id="userName" 
+                  placeholder="yourUsername" 
+                  value={userNameInput}
+                  onChange={(e) => setUserNameInput(e.target.value)}
+                  required 
+                />
+              </div>
+              <div className="mb-3 text-start">
+                <label htmlFor="password" className="form-label">Password:</label>
+                <input 
+                  type="password" 
+                  className="form-control"
+                  id="password" 
+                  placeholder="password" 
+                  required 
+                />
+              </div>
+              <div className="d-flex gap-2 justify-content-center my-3">
+                <button type="submit" className="btn btn-primary px-4">Login</button>
+                <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/lobby')}>
+                  Create Account
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div>
+              <h4 className="text-success mb-3">Welcome back, {userName}!</h4>
+              <div className="d-flex gap-2 justify-content-center my-3">
+                <button className="btn btn-primary px-4" onClick={() => navigate('/lobby')}>
+                  Go to Lobby
+                </button>
+                <button className="btn btn-outline-danger" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
             </div>
-            <div className="mb-3 text-start">
-              <label htmlFor="password" className="form-label">Password:</label>
-              <input 
-                type="password" 
-                className="form-control"
-                id="password" 
-                name="password" 
-                placeholder="password" 
-                required 
-              />
-            </div>
-            <div className="d-flex gap-2 justify-content-center my-3">
-              <button type="submit" className="btn btn-primary px-4">Login</button>
-              <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/lobby')}>
-                Create Account
-              </button>
-            </div>
-          </form>
-          {/* <!-- User Name Display Requirement (Simulated logged-in state) --> */}
-          <p className="text-muted small mb-0"><em>(Once authenticated, this will display: "Welcome back, User!")</em></p>
+          )}
         </div>
       </section>
 
@@ -63,7 +88,6 @@ export function Home() {
             <i>(Example table of data below)</i>
           </p>
           
-          {/* //Table mean to scroll to fit all the columns. */}
           <div className="table-responsive">
             <table className="table table-dark table-striped table-hover align-middle text-nowrap mb-0">
               <thead className="table-dark">
