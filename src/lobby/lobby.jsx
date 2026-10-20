@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './lobby.css';
 
@@ -10,6 +10,35 @@ export function Lobby() {
   const [roomCodeInput, setRoomCodeInput] = useState('');
   const [activeRoomCode, setActiveRoomCode] = useState('');
   const [isNarrator, setIsNarrator] = useState(false);
+  const [players, setPlayers] = useState([
+    { id: 1, name: 'Braden', time: 'Host' },
+    { id: 2, name: 'Sarah', time: 'Joined 2m ago' },
+    { id: 3, name: 'Mike', time: 'Joined 5m ago' },
+  ]);
+
+  useEffect(() => {
+    // Only run the simulation when the user is actively in a lobby
+    if (!isInLobby) return;
+
+    const mockNames = ['Alex', 'Taylor', 'Jordan', 'Casey', 'Morgan', 'Sam', 'Riley'];
+    
+    const interval = setInterval(() => {
+      const randomName = mockNames[Math.floor(Math.random() * mockNames.length)];
+      
+      setPlayers((prevPlayers) => {
+        // Prevent duplicate names in the room
+        if (prevPlayers.some((p) => p.name === randomName)) return prevPlayers;
+        
+        return [
+          ...prevPlayers,
+          { id: Date.now(), name: randomName, time: 'Joined just now...' }
+        ];
+      });
+    }, 6000); // Adds a new player every 6 seconds
+
+    // Cleanup interval when leaving the room
+    return () => clearInterval(interval);
+  }, [isInLobby]);
 
   const handleJoinRoom = (e) => {
     e.preventDefault();
@@ -95,20 +124,24 @@ return (
           {/* Connected Players Card */}
           <div id="live-players" className="card shadow-sm border-secondary mb-5">
             <div className="card-header border-secondary text-center py-3">
-              <h3 className="h4 mb-1">Connected Players (3)</h3>
-              <p className="text-white-50 small mb-0">(WebSocket Placeholder; will update automatically)</p>
+              <h3 className="h4 mb-1">Connected Players ({players.length})</h3>
+              <p className="text-white-50 small mb-0">(WebSocket Simulation Active via setInterval)</p>
             </div>
             
             <ul className="list-group list-group-flush text-center fs-5">
-              <li className="list-group-item bg-transparent text-light py-3 border-secondary">
-                {isNarrator ? '👑 ' : ''} Braden <span className="badge bg-success ms-2">{isNarrator ? 'Narrator' : 'Player'}</span>
-              </li>
-              <li className="list-group-item bg-transparent text-light py-3 border-secondary">
-                Sarah <span className="text-white-50 fs-6"><i>(Joined just now...)</i></span>
-              </li>
-              <li className="list-group-item bg-transparent text-light py-3 border-secondary">
-                Mike <span className="text-white-50 fs-6"><i>(Joined 12s ago...)</i></span>
-              </li>
+              {players.map((player, index) => {
+                const isHost = index === 0; // First player represents the host/narrator
+                return (
+                  <li key={player.id} className="list-group-item bg-transparent text-light py-3 border-secondary">
+                    {isHost ? '👑 ' : ''} {player.name} 
+                    {isHost ? (
+                      <span className="badge bg-success ms-2">{isNarrator ? 'Narrator' : 'Host'}</span>
+                    ) : (
+                      <span className="text-white-50 fs-6 ms-2"><i>({player.time})</i></span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
