@@ -32,17 +32,17 @@ export function Lobby() {
   };
 
 return (
-    <main className="container-fluid flex-grow-1">
+    <main className="container-fluid flex-grow-1 d-flex flex-column justify-content-center">
       {!isInLobby ? (
         /* --- VIEW 1: Join or Create a Room (Shown when NOT in a lobby) --- */
-        <section id="lobby-entry" className="container my-5">
+        <section id="lobby-entry" className="container py-5 my-auto">
           <div className="row g-4">
             
             {/* Join a Game Card */}
             <div className="col-md-6">
-              <div className="card shadow-sm border-secondary h-100 p-4">
-                <h2 className="h4 card-title mb-3">Join a Game</h2>
-                <form onSubmit={handleJoinRoom}>
+              <div className="card shadow-sm border-secondary h-100 p-5 d-flex flex-column justify-content-between">
+                <div>
+                  <h2 className="h4 card-title mb-3">Join a Game</h2>
                   <div className="mb-3">
                     <label htmlFor="room-code" className="form-label">Room Code:</label>
                     <input 
@@ -56,14 +56,16 @@ return (
                       required
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary w-100 fw-semibold">Join Room</button>
+                </div>
+                <form onSubmit={handleJoinRoom}>
+                  <button type="submit" className="btn btn-primary w-100 fw-semibold py-2">Join Room</button>
                 </form>
               </div>
             </div>
 
             {/* Host a Game Card */}
             <div className="col-md-6">
-              <div className="card shadow-sm border-secondary h-100 p-4 d-flex flex-column justify-content-between">
+              <div className="card shadow-sm border-secondary h-100 p-5 d-flex flex-column justify-content-between">
                 <div>
                   <h2 className="h4 card-title mb-3">Host a Game</h2>
                   <p className="text-white-50 small mb-4">
@@ -71,7 +73,7 @@ return (
                   </p>
                 </div>
                 <form onSubmit={handleCreateRoom}>
-                  <button type="submit" className="btn btn-success w-100 fw-semibold mt-auto py-2">
+                  <button type="submit" className="btn btn-success w-100 fw-semibold py-2">
                     Create New Room (Become Narrator)
                   </button>
                 </form>
