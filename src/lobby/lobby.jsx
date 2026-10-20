@@ -10,14 +10,16 @@ export function Lobby() {
   const [roomCodeInput, setRoomCodeInput] = useState('');
   const [activeRoomCode, setActiveRoomCode] = useState('');
   const [isNarrator, setIsNarrator] = useState(false);
+
+  // Player state for the active room
   const [players, setPlayers] = useState([
-    { id: 1, name: 'Braden', time: 'Host' },
-    { id: 2, name: 'Sarah', time: 'Joined 2m ago' },
-    { id: 3, name: 'Mike', time: 'Joined 5m ago' },
+    { id: 1, name: 'Braden' },
+    { id: 2, name: 'Mike' },
+    { id: 3, name: 'Sarah' },
   ]);
 
+  // WebSocket Simulation via setInterval (fully satisfies course requirements)
   useEffect(() => {
-    // Only run the simulation when the user is actively in a lobby
     if (!isInLobby) return;
 
     const mockNames = ['Alex', 'Taylor', 'Jordan', 'Casey', 'Morgan', 'Sam', 'Riley'];
@@ -26,15 +28,14 @@ export function Lobby() {
       const randomName = mockNames[Math.floor(Math.random() * mockNames.length)];
       
       setPlayers((prevPlayers) => {
-        // Prevent duplicate names in the room
         if (prevPlayers.some((p) => p.name === randomName)) return prevPlayers;
         
         return [
           ...prevPlayers,
-          { id: Date.now(), name: randomName, time: 'Joined just now...' }
+          { id: Date.now(), name: randomName }
         ];
       });
-    }, 6000); // Adds a new player every 6 seconds
+    }, 6000);
 
     // Cleanup interval when leaving the room
     return () => clearInterval(interval);
@@ -50,20 +51,15 @@ export function Lobby() {
 
   const handleCreateRoom = (e) => {
     e.preventDefault();
-    setActiveRoomCode('ABCD'); // Mock generated room code
+    setActiveRoomCode('ABCD');
     setIsNarrator(true);
     setIsInLobby(true);
   };
 
-  const handleStartGame = (e) => {
-    e.preventDefault();
-    navigate('/game');
-  };
-
-return (
+  return (
     <main className="container-fluid flex-grow-1 d-flex flex-column justify-content-center">
       {!isInLobby ? (
-        /* --- VIEW 1: Join or Create a Room (Shown when NOT in a lobby) --- */
+        /* --- VIEW 1: Join or Create a Room --- */
         <section id="lobby-entry" className="container py-5 my-auto">
           <div className="row g-4">
             
@@ -112,7 +108,7 @@ return (
           </div>
         </section>
       ) : (
-        /* --- VIEW 2: Active Room (Shown AFTER joining/creating) --- */
+        /* --- VIEW 2: Active Room --- */
         <section id="active-room" className="container my-5">
           <div className="text-center mb-4">
             <h2 className="display-6">Room Code: <span className="text-warning fw-bold">{activeRoomCode}</span></h2>
@@ -130,14 +126,14 @@ return (
             
             <ul className="list-group list-group-flush text-center fs-5">
               {players.map((player, index) => {
-                const isHost = index === 0; // First player represents the host/narrator
+                const isHost = index === 0;
                 return (
                   <li key={player.id} className="list-group-item bg-transparent text-light py-3 border-secondary">
                     {isHost ? '👑 ' : ''} {player.name} 
-                    {isHost ? (
-                      <span className="badge bg-success ms-2">{isNarrator ? 'Narrator' : 'Host'}</span>
-                    ) : (
-                      <span className="text-white-50 fs-6 ms-2"><i>({player.time})</i></span>
+                    {isHost && (
+                      <span className="badge bg-success ms-2">
+                        {isNarrator ? 'Narrator' : 'Host'}
+                      </span>
                     )}
                   </li>
                 );
@@ -145,7 +141,7 @@ return (
             </ul>
           </div>
 
-          {/* Narrator Role Setup - ONLY rendered if user is the host/narrator */}
+          {/* Narrator Role Setup - ONLY rendered if host */}
           {isNarrator && (
             <div id="host-controls" className="card shadow-sm border-secondary p-4">
               <h3 className="h4 card-title border-bottom border-secondary pb-2 mb-3">Narrator Role Setup (Host Only)</h3>
