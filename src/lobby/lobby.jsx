@@ -18,6 +18,17 @@ export function Lobby() {
     { id: 3, name: 'Sarah' },
   ]);
 
+  // Role configuration state (controlled inputs)
+  const [mafiaCount, setMafiaCount] = useState(2);
+  const [doctorCount, setDoctorCount] = useState(1);
+  const [detectiveCount, setDetectiveCount] = useState(1);
+  const [villagerCount, setVillagerCount] = useState(4);
+
+  // Calculate total roles selected
+  const totalRoles = Number(mafiaCount) + Number(doctorCount) + Number(detectiveCount) + Number(villagerCount);
+  const hasRoleMismatch = totalRoles !== players.length;
+
+
   // WebSocket Simulation via setInterval (fully satisfies course requirements)
   useEffect(() => {
     if (!isInLobby) return;
@@ -143,34 +154,154 @@ export function Lobby() {
 
           {/* Narrator Role Setup - ONLY rendered if host */}
           {isNarrator && (
-            <div id="host-controls" className="card shadow-sm border-secondary p-4">
-              <h3 className="h4 card-title border-bottom border-secondary pb-2 mb-3">Narrator Role Setup (Host Only)</h3>
+            <div id="host-controls" className="card shadow-sm border-secondary p-3">
+              <h3 className="h5 card-title border-bottom border-secondary pb-2 mb-2">Narrator Role Setup (Host Only)</h3>
 
               <form onSubmit={(e) => { e.preventDefault(); navigate('/game'); }}>
-                <fieldset className="row g-3 text-center mb-4">
-                  <legend className="h6 text-white-50 mb-3 text-start">Select Role Quantities</legend>
-
-                  <div className="col-6 col-md-3">
-                    <label htmlFor="mafia-count" className="form-label">Mafia / Werewolves</label>
-                    <input type="number" id="mafia-count" min="1" max="10" defaultValue="2" className="form-control text-center mx-auto" style={{ maxWidth: '90px' }} />
+                <div className="mb-3">
+                  <div className="d-flex justify-content-between align-items-center mb-2">
+                    <span className="small text-white-50 mb-0">Select Role Quantities</span>
+                    <span className={`small fw-bold ${hasRoleMismatch ? 'text-warning' : 'text-success'}`}>
+                      Total: {totalRoles} / {players.length} Players
+                    </span>
                   </div>
 
-                  <div className="col-6 col-md-3">
-                    <label htmlFor="doctor-count" className="form-label">Doctor / Medic</label>
-                    <input type="number" id="doctor-count" min="0" max="5" defaultValue="1" className="form-control text-center mx-auto" style={{ maxWidth: '90px' }} />
-                  </div>
+                  {/* Compact Vertical Stack of Role Steppers */}
+                  <div className="row g-2">
+                    
+                    {/* Mafia Stepper */}
+                    <div className="col-12">
+                      <div className="bg-dark px-3 py-2 rounded border border-secondary d-flex justify-content-between align-items-center">
+                        <span className="text-light small fw-semibold">Mafia / Werewolves</span>
+                        <div className="input-group input-group-sm" style={{ maxWidth: '135px' }}>
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setMafiaCount(Math.max(1, Number(mafiaCount) - 1))}
+                          >
+                            -
+                          </button>
+                          <input 
+                            type="text" 
+                            value={mafiaCount} 
+                            readOnly 
+                            className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
+                          />
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setMafiaCount(Math.min(10, Number(mafiaCount) + 1))}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
 
-                  <div className="col-6 col-md-3">
-                    <label htmlFor="detective-count" className="form-label">Detective / Sheriff</label>
-                    <input type="number" id="detective-count" min="0" max="5" defaultValue="1" className="form-control text-center mx-auto" style={{ maxWidth: '90px' }} />
-                  </div>
+                    {/* Doctor Stepper */}
+                    <div className="col-12">
+                      <div className="bg-dark px-3 py-2 rounded border border-secondary d-flex justify-content-between align-items-center">
+                        <span className="text-light small fw-semibold">Doctor / Medic</span>
+                        <div className="input-group input-group-sm" style={{ maxWidth: '135px' }}>
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setDoctorCount(Math.max(0, Number(doctorCount) - 1))}
+                          >
+                            -
+                          </button>
+                          <input 
+                            type="text" 
+                            value={doctorCount} 
+                            readOnly 
+                            className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
+                          />
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setDoctorCount(Math.min(5, Number(doctorCount) + 1))}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
 
-                  <div className="col-6 col-md-3">
-                    <label htmlFor="villager-count" className="form-label">Town / Villagers</label>
-                    <input type="number" id="villager-count" min="1" max="20" defaultValue="4" className="form-control text-center mx-auto" style={{ maxWidth: '90px' }} />
+                    {/* Detective Stepper */}
+                    <div className="col-12">
+                      <div className="bg-dark px-3 py-2 rounded border border-secondary d-flex justify-content-between align-items-center">
+                        <span className="text-light small fw-semibold">Detective / Sheriff</span>
+                        <div className="input-group input-group-sm" style={{ maxWidth: '135px' }}>
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setDetectiveCount(Math.max(0, Number(detectiveCount) - 1))}
+                          >
+                            -
+                          </button>
+                          <input 
+                            type="text" 
+                            value={detectiveCount} 
+                            readOnly 
+                            className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
+                          />
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setDetectiveCount(Math.min(5, Number(detectiveCount) + 1))}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Villager Stepper */}
+                    <div className="col-12">
+                      <div className="bg-dark px-3 py-2 rounded border border-secondary d-flex justify-content-between align-items-center">
+                        <span className="text-light small fw-semibold">Town / Villagers</span>
+                        <div className="input-group input-group-sm" style={{ maxWidth: '135px' }}>
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setVillagerCount(Math.max(1, Number(villagerCount) - 1))}
+                          >
+                            -
+                          </button>
+                          <input 
+                            type="text" 
+                            value={villagerCount} 
+                            readOnly 
+                            className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
+                          />
+                          <button 
+                            type="button" 
+                            className="btn btn-outline-secondary px-2 py-1"
+                            onClick={() => setVillagerCount(Math.min(20, Number(villagerCount) + 1))}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
-                </fieldset>
-                <button type="submit" className="btn btn-danger w-100 fw-semibold py-2 fs-5">Start Game</button>
+                </div>
+
+                {/* Validation Warning / Info Message */}
+                {hasRoleMismatch && (
+                  <div className="alert alert-warning py-1 px-2 small text-center mb-2" role="alert">
+                    ⚠️ Total roles ({totalRoles}) must match players ({players.length})!
+                  </div>
+                )}
+
+                <button 
+                  type="submit" 
+                  disabled={hasRoleMismatch}
+                  className={`btn w-100 fw-semibold py-2 ${hasRoleMismatch ? 'btn-secondary' : 'btn-danger'}`}
+                >
+                  {hasRoleMismatch ? 'Match Counts To Start' : 'Start Game'}
+                </button>
               </form>
             </div>
           )}
