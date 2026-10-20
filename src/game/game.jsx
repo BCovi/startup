@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './game.css';
 
 export function Game() {
+  const [phase, setPhase] = useState('Daytime Phase ☀️');
+  const [role, setRole] = useState(null);
+  const [isRevealed, setIsRevealed] = useState(false);
+
+  // Randomly assign a role on initial component mount
+  useEffect(() => {
+    const roles = [
+      { name: 'Werewolf', icon: '🐺', color: 'text-danger', goal: 'Eliminate the town without getting caught.' },
+      { name: 'Seer', icon: '🔮', color: 'text-info', goal: 'Inspect one player each night to learn their role.' },
+      { name: 'Doctor', icon: '🩺', color: 'text-success', goal: 'Protect one player each night from attack.' },
+      { name: 'Villager', icon: '🙋', color: 'text-light', goal: 'Find and vote out all Werewolves.' }
+    ];
+    
+    const randomRole = roles[Math.floor(Math.random() * roles.length)];
+    setRole(randomRole);
+  }, []);
+
   return (
     <main className="container-fluid flex-grow-1">
       {/* Phase & Room Header Banner */}
@@ -22,17 +39,36 @@ export function Game() {
         <h2 className="h5 text-uppercase tracking-wide text-white-50 mb-1">Your Secret Role</h2>
         <p className="small text fst-italic mb-3">Keep your screen hidden from others!</p>
 
-        <div className="card-container mx-auto p-4 border border-secondary rounded bg-black bg-opacity-50 shadow-sm">
-          <button type="button" className="btn btn-outline-warning btn-sm mb-3 px-3 py-2 role-toggle-btn">
-            👁️ Tap to Reveal Card <i>(not functional yet)</i>
-          </button>
+        {/* Step 2: Update the React logic in src/game/game.jsx */}
+        <div className="card-container mx-auto p-4 border border-secondary rounded bg-black bg-opacity-50 shadow-sm secret-role-container">
+          
+          {/* Button View Panel */}
+          <div className={`secret-role-panel ${isRevealed ? 'button-panel-hidden' : 'secret-role-panel-visible'}`}>
+            <button 
+              type="button" 
+              className="btn btn-outline-warning py-3 fw-bold fs-5 w-100 role-toggle-btn"
+              onClick={() => setIsRevealed(true)}
+            >
+              👁️ Tap to Reveal Card
+            </button>
+          </div>
 
-          <div className="revealed-role mt-2">
+          {/* Revealed Role Details Panel */}
+          <div className={`revealed-role mt-2 secret-role-panel ${isRevealed ? 'secret-role-panel-visible' : 'details-panel-hidden'}`}>
             <div className="text-uppercase small text-white-50 mb-1">You are a</div>
-            <h3 className="display-5 fw-bold text-danger mb-2">Werewolf 🐺</h3>
-            <p className="card-text text-white-50 fs-6 mb-0">
-              <strong>Goal:</strong> Eliminate the town without getting caught.
+            <h3 className={`display-5 fw-bold ${role?.color || 'text-danger'} mb-2`}>
+              {role?.name} {role?.icon}
+            </h3>
+            <p className="card-text text-white-50 fs-6 mb-3">
+              <strong>Goal:</strong> {role?.goal}
             </p>
+            <button 
+              type="button" 
+              className="btn btn-sm btn-outline-secondary mt-2"
+              onClick={() => setIsRevealed(false)}
+            >
+              Hide Card
+            </button>
           </div>
         </div>
 
@@ -43,27 +79,27 @@ export function Game() {
           </h4>
           <div className="row g-2 text-start small">
             <div className="col-6 col-md-3">
-              <div className="p-2 border border-secondary rounded bg-dark">
-                <div className="fw-bold text-danger">Werewolf 🐺</div>
-                <div className="text-white-50 extra-small">Eliminate the town without getting caught.</div>
-              </div>
-            </div>
-            <div className="col-6 col-md-3">
-              <div className="p-2 border border-secondary rounded bg-dark">
-                <div className="fw-bold text-info">Seer 🔮</div>
-                <div className="text-white-50 extra-small">Inspect 1 player each night to learn their role.</div>
-              </div>
-            </div>
-            <div className="col-6 col-md-3">
-              <div className="p-2 border border-secondary rounded bg-dark">
-                <div className="fw-bold text-success">Doctor 🩺</div>
-                <div className="text-white-50 extra-small">Protect 1 player each night from attack.</div>
-              </div>
-            </div>
-            <div className="col-6 col-md-3">
-              <div className="p-2 border border-secondary rounded bg-dark">
+              <div className="p-2 border border-secondary rounded bg-dark h-100 d-flex flex-column justify-content-between">
                 <div className="fw-bold text-light">Villager 🙋</div>
-                <div className="text-white-50 extra-small">Find and vote out all Werewolves.</div>
+                <div className="text-white-50 extra-small mt-1">Find and vote out all Werewolves.</div>
+              </div>
+            </div>
+            <div className="col-6 col-md-3">
+              <div className="p-2 border border-secondary rounded bg-dark h-100 d-flex flex-column justify-content-between">
+                <div className="fw-bold text-danger">Werewolf 🐺</div>
+                <div className="text-white-50 extra-small mt-1">Eliminate the town without getting caught.</div>
+              </div>
+            </div>
+            <div className="col-6 col-md-3">
+              <div className="p-2 border border-secondary rounded bg-dark h-100 d-flex flex-column justify-content-between">
+                <div className="fw-bold text-success">Doctor 🩺</div>
+                <div className="text-white-50 extra-small mt-1">Protect one player each night from attack.</div>
+              </div>
+            </div>
+            <div className="col-6 col-md-3">
+              <div className="p-2 border border-secondary rounded bg-dark h-100 d-flex flex-column justify-content-between">
+                <div className="fw-bold text-info">Seer 🔮</div>
+                <div className="text-white-50 extra-small mt-1">Inspect one player each night to learn their role.</div>
               </div>
             </div>
           </div>

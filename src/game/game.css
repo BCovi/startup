@@ -22,3 +22,44 @@
 .skull-icon {
   max-height: 200px;
 }
+
+.secret-role-container {
+  display: grid;
+  width: 100%;
+  max-width: 600px;
+  min-height: 160px;
+  align-items: center;
+  justify-items: center;
+  perspective: 1000px;
+}
+
+.secret-role-panel {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.6s ease;
+  backface-visibility: hidden;
+}
+
+/* Button panel flips away to the left (-90deg) when hidden */
+.button-panel-hidden {
+  opacity: 0;
+  transform: rotateY(-90deg) scale(0.95);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Details panel flips away to the right (90deg) when hidden */
+.details-panel-hidden {
+  opacity: 0;
+  transform: rotateY(90deg) scale(0.95);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.secret-role-panel-visible {
+  opacity: 1;
+  transform: rotateY(0deg) scale(1);
+  visibility: visible;
+  pointer-events: auto;
+}
