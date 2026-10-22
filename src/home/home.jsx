@@ -5,6 +5,8 @@ export function Home() {
   const navigate = useNavigate();
   // State for what is currently being typed in the input box
   const [userNameInput, setUserNameInput] = useState('');
+  // State to track whether the user clicked Login or Create Account
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   // State for the currently authenticated user loaded from localStorage
   const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
 
@@ -17,6 +19,10 @@ export function Home() {
   const handleAuth = (e) => {
     e.preventDefault();
     if (!userNameInput) return;
+    
+    // Future backend hook point using isCreatingAccount flag:
+    // if (isCreatingAccount) { /* Call register endpoint */ } else { /* Call login endpoint */ }
+    
     localStorage.setItem('userName', userNameInput);
     setUserName(userNameInput);
   };
@@ -73,8 +79,18 @@ export function Home() {
                 />
               </div>
               <div className="d-flex gap-2 justify-content-center my-3">
-                <button type="submit" className="btn btn-primary px-4">Login</button>
-                <button type="submit" className="btn btn-outline-secondary">
+                <button 
+                  type="submit" 
+                  className="btn btn-primary px-4"
+                  onClick={() => setIsCreatingAccount(false)}
+                >
+                  Login
+                </button>
+                <button 
+                  type="submit" 
+                  className="btn btn-outline-secondary"
+                  onClick={() => setIsCreatingAccount(true)}
+                >
                   Create Account
                 </button>
               </div>
