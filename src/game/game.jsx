@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './game.css';
 
 export function Game() {
+  const [isNarrator, setIsNarrator] = useState(false); // Set to true to view host controls
   const [phase, setPhase] = useState('Day Phase ☀️');
   const [role, setRole] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -180,7 +181,9 @@ const handleEliminate = () => {
               className={`py-2 fw-bold btn ${phase.includes('Day') ? 'btn-outline-info border-3 shadow-sm' : 'btn-outline-info opacity-75'}`}
               onClick={() => {
                 setPhase('Night Phase 🌙');
-                setVotingOpen(false); // Automatically close voting when night falls!
+                setVotingOpen(false);
+                setUserVote(null); // Clears the user's past vote!
+                setVotes({ John: 0, Sarah: 0, Mike: 0, Skip: 0 }); // Resets the tally for the next round!
               }}
             >
               Advance to Night 🌙 {phase.includes('Day') && <span className="badge bg-info text-dark ms-2">Next ➔</span>}
@@ -337,21 +340,34 @@ const handleEliminate = () => {
               (Live State)
             </span>
           </div>
-
           <ul className="list-group list-group-flush bg-transparent">
-            {allPlayers.map(player => (
-              <li key={player} className="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
-                <span>
-                  <strong>{player}</strong> 
-                  {eliminatedPlayers.includes(player) && <span className="text-danger small ms-1">(Eliminated)</span>}
-                </span>
-                <span className="badge bg-primary rounded-pill">{votes[player]} votes</span>
-              </li>
+            {[...allPlayers]
+              .sort((a, b) => votes[b] - votes[a])
+              .filter(player => votes[player] > 0)
+              .map(player => (
+                <li key={player} className="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
+                  <span>
+                    <strong>{player}</strong> 
+                    {eliminatedPlayers.includes(player) && <span className="text-danger small ms-1">(Eliminated)</span>}
+                  </span>
+                  <span className="badge bg-primary rounded-pill">{votes[player]} {votes[player] === 1 ? 'vote' : 'votes'}</span>
+                </li>
             ))}
-            <li className="list-group-item bg-transparent text-light border-0 d-flex justify-content-between align-items-center px-0 py-2">
-              <span className="text-white-50">Skip Vote</span>
-              <span className="badge bg-secondary rounded-pill">{votes.Skip} votes</span>
-            </li>
+
+            {/* Show Skip Vote if anyone skipped */}
+            {votes.Skip > 0 && (
+              <li className="list-group-item bg-transparent text-light border-0 d-flex justify-content-between align-items-center px-0 py-2">
+                <span className="text-white-50">Skip Vote</span>
+                <span className="badge bg-secondary rounded-pill">{votes.Skip} {votes.Skip === 1 ? 'vote' : 'votes'}</span>
+              </li>
+            )}
+
+            {/* Fallback message when the board is completely empty */}
+            {allPlayers.every(p => votes[p] === 0) && votes.Skip === 0 && (
+              <li className="list-group-item bg-transparent text-light border-0 text-center py-2 text-white-50 small fst-italic">
+                No votes cast yet this round...
+              </li>
+            )}
           </ul>
         </div>
       </section>
@@ -383,7 +399,9 @@ const handleEliminate = () => {
               <div className="border border-secondary rounded p-3 bg-black bg-opacity-50 text-start">
                 <div className="text-white-50 small text-uppercase fw-semibold mb-1">Your Former Role</div>
                 <div className="pt-2 border-top border-secondary d-flex justify-content-between align-items-center">
-                  <span className="fw-bold text-light">Werewolf 🐺</span>
+                  <span className={`fw-bold ${role?.color || 'text-light'}`}>
+                    {role?.name || 'Unknown'} {role?.icon}
+                  </span>
                   <span className="text-white-50 small">Eliminated</span>
                 </div>
               </div>
