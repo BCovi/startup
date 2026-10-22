@@ -9,6 +9,8 @@ export function Game() {
   const [seerResult, setSeerResult] = useState('');
   const [eliminateTarget, setEliminateTarget] = useState('');
   const [eliminatedNotice, setEliminatedNotice] = useState('');
+  const [eliminatedPlayers, setEliminatedPlayers] = useState([]);
+  
 
   const handleInspect = () => {
     if (!seerTarget) return;
@@ -16,10 +18,17 @@ export function Game() {
     setSeerResult(`${seerTarget} is a ${mockRoles[seerTarget] || 'Villager 🙋'}`);
   };
 
-  const handleEliminate = () => {
-    if (!eliminateTarget) return;
-    setEliminatedNotice(`⚡ ${eliminateTarget} has been eliminated from the game!`);
-  };
+const handleEliminate = () => {
+  if (!eliminateTarget) return;
+  setEliminatedNotice(`⚡ ${eliminateTarget} has been eliminated from the game!`);
+  
+  // Add them to the eliminated list if not already there
+  if (!eliminatedPlayers.includes(eliminateTarget)) {
+    setEliminatedPlayers([...eliminatedPlayers, eliminateTarget]);
+  }
+  
+  setEliminateTarget(''); // Clear the dropdown selection
+};
 
   // Randomly assign a role on initial component mount
   useEffect(() => {
@@ -176,42 +185,69 @@ export function Game() {
           </div>
         </div>
 
+        {/* MANUAL ACTIONS SECTION */}
         <h3 className="h5 mb-3 border-bottom border-secondary pb-2">Manual Actions</h3>
-
+        
         {/* Seer Tool for Narrator */}
-        <form onSubmit={(e) => e.preventDefault()} className="mb-3">
+        <form onSubmit={(e) => { e.preventDefault(); handleInspect(); }} className="mb-3">
           <label htmlFor="seer-check" className="form-label text-white-50 small">Seer Investigation:</label>
           <div className="input-group">
-            <select id="seer-check" name="seer-check" className="form-select bg-dark text-light border-secondary" defaultValue="">
+            <select 
+              id="seer-check" 
+              className="form-select bg-dark text-light border-secondary" 
+              value={seerTarget}
+              onChange={(e) => setSeerTarget(e.target.value)}
+            >
               <option value="">Select target player...</option>
-              <option value="john">John</option>
-              <option value="sarah">Sarah</option>
-              <option value="mike">Mike</option>
+              {['John', 'Sarah', 'Mike']
+                .filter(player => !eliminatedPlayers.includes(player))
+                .map(player => (
+                  <option key={player} value={player}>{player}</option>
+                ))}
             </select>
             <button type="submit" className="btn btn-info fw-bold px-4">Inspect Role</button>
           </div>
         </form>
 
-        {/* Role Result Display */}
-        <div className="alert alert-info py-2 px-3 small mb-4" role="alert">
-          <em>Inspected Role Result (example): Sarah is a Werewolf</em>
-        </div>
+        {/* Dynamic Role Result Display */}
+        {seerResult && (
+          <div className="alert alert-info py-2 px-3 small mb-4" role="alert">
+            <em>{seerResult}</em>
+          </div>
+        )}
 
         {/* Eliminate Player Tool for Narrator */}
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => { e.preventDefault(); handleEliminate(); }}>
           <label htmlFor="kill-player" className="form-label text-white-50 small">Eliminate Player:</label>
           <div className="input-group">
-            <select id="kill-player" name="eliminated" className="form-select bg-dark text-light border-secondary" defaultValue="">
-              <option value="" disabled>Select a player...</option>
-              <option value="player1">John</option>
-              <option value="player2">Sarah</option>
-              <option value="player3">Mike</option>
+            <select 
+              id="kill-player" 
+              className="form-select bg-dark text-light border-secondary" 
+              value={eliminateTarget}
+              onChange={(e) => setEliminateTarget(e.target.value)}
+            >
+              <option value="">Select a player...</option>
+              {['John', 'Sarah', 'Mike']
+                .filter(player => !eliminatedPlayers.includes(player))
+                .map(player => (
+                  <option key={player} value={player}>{player}</option>
+                ))}
             </select>
             <button type="submit" className="btn btn-danger fw-bold px-4">Eliminate</button>
           </div>
+          <div className="form-text text-white-50 small mt-1" style={{ fontSize: '0.8rem' }}>
+            💡 <em>Hold night kills until morning reveals (allows for Doctor saves & storytelling suspense).</em>
+          </div>
+          
         </form>
-      </section>
 
+        {/* Dynamic Elimination Notice Display */}
+        {eliminatedNotice && (
+          <div className="alert alert-danger py-2 px-3 small mt-3 mb-0" role="alert">
+            <em>{eliminatedNotice}</em>
+          </div>
+        )}
+      </section>
       <hr />
 
       {/* 2. ALIVE PLAYER VIEW */}
