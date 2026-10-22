@@ -5,6 +5,21 @@ export function Game() {
   const [phase, setPhase] = useState('Day Phase ☀️');
   const [role, setRole] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
+  const [seerTarget, setSeerTarget] = useState('');
+  const [seerResult, setSeerResult] = useState('');
+  const [eliminateTarget, setEliminateTarget] = useState('');
+  const [eliminatedNotice, setEliminatedNotice] = useState('');
+
+  const handleInspect = () => {
+    if (!seerTarget) return;
+    const mockRoles = { John: 'Villager 🙋', Sarah: 'Werewolf 🐺', Mike: 'Doctor 🩺' };
+    setSeerResult(`${seerTarget} is a ${mockRoles[seerTarget] || 'Villager 🙋'}`);
+  };
+
+  const handleEliminate = () => {
+    if (!eliminateTarget) return;
+    setEliminatedNotice(`⚡ ${eliminateTarget} has been eliminated from the game!`);
+  };
 
   // Randomly assign a role on initial component mount
   useEffect(() => {
@@ -119,32 +134,44 @@ export function Game() {
           <span className="badge bg-secondary">Host View</span>
         </div>
 
+        {/* Current Phase Reference Indicator */}
+        <div className="mb-3 d-flex align-items-center justify-content-between px-3 py-2 bg-dark border border-secondary rounded">
+          <span className="text-white-50 small">Current Phase:</span>
+          <span className={`badge fs-6 px-3 py-2 ${
+            phase.includes('Night') ? 'bg-info text-dark' :
+            phase.includes('Voting') ? 'bg-danger text-white' :
+            'bg-warning text-dark'
+          }`}>
+            {phase}
+          </span>
+        </div>
+
         {/* Game Progression Buttons (Stacked Vertically) */}
         <div>
-          <div className="fw-bold text-uppercase small mb-2">Phase Actions</div>
+          <div className="fw-bold text-uppercase small mb-2 text-white-50">Phase Actions</div>
           <div className="d-grid gap-2 mb-3">
             <button 
               type="button" 
-              className={`py-2 fw-bold ${phase.includes('Voting') ? 'btn btn-info shadow' : 'btn btn-outline-info'}`}
+              className={`py-2 fw-bold btn ${phase.includes('Voting') ? 'btn-outline-info border-3 shadow-sm' : 'btn-outline-info opacity-75'}`}
               onClick={() => setPhase('Night Phase 🌙')}
             >
-              Advance to Night 🌙 {phase.includes('Voting') && '⭐'}
+              Advance to Night 🌙 {phase.includes('Voting') && <span className="badge bg-info text-dark ms-2">Next ➔</span>}
             </button>
             
             <button 
               type="button" 
-              className={`py-2 fw-bold ${phase.includes('Night') ? 'btn btn-warning text-dark shadow' : 'btn btn-outline-warning'}`}
+              className={`py-2 fw-bold btn ${phase.includes('Night') ? 'btn-outline-warning border-3 shadow-sm' : 'btn-outline-warning opacity-75'}`}
               onClick={() => setPhase('Daytime Phase ☀️')}
             >
-              Advance to Day ☀️ {phase.includes('Night') && '⭐'}
+              Advance to Day ☀️ {phase.includes('Night') && <span className="badge bg-warning text-dark ms-2">Next ➔</span>}
             </button>
             
             <button 
               type="button" 
-              className={`py-2 fw-bold ${phase.includes('Day') ? 'btn btn-danger shadow' : 'btn btn-outline-danger'}`}
+              className={`py-2 fw-bold btn ${phase.includes('Day') ? 'btn-outline-danger border-3 shadow-sm' : 'btn-outline-danger opacity-75'}`}
               onClick={() => setPhase('Voting Phase 🗳️')}
             >
-              Advance to Voting 🗳️ {phase.includes('Day') && '⭐'}
+              Advance to Voting 🗳️ {phase.includes('Day') && <span className="badge bg-danger text-white ms-2">Next ➔</span>}
             </button>
           </div>
         </div>
