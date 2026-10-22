@@ -105,9 +105,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverables, including committing regularly to GitHub, deploying Simon React P2, and github link.
+- [x] **All functionality implemented or mocked out** - Built the core interactive game loop including role assignment, card reveals, phase transitions, live vote tallying, narrator controls, and win/loss conditions.
+- [x] **Hooks** - Utilized useState for dynamic UI states (phases, votes, roles, and eliminations) and useEffect for component lifecycle setup. I also used local storage to store the users login for now. Nothing else was super useful to bs used with local storage.
 
 ## 🚀 Service deliverable
 
