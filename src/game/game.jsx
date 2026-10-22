@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './game.css';
 
 export function Game() {
-  const [phase, setPhase] = useState('Daytime Phase ☀️');
+  const [phase, setPhase] = useState('Day Phase ☀️');
   const [role, setRole] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
 
@@ -28,8 +28,12 @@ export function Game() {
           <small className="text-white-50">Room Code: #8492</small>
         </div>
         <div>
-          <span className="badge bg-warning text-dark fs-6 px-3 py-2 border border-light-subtle shadow-sm">
-            ☀ Daytime Phase
+          <span className={`badge fs-6 px-3 py-2 border border-light-subtle shadow-sm ${
+            phase.includes('Night') ? 'bg-info text-dark' :
+            phase.includes('Voting') ? 'bg-danger text-white' :
+            'bg-warning text-dark'
+          }`}>
+            {phase}
           </span>
         </div>
       </div>
@@ -116,12 +120,32 @@ export function Game() {
         </div>
 
         {/* Game Progression Buttons (Stacked Vertically) */}
-        <div className="mb-4">
-          <label className="form-label text-white-50 small fw-bold text-uppercase">Phase Actions</label>
-          <div className="d-grid gap-2">
-            <button type="button" className="btn btn-outline-info py-2 fw-semibold">Advance to Night 🌙</button>
-            <button type="button" className="btn btn-outline-warning py-2 fw-semibold">Advance to Day ☀️</button>
-            <button type="button" className="btn btn-outline-danger py-2 fw-semibold">Advance to Voting 🗳️</button>
+        <div>
+          <div className="fw-bold text-uppercase small mb-2">Phase Actions</div>
+          <div className="d-grid gap-2 mb-3">
+            <button 
+              type="button" 
+              className={`py-2 fw-bold ${phase.includes('Voting') ? 'btn btn-info shadow' : 'btn btn-outline-info'}`}
+              onClick={() => setPhase('Night Phase 🌙')}
+            >
+              Advance to Night 🌙 {phase.includes('Voting') && '⭐'}
+            </button>
+            
+            <button 
+              type="button" 
+              className={`py-2 fw-bold ${phase.includes('Night') ? 'btn btn-warning text-dark shadow' : 'btn btn-outline-warning'}`}
+              onClick={() => setPhase('Daytime Phase ☀️')}
+            >
+              Advance to Day ☀️ {phase.includes('Night') && '⭐'}
+            </button>
+            
+            <button 
+              type="button" 
+              className={`py-2 fw-bold ${phase.includes('Day') ? 'btn btn-danger shadow' : 'btn btn-outline-danger'}`}
+              onClick={() => setPhase('Voting Phase 🗳️')}
+            >
+              Advance to Voting 🗳️ {phase.includes('Day') && '⭐'}
+            </button>
           </div>
         </div>
 
