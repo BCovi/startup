@@ -18,16 +18,25 @@ export function Lobby() {
     { id: 3, name: 'Sarah' },
   ]);
 
-  // Role configuration state (controlled inputs)
-  const [mafiaCount, setMafiaCount] = useState(2);
-  const [doctorCount, setDoctorCount] = useState(1);
-  const [detectiveCount, setDetectiveCount] = useState(1);
-  const [villagerCount, setVillagerCount] = useState(4);
+  // Refactored Role configuration state (consolidated object)
+  const [roleCounts, setRoleCounts] = useState({
+    mafia: 2,
+    doctor: 1,
+    detective: 1,
+    villager: 4,
+  });
 
-  // Calculate total roles selected
-  const totalRoles = Number(mafiaCount) + Number(doctorCount) + Number(detectiveCount) + Number(villagerCount);
+  // Calculate total roles selected dynamically from the object values
+  const totalRoles = Object.values(roleCounts).reduce((acc, count) => acc + count, 0);
   const hasRoleMismatch = totalRoles !== players.length;
 
+  // Generic handler to update role counts with min/max bounds
+  const handleCountChange = (role, delta, min, max) => {
+    setRoleCounts(prev => ({
+      ...prev,
+      [role]: Math.max(min, Math.min(max, prev[role] + delta))
+    }));
+  };
 
   // WebSocket Simulation via setInterval (fully satisfies course requirements)
   useEffect(() => {
@@ -65,6 +74,12 @@ export function Lobby() {
     setActiveRoomCode('ABCD');
     setIsNarrator(true);
     setIsInLobby(true);
+  };
+
+  const handleStartGame = (e) => {
+    e.preventDefault();
+    if (hasRoleMismatch) return; // 🛑 Guard navigation if counts don't match
+    navigate('/game');
   };
 
   return (
@@ -157,7 +172,7 @@ export function Lobby() {
             <div id="host-controls" className="card shadow-sm border-secondary p-3">
               <h3 className="h5 card-title border-bottom border-secondary pb-2 mb-2">Narrator Role Setup (Host Only)</h3>
 
-              <form onSubmit={(e) => { e.preventDefault(); navigate('/game'); }}>
+              <form onSubmit={handleStartGame}>
                 <div className="mb-3">
                   <div className="d-flex justify-content-between align-items-center mb-2">
                     <span className="small text-white-50 mb-0">Select Role Quantities</span>
@@ -177,20 +192,20 @@ export function Lobby() {
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setMafiaCount(Math.max(1, Number(mafiaCount) - 1))}
+                            onClick={() => handleCountChange('mafia', -1, 1, 10)}
                           >
                             -
                           </button>
                           <input 
                             type="text" 
-                            value={mafiaCount} 
+                            value={roleCounts.mafia} 
                             readOnly 
                             className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
                           />
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setMafiaCount(Math.min(10, Number(mafiaCount) + 1))}
+                            onClick={() => handleCountChange('mafia', 1, 1, 10)}
                           >
                             +
                           </button>
@@ -206,20 +221,20 @@ export function Lobby() {
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setDoctorCount(Math.max(0, Number(doctorCount) - 1))}
+                            onClick={() => handleCountChange('doctor', -1, 0, 5)}
                           >
                             -
                           </button>
                           <input 
                             type="text" 
-                            value={doctorCount} 
+                            value={roleCounts.doctor} 
                             readOnly 
                             className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
                           />
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setDoctorCount(Math.min(5, Number(doctorCount) + 1))}
+                            onClick={() => handleCountChange('doctor', 1, 0, 5)}
                           >
                             +
                           </button>
@@ -235,20 +250,20 @@ export function Lobby() {
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setDetectiveCount(Math.max(0, Number(detectiveCount) - 1))}
+                            onClick={() => handleCountChange('detective', -1, 0, 5)}
                           >
                             -
                           </button>
                           <input 
                             type="text" 
-                            value={detectiveCount} 
+                            value={roleCounts.detective} 
                             readOnly 
                             className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
                           />
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setDetectiveCount(Math.min(5, Number(detectiveCount) + 1))}
+                            onClick={() => handleCountChange('detective', 1, 0, 5)}
                           >
                             +
                           </button>
@@ -264,20 +279,20 @@ export function Lobby() {
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setVillagerCount(Math.max(1, Number(villagerCount) - 1))}
+                            onClick={() => handleCountChange('villager', -1, 1, 20)}
                           >
                             -
                           </button>
                           <input 
                             type="text" 
-                            value={villagerCount} 
+                            value={roleCounts.villager} 
                             readOnly 
                             className="form-control text-center bg-dark text-light border-secondary py-1 px-0" 
                           />
                           <button 
                             type="button" 
                             className="btn btn-outline-secondary px-2 py-1"
-                            onClick={() => setVillagerCount(Math.min(20, Number(villagerCount) + 1))}
+                            onClick={() => handleCountChange('villager', 1, 1, 20)}
                           >
                             +
                           </button>

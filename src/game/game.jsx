@@ -57,6 +57,16 @@ export function Game() {
     }
   };
 
+  // Reset Game handler to avoid full page reloads
+  const resetGame = () => {
+    setWinner(null);
+    setEliminatedPlayers([]);
+    setPhase('Day Phase ☀️');
+    setUserVote(null);
+    setVotes({ John: 0, Sarah: 0, Mike: 0, Skip: 0 });
+    setIsRevealed(false);
+  };
+
   // Voting handler
   const handleVote = (target) => {
     if (votingClosed || userVote) return;
@@ -133,7 +143,7 @@ export function Game() {
           <div>
             <button 
               className="btn btn-warning fw-bold px-4 py-2"
-              onClick={() => window.location.reload()}
+              onClick={resetGame}
             >
               Play Again 🔄
             </button>
