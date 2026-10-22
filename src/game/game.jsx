@@ -10,6 +10,22 @@ export function Game() {
   const [eliminateTarget, setEliminateTarget] = useState('');
   const [eliminatedNotice, setEliminatedNotice] = useState('');
   const [eliminatedPlayers, setEliminatedPlayers] = useState([]);
+  const allPlayers = ['John', 'Sarah', 'Mike'];
+  const alivePlayers = allPlayers.filter(player => !eliminatedPlayers.includes(player));
+
+  // Voting states
+  const [votes, setVotes] = useState({ John: 0, Sarah: 0, Mike: 0, Skip: 0 });
+  const [userVote, setUserVote] = useState(null);
+  const [votingOpen, setVotingOpen] = useState(false);
+  const [votingClosed, setVotingClosed] = useState(false);
+
+  
+  // Voting handler
+  const handleVote = (target) => {
+    if (votingClosed || userVote) return;
+    setVotes(prev => ({ ...prev, [target]: prev[target] + 1 }));
+    setUserVote(target);
+  };
   
 
   const handleInspect = () => {
@@ -158,13 +174,16 @@ const handleEliminate = () => {
         {/* Game Progression Buttons (Stacked Vertically) */}
         <div>
           <div className="fw-bold text-uppercase small mb-2 text-white-50">Phase Actions</div>
-          <div className="d-grid gap-2 mb-3">
+          <div className="d-grid gap-2 mb-4">
             <button 
               type="button" 
-              className={`py-2 fw-bold btn ${phase.includes('Voting') ? 'btn-outline-info border-3 shadow-sm' : 'btn-outline-info opacity-75'}`}
-              onClick={() => setPhase('Night Phase 🌙')}
+              className={`py-2 fw-bold btn ${phase.includes('Day') ? 'btn-outline-info border-3 shadow-sm' : 'btn-outline-info opacity-75'}`}
+              onClick={() => {
+                setPhase('Night Phase 🌙');
+                setVotingOpen(false); // Automatically close voting when night falls!
+              }}
             >
-              Advance to Night 🌙 {phase.includes('Voting') && <span className="badge bg-info text-dark ms-2">Next ➔</span>}
+              Advance to Night 🌙 {phase.includes('Day') && <span className="badge bg-info text-dark ms-2">Next ➔</span>}
             </button>
             
             <button 
@@ -174,13 +193,23 @@ const handleEliminate = () => {
             >
               Advance to Day ☀️ {phase.includes('Night') && <span className="badge bg-warning text-dark ms-2">Next ➔</span>}
             </button>
-            
+          </div>
+
+          {/* Narrator Voting Toggle Control */}
+          <div className="mt-3 pt-3 border-top border-secondary d-flex justify-content-between align-items-center">
+            <div>
+              <div className="fw-bold small text-white">Voting Status</div>
+              <div className="text-white-50 small">
+                {!phase.includes('Day') ? '🔒 Closed (Night Phase)' : votingOpen ? '🟢 Voting is OPEN' : '🔴 Voting is CLOSED'}
+              </div>
+            </div>
             <button 
               type="button" 
-              className={`py-2 fw-bold btn ${phase.includes('Day') ? 'btn-outline-danger border-3 shadow-sm' : 'btn-outline-danger opacity-75'}`}
-              onClick={() => setPhase('Voting Phase 🗳️')}
+              className={`btn btn-sm fw-bold ${votingOpen ? 'btn-outline-danger' : 'btn-outline-success'}`}
+              disabled={!phase.includes('Day')} // Can only open voting during the day!
+              onClick={() => setVotingOpen(!votingOpen)}
             >
-              Advance to Voting 🗳️ {phase.includes('Day') && <span className="badge bg-danger text-white ms-2">Next ➔</span>}
+              {votingOpen ? 'Close Voting' : 'Open Voting'}
             </button>
           </div>
         </div>
@@ -254,47 +283,74 @@ const handleEliminate = () => {
       <section id="alive-view" className="card bg-dark text-light border-secondary shadow p-4 mb-4">
         <div className="d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
           <h2 className="h4 mb-0">Daytime Voting</h2>
-          <span className="badge bg-danger fs-6 px-3 py-2 border border-light-subtle shadow-sm">
-            <time dateTime="PT45S">00:45</time>
-          </span>
         </div>
 
-        <p className="text-white-50 small mb-3">
-          Select a player to cast your vote for elimination:<br />
-          <span className="fst-italic text-white-50">(WebSocket list of players will update live)</span>
-        </p>
-
-        {/* Voting Buttons */}
-        <form onSubmit={(e) => e.preventDefault()} className="mb-4">
-          <div className="d-grid gap-2 d-sm-flex flex-wrap">
-            <button type="submit" name="vote" value="player1" className="btn btn-outline-light flex-fill py-2 fw-semibold">John</button>
-            <button type="submit" name="vote" value="player2" className="btn btn-outline-light flex-fill py-2 fw-semibold">Sarah</button>
-            <button type="submit" name="vote" value="player3" className="btn btn-outline-light flex-fill py-2 fw-semibold">Mike</button>
-            <button type="submit" name="vote" value="player0" className="btn btn-outline-secondary flex-fill py-2 fw-semibold">SKIP VOTE</button>
+        {/* Dynamic status alerts based on phase and voting toggle */}
+        {!phase.includes('Day') ? (
+          <div className="alert alert-secondary py-2 px-3 small mb-3" role="alert">
+            🌙 <em>The town is asleep. Voting is disabled during the night phase.</em>
           </div>
-        </form>
+        ) : !votingOpen ? (
+          <div className="alert alert-warning py-2 px-3 small mb-3" role="alert">
+            ⏳ <em>Discussion in progress. Waiting for the narrator to open voting...</em>
+          </div>
+        ) : userVote ? (
+          <div className="alert alert-success py-2 px-3 small mb-3" role="alert">
+            ✅ <em>You voted for: <strong>{userVote}</strong>. Waiting for results...</em>
+          </div>
+        ) : (
+          <p className="text-white-50 small mb-3">
+            Select a player to cast your vote for elimination:
+          </p>
+        )}
+
+        {/* Dynamic Voting Buttons (Only show when it's Day, voting is open, and user hasn't voted) */}
+        {phase.includes('Day') && votingOpen && !userVote && (
+          <div className="mb-4">
+            <div className="d-grid gap-2 d-sm-flex flex-wrap">
+              {alivePlayers.map(player => (
+                <button 
+                  key={player}
+                  type="button" 
+                  className="btn btn-outline-light flex-fill py-2 fw-semibold"
+                  onClick={() => handleVote(player)}
+                >
+                  {player}
+                </button>
+              ))}
+              <button 
+                type="button" 
+                className="btn btn-outline-secondary flex-fill py-2 fw-semibold"
+                onClick={() => handleVote('Skip')}
+              >
+                SKIP VOTE
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Real-Time Live Tally Box */}
         <div id="live-tally" className="border border-secondary rounded p-3 bg-black bg-opacity-40">
           <div className="d-flex justify-content-between align-items-center mb-2">
             <h3 className="h6 mb-0 text-uppercase tracking-wide text-white-50">Live Tally</h3>
             <span className="badge bg-info bg-opacity-10 text-info border border-info border-opacity-25 small">
-              (WebSocket Realtime)
+              (Live State)
             </span>
           </div>
 
           <ul className="list-group list-group-flush bg-transparent">
-            <li className="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
-              <span><strong>John</strong> <span className="text-white-50 small ms-1">(Mike, Sarah)</span></span>
-              <span className="badge bg-danger rounded-pill">2 votes</span>
-            </li>
-            <li className="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
-              <span><strong>Sarah</strong> <span className="text-white-50 small ms-1">(John)</span></span>
-              <span className="badge bg-warning text-dark rounded-pill">1 vote</span>
-            </li>
+            {allPlayers.map(player => (
+              <li key={player} className="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
+                <span>
+                  <strong>{player}</strong> 
+                  {eliminatedPlayers.includes(player) && <span className="text-danger small ms-1">(Eliminated)</span>}
+                </span>
+                <span className="badge bg-primary rounded-pill">{votes[player]} votes</span>
+              </li>
+            ))}
             <li className="list-group-item bg-transparent text-light border-0 d-flex justify-content-between align-items-center px-0 py-2">
-              <span><strong>Mike</strong></span>
-              <span className="badge bg-secondary rounded-pill">0 votes</span>
+              <span className="text-white-50">Skip Vote</span>
+              <span className="badge bg-secondary rounded-pill">{votes.Skip} votes</span>
             </li>
           </ul>
         </div>
