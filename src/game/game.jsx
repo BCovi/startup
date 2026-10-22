@@ -11,6 +11,8 @@ export function Game() {
   const [eliminateTarget, setEliminateTarget] = useState('');
   const [eliminatedNotice, setEliminatedNotice] = useState('');
   const [eliminatedPlayers, setEliminatedPlayers] = useState([]);
+  const [winner, setWinner] = useState(null); // Track game over win state
+  
   const allPlayers = ['John', 'Sarah', 'Mike'];
   const alivePlayers = allPlayers.filter(player => !eliminatedPlayers.includes(player));
 
@@ -22,6 +24,38 @@ export function Game() {
 
   // Check if current user is dead
   const isDead = eliminatedPlayers.includes('You');
+
+  // Fixed roles for mock players to evaluate win conditions
+  const playerRoles = {
+    John: 'Villager',
+    Sarah: 'Werewolf',
+    Mike: 'Doctor'
+  };
+
+  // Win condition checker
+  const checkWinCondition = (currentEliminated) => {
+    const allPlayerRoles = {
+      ...playerRoles,
+      You: role?.name
+    };
+
+    // Check alive Werewolves
+    const werewolves = Object.keys(allPlayerRoles).filter(p => allPlayerRoles[p] === 'Werewolf');
+    const aliveWerewolves = werewolves.filter(w => w === 'You' ? !currentEliminated.includes('You') : !currentEliminated.includes(w));
+
+    if (aliveWerewolves.length === 0) {
+      setWinner('Town 🏆 (All Werewolves eliminated!)');
+      return;
+    }
+
+    // Check alive Town members
+    const aliveTown = Object.keys(allPlayerRoles).filter(p => allPlayerRoles[p] !== 'Werewolf' && (p === 'You' ? !currentEliminated.includes('You') : !currentEliminated.includes(p)));
+
+    if (aliveWerewolves.length >= aliveTown.length) {
+      setWinner('Werewolves 🐺 (They have overtaken the town!)');
+      return;
+    }
+  };
 
   // Voting handler
   const handleVote = (target) => {
@@ -40,9 +74,13 @@ export function Game() {
     if (!eliminateTarget) return;
     setEliminatedNotice(`⚡ ${eliminateTarget} has been eliminated from the game!`);
     
+    const updatedEliminated = [...eliminatedPlayers, eliminateTarget];
     if (!eliminatedPlayers.includes(eliminateTarget)) {
-      setEliminatedPlayers([...eliminatedPlayers, eliminateTarget]);
+      setEliminatedPlayers(updatedEliminated);
     }
+
+    // Evaluate if game is over
+    checkWinCondition(updatedEliminated);
     
     setEliminateTarget('');
   };
@@ -68,7 +106,7 @@ export function Game() {
         <div>
           <button 
             className={`btn btn-sm me-2 ${!isNarrator && !isDead ? 'btn-light fw-bold' : 'btn-outline-secondary'}`}
-            onClick={() => { setIsNarrator(false); setEliminatedPlayers([]); }}
+            onClick={() => { setIsNarrator(false); setEliminatedPlayers([]); setWinner(null); }}
           >
             👤 Alive Player View
           </button>
@@ -86,6 +124,22 @@ export function Game() {
           </button>
         </div>
       </div>
+
+      {/* GAME OVER BANNER */}
+      {winner && (
+        <div className="card bg-dark text-warning border-warning shadow-lg p-5 mb-4 text-center">
+          <h2 className="display-4 fw-bold text-uppercase mb-3">Game Over</h2>
+          <div className="fs-3 mb-4">Winner: <strong>{winner}</strong></div>
+          <div>
+            <button 
+              className="btn btn-warning fw-bold px-4 py-2"
+              onClick={() => window.location.reload()}
+            >
+              Play Again 🔄
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Phase & Room Header Banner */}
       <div className="d-flex justify-content-between align-items-center bg-black bg-opacity-40 border border-secondary rounded p-3 mb-4 shadow-sm">
