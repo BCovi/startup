@@ -280,7 +280,7 @@ This file represents what I have learned about web programming.
   * **`<Routes>`:** Container that holds route definitions and displays the matching route component.
   * **`<Route>`:** Maps a URL path to a React component using props: `<Route path="/green" element={<Page />} />`.
 
-  ## React Pt2
+## React Pt2
 
 ### JavaScript Console
 
@@ -463,3 +463,37 @@ This file represents what I have learned about web programming.
 * **`var` vs `let`/`const`**: `var` ignores block scope and hoists to function scope; best practice is to avoid it entirely in favor of `let` and `const`.
 * **`this` Keyword**: References the object containing the current execution context (evaluates to `globalThis`, the owning object, or `undefined` in strict mode).
 * **Closures**: Functions that remember and retain access to their surrounding creation state, with arrow functions lexically inheriting `this` from their creation context.
+
+## HTTP Service
+
+### Web Servers
+
+* **Core Definition**: Computing hardware and software hosting web services that accept incoming internet connections and speak the HTTP protocol.
+* **Monolithic vs. Modern Servers**: Early servers required separate software packages (Apache, Nginx); modern web applications embed the HTTP service directly using libraries like Express.
+* **Web Service Endpoints**: Custom programmatic routes added to applications to return dynamic data or execute backend logic beyond serving static HTML.
+* **Web Service Gateways (Reverse Proxy)**: Centralized services listening on port 443 that handle SSL termination, load balancing, and route public requests to internal ports.
+* **Microservices & Serverless**: Microservices partition system functionality into independent, horizontally scalable services, while serverless abstracts infrastructure entirely down to individual gateway-managed endpoints.
+
+### Web Services Introduction
+
+* **Frontend vs. Backend**: Frontend runs in the browser (HTML/CSS/JS/images) via HTTPS; backend runs on the server to handle static files, endpoints, business logic, and data persistence.
+* **Web Service Endpoints (APIs)**: Custom programmatic routes exposed by the backend to handle requests (like creating users or fetching scores) and return data.
+* **The `fetch` Function**: A built-in browser function used by frontend JavaScript to make asynchronous HTTP requests to endpoints.
+* **Request-and-Update Cycle**: The core mechanism where the frontend fetches data (such as JSON) and dynamically updates the DOM without reloading the full page.
+
+### URL (Uniform Resource Locator)
+
+* **Core Definition**: A string representing the location and access protocol of any web resource (web pages, images, JSON objects, etc.).
+* **Required Components**: The **scheme** (protocol like `https`) and the **domain name** are mandatory; all other parts are optional.
+* **Structure Syntax**: `<scheme>://<domain name>:<port>/<path>?<parameters>#<anchor>`
+* **Path & Parameters**: The **path** specifies the resource route, while **parameters** (query string) pass key-value qualifiers separated by `&`.
+* **Anchor / Fragment ID**: A hash component (`#`) used to reference a sub-location or target a specific element ID for client-side scrolling.
+* **URL vs URI/URN**: A URN is a unique name without location, a URI is a general identifier encompassing both, but web programming uses URLs.
+
+### Ports
+
+* **Core Definition**: Numeric identifiers paired with IP addresses that allow a single device to route incoming traffic across multiple network protocols and internal services.
+* **Port Ranges (IANA)**: Divided into **Well-Known** (0–1,023 for core system protocols like HTTP 80 and HTTPS 443), **Registered** (1,024–49,151 for user apps), and **Dynamic/Private** (49,152–65,535).
+* **Server Architecture & Caddy**: External requests hit standard ports (80/443) where Caddy proxies and routes traffic inward to unique internal service ports (e.g., port 3000 for Simon, port 4000 for Startup).
+* **Ephemeral Ports**: Temporary, high-numbered dynamic ports assigned by the client OS for outbound requests, allowing servers to return responses to the correct browser socket.
+
