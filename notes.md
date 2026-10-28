@@ -497,3 +497,40 @@ This file represents what I have learned about web programming.
 * **Server Architecture & Caddy**: External requests hit standard ports (80/443) where Caddy proxies and routes traffic inward to unique internal service ports (e.g., port 3000 for Simon, port 4000 for Startup).
 * **Ephemeral Ports**: Temporary, high-numbered dynamic ports assigned by the client OS for outbound requests, allowing servers to return responses to the correct browser socket.
 
+### HTTP (Hypertext Transfer Protocol)
+
+* **Core Protocol**: The foundational protocol for client-server communication using stateless request and response cycles.
+* **Request Syntax**: Consists of a method line (`<verb> <url path> <version>`), optional key-value headers, and an optional body separated by two newlines.
+* **Response Syntax**: Consists of a status line (`<version> <status code> <status string>`), optional headers, and an optional body.
+* **Common Verbs**: `GET` (retrieve resource), `POST` (create resource), `PUT` (update resource), `DELETE` (remove resource), and `OPTIONS` (metadata lookup).
+* **Status Code Ranges**: Divided into `1xx` (Informational), `2xx` (Success, e.g., `200` OK, `201` Created), `3xx` (Redirects/Caching, e.g., `304` Not Modified), `4xx` (Client Errors, e.g., `401` Unauthenticated vs. `403` Forbidden), and `5xx` (Server Errors, e.g., `500`).
+* **Headers & Body**: Metadata key-value pairs (e.g., `Authorization`, `Content-Type`, `Cookie`) managing security, caching, and data formats; body format is dictated by the `Content-Type` MIME type.
+* **Cookies**: Server-generated key-value pairs (`Set-Cookie`) stored on the client and returned on subsequent requests (`Cookie`) to track user state and bypass HTTP statelessness.
+* **Protocol Evolution**: Progressed from HTTP/0.9 (basic text get) and HTTP/1.1 (persistent connections, CRUD methods) to HTTP/2 (multiplexing) and HTTP/3 (QUIC protocol, default encryption).
+
+### Fetch API
+
+* **Core Definition**: The modern browser-native API used by client-side JavaScript to make asynchronous HTTP requests, replacing legacy `XMLHttpRequest`.
+* **Promise-Based Flow**: `fetch()` accepts a URL and returns a promise that asynchronously resolves to an HTTP response object.
+* **Response Handling**: The `.json()` method on the response object parses JSON payloads into usable JavaScript objects.
+* **HTTP Methods**: Defaults to `GET` requests; `POST` requests require an options configuration specifying `method`, `headers` (e.g., `'Content-type': 'application/json'`), and a `JSON.stringify()` request body.
+* **Error Handling**: Implementing `.catch()` blocks ensures network errors and failed requests are captured gracefully.
+
+### Using Public APIs
+
+* **Core Definition**: Third-party services exposing endpoints (URLs) that return data (usually JSON) to transform static pages into dynamic, data-driven applications.
+* **API Evaluation**: When selecting public APIs, verify authentication requirements, HTTPS support, and CORS (Cross-Origin Resource Sharing) compatibility.
+* **Fetch Workflow**: Uses the asynchronous `fetch()` function which returns a Promise, parsed via `.json()` to update the UI dynamically.
+* **API Keys & Auth**: Unique identifiers used to enforce rate limits and prevent abuse, typically passed via query parameters or request headers.
+* **Common Challenges**: Mitigating rate limits (HTTP 429), handling unpredictable data schema changes, and managing network latency with loading states.
+
+### Service Design
+
+* **Core Purpose**: Web services provide backend functionality such as user authentication, session tracking, and data storage.
+* **Model & Sequence Diagrams**: Design applications around domain-specific user objects (avoiding infrastructure details) and use sequence diagrams to map out object interactions and endpoints.
+* **Leveraging HTTP**: Maximize native HTTP infrastructure (standard verbs, MIME types, caching servers, and proxies) rather than custom-building networking layers.
+* **Endpoint Design Principles**: Endpoints should be **Grammatical** (resources as nouns), **Readable** (clear URL paths), **Discoverable** (linking related resources), **Compatible** (backward-compatible JSON updates), **Simple** (single-purpose), and **Documented** (using OpenAPI/Swagger).
+* **RPC (Remote Procedure Call)**: Action-oriented paradigm that treats services like remote function calls, typically leveraging POST requests with action names.
+* **REST (Representational State Transfer)**: Resource-oriented paradigm using standard HTTP verbs (GET, POST, PUT, DELETE) and unique URL paths to optimize caching and state handling.
+* **GraphQL**: Client-driven flexibility paradigm utilizing a single unified query endpoint that allows clients to define the exact shape of data returned to prevent over-fetching.
+
