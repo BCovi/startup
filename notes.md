@@ -534,3 +534,41 @@ This file represents what I have learned about web programming.
 * **REST (Representational State Transfer)**: Resource-oriented paradigm using standard HTTP verbs (GET, POST, PUT, DELETE) and unique URL paths to optimize caching and state handling.
 * **GraphQL**: Client-driven flexibility paradigm utilizing a single unified query endpoint that allows clients to define the exact shape of data returned to prevent over-fetching.
 
+### Node Web Service
+
+* **Core Definition**: Using Node.js backend code to listen on a network port, process incoming HTTP requests, and send responses.
+* **Prerequisites & Setup**: Install the LTS version of Node.js, check versions (`node -v` and `npm -v`), initialize a project using `npm init -y`, and create an `index.js` file.
+* **HTTP Module (`http`)**: Built-in Node.js module used to create a server via `http.createServer()`, handling incoming request (`req`) and response (`res`) objects.
+* **Server Listening**: `server.listen(port, callback)` starts the server, allowing it to accept connections on a specific local port (e.g., `localhost:3000`).
+* **Debugging & Execution**: Run code via `node index.js` in the terminal or press `F5` in VS Code to attach the built-in Node.js debugger.
+* **Workflow Shift**: Replaces the VS Code Live Server extension with Node.js to run backend services and serve application code.
+
+### Express Framework
+
+* **Core Definition**: A production-ready Node.js web framework that simplifies request routing, JSON parsing, middleware execution, and HTTP response handling.
+* **App Initialization**: Instantiated by requiring express (`const app = express()`) and binding to a network port (`app.listen(port)`).
+* **Defining Routes**: Maps HTTP verbs (`get`, `post`, `put`, `delete`) to URL paths (e.g., `app.get('/store/:name', ...)`), using `req.params` to capture dynamic path variables.
+* **Middleware Pattern**: Functions matching `(req, res, next)` that execute sequentially. Must invoke `next()` to pass control down the chain unless a response is fully terminated.
+* **Built-in & Third-Party Middleware**: 
+  * Built-in: `express.static('public')` for serving static web assets.
+  * Third-party: External packages like `cookie-parser` injected via `app.use()` to manage cookies (`req.cookies` and `res.cookie()`).
+* **Error-Handling Middleware**: Specialized functions featuring a four-parameter signature `(err, req, res, next)` that catch application errors and return structured failure responses (e.g., status 500).
+* **Debugging**: Executed and inspected in VS Code using the Node.js debugger (`F5`), with the ability to step directly into third-party package source code inside `node_modules` (`F11`).
+
+### JavaScript Modules
+
+* **CommonJS**: Node.js standard using `require()` to import and `module.exports` to export.
+* **ES Modules**: Modern standard using `import` and `export` keywords (requires `"type": "module"` in `package.json`).
+* **File Overrides**: Use `.cjs` and `.mjs` extensions to explicitly override global module configuration.
+* **Browser Scoping**: Browser ES modules are isolated; functions/variables must be attached to the global `window` object to be accessed by inline HTML event handlers.
+
+### PM2 (Process Manager 2)
+
+* **Core Definition**: A process manager and daemon that keeps Node.js backend applications running continuously in the background across console closures and server reboots.
+* **Process Monitoring (`pm2 ls`)**: Displays a dashboard of hosted node processes, tracking unique IDs, names, execution modes, restart counters, status (`online`), and real-time CPU/memory usage.
+* **Essential Lifecycle Commands**:
+  * `pm2 start index.js -n <name> -- <port>`: Registers and starts a new named process on a specific port.
+  * `pm2 stop <name>` / `pm2 restart <name>` / `pm2 delete <name>`: Controls, reloads, or removes active hosted processes.
+  * `pm2 save`: Persists the current process configuration table across system reboots.
+  * `pm2 logs <name>`: Displays live process logs for debugging runtime errors.
+* **Deployment Workflow**: Used in conjunction with Caddy reverse proxy configuration to host and manage separate production web services on an AWS server.
