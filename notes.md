@@ -572,3 +572,24 @@ This file represents what I have learned about web programming.
   * `pm2 save`: Persists the current process configuration table across system reboots.
   * `pm2 logs <name>`: Displays live process logs for debugging runtime errors.
 * **Deployment Workflow**: Used in conjunction with Caddy reverse proxy configuration to host and manage separate production web services on an AWS server.
+
+### Troubleshooting 502 Bad Gateway
+
+* **Core Meaning**: Indicates Caddy cannot connect to your backend HTTP service because the app crashed, files are missing, or PM2 failed to start the process.
+* **General Workflow**: 
+  1. **SSH & Navigate**: Connect via `ssh -i <pem> ubuntu@<domain>` and `cd services/<service>`.
+  2. **Verify Structure**: Ensure a lowercase `index.js` file exists and `node_modules` are present in the service folder.
+  3. **Check Ports**: Verify `index.js` listens on the correct port (Port 3000 for Simon, Port 4000 for Startup).
+* **Debugging Commands**:
+  * `node index.js`: Run manually in the service directory to catch runtime crashes or missing dependencies.
+  * `pm2 describe <service>` & `pm2 logs <service>`: Inspect process health, execution paths, and live error outputs.
+  * `pm2 restart <service>`: Reload the process daemon after fixes.
+* **Common Pitfalls**: Mismatched ports between your backend code and Caddy configuration, missing a backend `package.json`, or putting backend files in the project root instead of the `service/` directory.
+
+### SOP and CORS
+
+* **Same-Origin Policy (SOP)**: A browser security rule that restricts JavaScript from making requests across different domains to prevent malicious site impersonation and data theft.
+* **Cross-Origin Resource Sharing (CORS)**: A mechanism allowing servers to explicitly declare permitted external origins using HTTP response headers.
+* **`Access-Control-Allow-Origin`**: The key header returned by a server (either `*` for public access or a specific domain) telling the browser whether to allow or block a cross-origin request.
+* **Browser Enforcement**: CORS and SOP are enforced by the *browser*, not the server; hackers can bypass browser policies via server-side proxies, requiring proper server-side authentication and security precautions.
+* **Third-Party API Requirements**: External APIs must include permissive CORS headers (`*` or your exact domain) to be successfully fetched by client-side browser code without being blocked.
