@@ -3,10 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 export function Home() {
   const navigate = useNavigate();
-  // State for what is currently being typed in the input box
+  // State for username/email input
   const [userNameInput, setUserNameInput] = useState('');
+  // State for password input
+  const [password, setPassword] = useState('');
   // State to track whether the user clicked Login or Create Account
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
+  // State for error messages
+  const [displayError, setDisplayError] = useState(null);
   // State for the currently authenticated user loaded from localStorage
   const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
 
@@ -16,48 +20,77 @@ export function Home() {
     { rank: 3, player: 'Mike', winRate: '40%', wins: 12, role: 'Villager' },
   ]);
 
-  const handleAuth = (e) => {
+  // Hook into backend authentication endpoints
+  const handleAuth = async (e) => {
     e.preventDefault();
-    if (!userNameInput) return;
+    if (!userNameInput || !password) return;
+
+    const endpoint = isCreatingAccount ? '/api/auth/create' : '/api/auth/login';
     
-    // Future backend hook point using isCreatingAccount flag:
-    // if (isCreatingAccount) { /* Call register endpoint */ } else { /* Call login endpoint */ }
-    
-    localStorage.setItem('userName', userNameInput);
-    setUserName(userNameInput);
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: userNameInput, password: password }),
+      });
+
+      if (response.status === 200) {
+        localStorage.setItem('userName', userNameInput);
+        setUserName(userNameInput);
+        setDisplayError(null);
+      } else {
+        const body = await response.json();
+        setDisplayError(`⚠️ Error: ${body.msg}`);
+      }
+    } catch (err) {
+      setDisplayError('⚠️ Network error connecting to backend.');
+    }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('userName');
-    setUserName('');
-    setUserNameInput('');
+  // Hook into backend logout endpoint
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'DELETE' });
+    } catch (err) {
+      // Ignore network errors on logout
+    } finally {
+      localStorage.removeItem('userName');
+      setUserName('');
+      setUserNameInput('');
+      setPassword('');
+    }
   };
 
+  // Fetch leaderboard data from backend on load
   useEffect(() => {
-    const interval = setInterval(() => {
-      setLeaderboardData((prevData) =>
-        prevData.map((row) =>
-          row.player === 'Braden'
-            ? { ...row, wins: row.wins + 1 }
-            : row
-        )
-      );
-    }, 10000);
-
-    return () => clearInterval(interval);
+    fetch('/api/stats')
+      .then((res) => {
+        if (res.status === 200) return res.json();
+        return [];
+      })
+      .then((data) => {
+        if (data && data.length > 0) {
+          setLeaderboardData(data);
+        }
+      })
+      .catch(() => {
+        // Fallback to initial display data if unauthenticated or offline
+      });
   }, []);
 
   return (
     <main>
-      {/* <!-- Login Placeholder Requirement --> */}
+      {/* <!-- Login / Auth Section --> */}
       <section id="authentication" className="container my-5 d-flex justify-content-center">
         <div className="card shadow-sm border-secondary p-4 text-center" style={{ maxWidth: '450px', width: '100%' }}>
           <h3 className="mb-3">{!userName ? 'Welcome to Nightfall' : 'Player Portal'}</h3>
           
+          {displayError && <div className="alert alert-danger py-2">{displayError}</div>}
+
           {!userName ? (
             <form onSubmit={handleAuth}>
               <div className="mb-3 text-start">
-                <label htmlFor="userName" className="form-label">Username:</label>
+                <label htmlFor="userName" className="form-label">Email / Username:</label>
                 <input 
                   type="text" 
                   className="form-control"
@@ -75,6 +108,8 @@ export function Home() {
                   className="form-control"
                   id="password" 
                   placeholder="password" 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required 
                 />
               </div>
@@ -113,7 +148,7 @@ export function Home() {
 
       <hr/>
 
-      {/* <!-- Database Data Placeholder Requirement --> */}
+      {/* <!-- Global Leaderboard Section --> */}
       <section id="global-leaderboard" className="container my-5">
         <div className="card shadow-sm border-secondary p-4">
           <h3 className="mb-2 text-center">Global Leaderboard</h3>
@@ -137,12 +172,12 @@ export function Home() {
               </thead>
               <tbody>
                 {leaderboardData.map((row) => (
-                  <tr key={row.rank}>
-                    <td>{row.rank}</td>
-                    <td>{row.player}</td>
-                    <td>{row.winRate}</td>
-                    <td>{row.wins}</td>
-                    <td>{row.role}</td>
+                  <tr key={row.rank || row.email}>
+                    <td>{row.rank || '-'}</td>
+                    <td>{row.player || row.email}</td>
+                    <td>{row.winRate || 'N/A'}</td>
+                    <td>{row.wins || 0}</td>
+                    <td>{row.role || 'Player'}</td>
                   </tr>
                 ))}
               </tbody>
