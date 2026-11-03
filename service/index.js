@@ -63,6 +63,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 
 // --- MIDDLEWARE ---
 const verifyAuth = async (req, res, next) => {
+  console.log('--> Incoming Cookies received by server:', req.cookies);
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     next();
@@ -110,7 +111,7 @@ async function findUser(field, value) {
 
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
-    secure: true,
+    secure: process.env.NODE_ENV === 'production', // Only secure in production (AWS/HTTPS
     httpOnly: true,
     sameSite: 'strict',
   });

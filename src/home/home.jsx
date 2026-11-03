@@ -14,11 +14,8 @@ export function Home() {
   // State for the currently authenticated user loaded from localStorage
   const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
 
-  const [leaderboardData, setLeaderboardData] = useState([
-    { rank: 1, player: 'Braden', winRate: '65%', wins: 28, role: 'Werewolf' },
-    { rank: 2, player: 'Sarah', winRate: '55%', wins: 21, role: 'Seer' },
-    { rank: 3, player: 'Mike', winRate: '40%', wins: 12, role: 'Villager' },
-  ]);
+  // Start with an empty array so it proves the backend fetch is working
+  const [leaderboardData, setLeaderboardData] = useState([]);
 
   // Hook into backend authentication endpoints
   const handleAuth = async (e) => {
@@ -62,6 +59,7 @@ export function Home() {
   };
 
   // Fetch leaderboard data from backend on load
+  // Fetch leaderboard data from the backend service on load
   useEffect(() => {
     fetch('/api/stats')
       .then((res) => {
@@ -69,12 +67,10 @@ export function Home() {
         return [];
       })
       .then((data) => {
-        if (data && data.length > 0) {
-          setLeaderboardData(data);
-        }
+        setLeaderboardData(data);
       })
       .catch(() => {
-        // Fallback to initial display data if unauthenticated or offline
+        // Fallback if offline
       });
   }, []);
 
@@ -171,15 +167,23 @@ export function Home() {
                 </tr>
               </thead>
               <tbody>
-                {leaderboardData.map((row) => (
-                  <tr key={row.rank || row.email}>
-                    <td>{row.rank || '-'}</td>
-                    <td>{row.player || row.email}</td>
-                    <td>{row.winRate || 'N/A'}</td>
-                    <td>{row.wins || 0}</td>
-                    <td>{row.role || 'Player'}</td>
+                {leaderboardData.length > 0 ? (
+                  leaderboardData.map((row, index) => (
+                    <tr key={index}>
+                      <td>{row.rank || index + 1}</td>
+                      <td>{row.player || row.email}</td>
+                      <td>{row.winRate || 'N/A'}</td>
+                      <td>{row.wins || 0}</td>
+                      <td>{row.role || 'Player'}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="text-center text-white-50 py-3">
+                      No match stats recorded on the server yet.
+                    </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
