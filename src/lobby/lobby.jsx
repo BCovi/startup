@@ -37,6 +37,25 @@ export function Lobby() {
       [role]: Math.max(min, Math.min(max, prev[role] + delta))
     }));
   };
+  
+  // Third-party API state for the lobby whisper
+  const [whisper, setWhisper] = useState('Listening for whispers from the dark...');
+
+  useEffect(() => {
+    if (!isInLobby) return;
+
+    fetch('https://api.adviceslip.com/advice')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.slip && data.slip.advice) {
+          setWhisper(data.slip.advice);
+        }
+      })
+      .catch((err) => {
+        console.error('API Fetch Error:', err);
+        setWhisper('The spirits are silent tonight.');
+      });
+  }, [isInLobby]);
 
   // WebSocket Simulation via setInterval (fully satisfies course requirements)
   useEffect(() => {
@@ -134,11 +153,18 @@ export function Lobby() {
           </div>
         </section>
       ) : (
+
         /* --- VIEW 2: Active Room --- */
         <section id="active-room" className="container my-5">
           <div className="text-center mb-4">
             <h2 className="display-6">Room Code: <span className="text-warning fw-bold">{activeRoomCode}</span></h2>
-            <button className="btn btn-outline-secondary btn-sm mt-2" onClick={() => setIsInLobby(false)}>
+            
+            {/* Subtle Sub-header: Third-Party API Whisper */}
+            <div className="text-white-50 small fst-italic mt-2 px-3">
+              "{whisper}"
+            </div>
+
+            <button className="btn btn-outline-secondary btn-sm mt-3" onClick={() => setIsInLobby(false)}>
               Leave Room
             </button>
           </div>
@@ -150,17 +176,28 @@ export function Lobby() {
               <p className="text-white-50 small mb-0">(WebSocket Simulation Active via setInterval)</p>
             </div>
             
-            <ul className="list-group list-group-flush text-center fs-5">
+            <ul className="list-group list-group-flush fs-5">
               {players.map((player, index) => {
                 const isHost = index === 0;
                 return (
-                  <li key={player.id} className="list-group-item bg-transparent text-light py-3 border-secondary">
-                    {isHost ? '👑 ' : ''} {player.name} 
-                    {isHost && (
-                      <span className="badge bg-success ms-2">
-                        {isNarrator ? 'Narrator' : 'Host'}
-                      </span>
-                    )}
+                  <li key={player.id} className="list-group-item bg-transparent text-light py-3 border-secondary d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center">
+                      {/* DiceBear Avatar Endpoint */}
+                      <img 
+                        src={`https://api.dicebear.com/10.x/notionists-neutral/svg?seed=${player.name}`} 
+                        alt={`${player.name} avatar`} 
+                        width="60" 
+                        height="60" 
+                        className="rounded-circle me-3 bg-dark border border-secondary p-1"
+                      />
+                      <div>
+                        <span className="fw-semibold">{player.name}</span>
+                        {isHost && <span className="badge bg-success ms-2">{isNarrator ? 'Narrator' : 'Host'}</span>}
+                      </div>
+                    </div>
+                    <div>
+                      {isHost && <span className="fs-4">👑</span>}
+                    </div>
                   </li>
                 );
               })}
