@@ -111,7 +111,7 @@ async function findUser(field, value) {
 
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
-    secure: process.env.NODE_ENV === 'production', // Only secure in production (AWS/HTTPS
+    secure: true,       // Hardcoded to true for HTTPS production
     httpOnly: true,
     sameSite: 'strict',
   });
