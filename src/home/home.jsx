@@ -70,7 +70,7 @@ export function Home() {
         setLeaderboardData(data);
       })
       .catch(() => {
-        // Fallback if offline
+        setDisplayError('⚠️ Unable to load leaderboard data from the server.');
       });
   }, []);
 
