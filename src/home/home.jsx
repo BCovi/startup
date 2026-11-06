@@ -31,7 +31,7 @@ export function Home() {
         body: JSON.stringify({ email: userNameInput, password: password }),
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         localStorage.setItem('userName', userNameInput);
         setUserName(userNameInput);
         setDisplayError(null);
@@ -58,21 +58,23 @@ export function Home() {
     }
   };
 
-  // Fetch leaderboard data from backend on load
+  
   // Fetch leaderboard data from the backend service on load
   useEffect(() => {
-    fetch('/api/stats')
-      .then((res) => {
-        if (res.status === 200) return res.json();
-        return [];
-      })
-      .then((data) => {
-        setLeaderboardData(data);
-      })
-      .catch(() => {
-        setDisplayError('⚠️ Unable to load leaderboard data from the server.');
-      });
-  }, []);
+  fetch('/api/stats')
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Failed to fetch leaderboard');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      setLeaderboardData(data);
+    })
+    .catch(() => {
+      setDisplayError('⚠️ Unable to load leaderboard data from the server.');
+    });
+}, []);
 
   return (
     <main>
@@ -93,7 +95,7 @@ export function Home() {
                   id="userName" 
                   placeholder="your@email.com" 
                   value={userNameInput}
-                  onChange={(e) => setUserNameInput(e.target.value)}
+                  onChange={(e) => { setUserNameInput(e.target.value); setDisplayError(null); }} // <--- Added setDisplayError(null)
                   required 
                 />
               </div>
@@ -105,7 +107,7 @@ export function Home() {
                   id="password" 
                   placeholder="password" 
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => { setPassword(e.target.value); setDisplayError(null); }} // <--- Added setDisplayError(null)
                   required 
                 />
               </div>
