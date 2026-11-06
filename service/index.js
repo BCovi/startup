@@ -80,7 +80,7 @@ apiRouter.get('/stats', verifyAuth, (_req, res) => {
 });
 
 // Submit a game stat / match result
-apiRouter.post('/stat', verifyAuth, (req, res) => {
+apiRouter.post('/stats', verifyAuth, (req, res) => {
   gameStats = updateStats(req.body);
   res.send(gameStats);
 });
