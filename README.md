@@ -118,7 +118,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Static middleware for frontend** - Configured Express static middleware (`express.static('public')`) along with a fallback handler to serve the built React frontend application in production.
 - [x] **Calls to third party endpoints** - Integrated a third-party API fetch in the lobby view (once you create a lobby) to pull live quotes dynamically from the Advice Slip API. I also added the use of DiceBear API on the same page, but it doesn't use fetch.
 - [x] **Backend service endpoints** - Created an Express Router (`/api`) providing modular backend endpoints for authentication and application data.
-- [x] **Frontend calls service endpoints** - Used frontend `fetch` operations across React views to communicate asynchronously with local Express backend endpoints.
+- [x] **Frontend calls service endpoints** - Used frontend `fetch` operations across React views to communicate asynchronously with local Express backend endpoints. (fetches live data to populate the leaderboard table; currently shows an empty state until match scores are submitted)
 - [x] **Supports registration, login, logout, and restricted endpoint** - Implemented user registration (`/api/auth/create`), login (`/api/auth/login`), and logout (`/api/auth/logout`) using HTTP-only cookies (`token`), alongside a `verifyAuth` middleware protecting the `/api/stats` game leaderboard endpoint.
 - [x] **Uses BCrypt to hash passwords** - Used the bcrypt library to securely scramble user passwords when creating new accounts so they are never saved in plain text, and safely checked them when users log back in.
 
