@@ -33,7 +33,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   } else {
     const user = await createUser(req.body.email, req.body.password);
     setAuthCookie(res, user.token);
-    res.send({ email: user.email });
+    res.status(201).send({ email: user.email });
   }
 });
 
@@ -75,7 +75,7 @@ const verifyAuth = async (req, res, next) => {
 // --- NIGHTFALL DATA ENDPOINTS ---
 
 // Get leaderboard stats
-apiRouter.get('/stats', verifyAuth, (_req, res) => {
+apiRouter.get('/stats',  (_req, res) => {
   res.send(gameStats);
 });
 
