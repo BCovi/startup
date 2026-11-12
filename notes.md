@@ -599,3 +599,27 @@ This file represents what I have learned about web programming.
 * **Authentication vs. Authorization**: Authentication verifies **who you are** (identity), while authorization determines **what you are allowed to do** (permissions/roles).
 * **Authentication Tokens**: Secure, stateless digital keycards stored on the client (e.g., cookies) to verify user identity across requests without transmitting passwords.
 * **Standards & Protocols**: Frameworks use standards like OAuth, SAML, OIDC, Single Sign-On (SSO), and Federated Login for secure, streamlined identity management.
+
+## DB
+
+### Software Deployment
+
+* **Environment Separation**: Strict isolation between development, staging, and production environments to prevent direct developer tampering and meet compliance standards (e.g., SOC2).
+* **Deployment Strategies**: Blue-Green uses two identical environments for instant traffic switching; Canary rolls out to a small subset for risk monitoring; Rolling updates replace instances in small batches.
+* **Continuous Integration (CI)**: Automated pipelines that handle code checkout, building, testing, and deployment to eliminate manual human error.
+* **Automated Deployment Script (`deployService.sh`)**: Uses `ssh`, `scp`, and command-line flags (`-k`, `-h`, `-s`) to automate packaging, file transfer, dependency installation, and daemon restarting (**PM2**).
+
+### Storage Services Overview
+
+* **Purpose**: Used for storing unstructured binary files (images, uploads, documents, movies) with metadata and byte content rather than structured database records.
+* **Why Avoid Local Server Storage**: Servers are **ephemeral** (temporary), have limited drive space, and lack built-in backups, meaning local files are permanently lost if the server is replaced.
+* **Cloud Storage Providers**: Major options include Amazon S3, Google Cloud Storage, Microsoft Azure Storage, and IBM Cloud Object Storage, providing programmatic access and cloud redundancy.
+* **AWS S3 Advantages**: Offers unlimited capacity, pay-as-you-go pricing, multi-copy redundancy, file versioning, and flexible public or private access controls via the AWS SDK.
+
+### Uploading Files & Server Storage Risks
+
+* **Upload Mechanism**: Handled on the frontend via HTML file inputs using `FormData` and `fetch`, and processed on the Express backend using the **Multer** NPM package.
+* **Limited Storage Capacity**: Production servers have restricted disk space (e.g., default 8 GB); filling it up causes server failures and requires rebuilding.
+* **Server Transience**: Production servers are frequently replaced or scaled, meaning any locally stored files or state will be permanently lost.
+* **Lack of Backups**: Local server storage is typically not backed up automatically, risking permanent data loss during system failures.
+* **Multi-Server Incompatibility**: In architectures with multiple application servers, files uploaded to one instance cannot be reliably accessed or downloaded by another.
