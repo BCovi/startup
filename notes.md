@@ -623,3 +623,10 @@ This file represents what I have learned about web programming.
 * **Server Transience**: Production servers are frequently replaced or scaled, meaning any locally stored files or state will be permanently lost.
 * **Lack of Backups**: Local server storage is typically not backed up automatically, risking permanent data loss during system failures.
 * **Multi-Server Incompatibility**: In architectures with multiple application servers, files uploaded to one instance cannot be reliably accessed or downloaded by another.
+
+### Data Services & MongoDB
+
+* **NoSQL vs. SQL**: Modern specialty data services handle specific structures (documents, graphs, key-value pairs) rather than rigid SQL tables; **MongoDB** stores data as flexible **JSON documents** grouped into **collections**.
+* **MongoDB Query Syntax**: Uses JavaScript-inspired methods like `insertOne()`, `find()` (with operators like `$lt`, `$gte`, `$or`), `updateMany()` (with `$set`), and `deleteMany()`.
+* **Credential Security**: Store connection details (`hostname`, `userName`, `password`) in an external `dbConfig.json` file and add it to `.gitignore` so credentials are never committed to GitHub.
+* **Connection Verification**: Ping the database on server startup (`db.command({ ping: 1 })`) inside a `try/catch` block to catch invalid credentials or network failures immediately.
