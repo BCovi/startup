@@ -39,10 +39,14 @@ async function updateUserRemoveAuth(user) {
 }
 
 async function recordGameResult(email, won, role) {
+  if (!email || typeof won !== 'boolean') {
+    return;
+  }
+
   const incFields = {
     [won ? 'wins' : 'losses']: 1,
   };
-  if (role) {
+  if (role && typeof role === 'string') {
     incFields[`roles.${role.toLowerCase()}`] = 1;
   }
 
