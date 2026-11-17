@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './game.css';
 
 export function Game() {
-  const [isNarrator, setIsNarrator] = useState(false); // Set to true to view host controls
+  const location = useLocation();
+  const lobbyData = location.state || {};
+
+  const [isNarrator, setIsNarrator] = useState(Boolean(lobbyData.isNarrator));
   const [phase, setPhase] = useState('Day Phase ☀️');
   const [role, setRole] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
@@ -11,26 +15,13 @@ export function Game() {
   const [eliminateTarget, setEliminateTarget] = useState('');
   const [eliminatedNotice, setEliminatedNotice] = useState('');
   const [eliminatedPlayers, setEliminatedPlayers] = useState([]);
-  const [winner, setWinner] = useState(null); // Track game over win state
-  
-  const allPlayers = ['John', 'Sarah', 'Mike'];
+  const [winner, setWinner] = useState(null);
+
+  const roomCode = lobbyData.roomCode || '8492';
+  const allPlayers = lobbyData.players
+    ? lobbyData.players.map((p) => p.name)
+    : ['John', 'Sarah', 'Mike'];
   const alivePlayers = allPlayers.filter(player => !eliminatedPlayers.includes(player));
-
-  // Voting states
-  const [votes, setVotes] = useState({ John: 0, Sarah: 0, Mike: 0, Skip: 0 });
-  const [userVote, setUserVote] = useState(null);
-  const [votingOpen, setVotingOpen] = useState(false);
-  const [votingClosed, setVotingClosed] = useState(false);
-
-  // Check if current user is dead
-  const isDead = eliminatedPlayers.includes('You');
-
-  // Fixed roles for mock players to evaluate win conditions
-  const playerRoles = {
-    John: 'Villager',
-    Sarah: 'Werewolf',
-    Mike: 'Doctor'
-  };
 
 const saveGameResult = async (winningTeam) => {
     console.log('Triggering saveGameResult:', winningTeam, role?.name);
@@ -175,7 +166,7 @@ const saveGameResult = async (winningTeam) => {
       <div className="d-flex justify-content-between align-items-center bg-black bg-opacity-40 border border-secondary rounded p-3 mb-4 shadow-sm">
         <div>
           <h1 className="h4 mb-0 fw-bold">Game Room: <span className="text-success">Active</span></h1>
-          <small className="text-white-50">Room Code: #8492</small>
+          <small className="text-white-50">Room Code: #{roomCode}</small>
         </div>
         <div>
           <span className={`badge fs-6 px-3 py-2 border border-light-subtle shadow-sm ${

@@ -12,8 +12,9 @@ export function Lobby() {
   const [isNarrator, setIsNarrator] = useState(false);
 
   // Player state for the active room
+  const loggedInName = localStorage.getItem('userName')?.split('@')[0] || 'Braden';
   const [players, setPlayers] = useState([
-    { id: 1, name: 'Braden' },
+    { id: 1, name: loggedInName },
     { id: 2, name: 'Mike' },
     { id: 3, name: 'Sarah' },
   ]);
@@ -98,7 +99,15 @@ export function Lobby() {
   const handleStartGame = (e) => {
     e.preventDefault();
     if (hasRoleMismatch) return; // 🛑 Guard navigation if counts don't match
-    navigate('/game');
+
+    navigate('/game', {
+      state: {
+        roomCode: activeRoomCode,
+        isNarrator: isNarrator,
+        players: players,
+        roleCounts: roleCounts,
+      },
+    });
   };
 
   return (
