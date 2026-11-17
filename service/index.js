@@ -87,11 +87,6 @@ apiRouter.post('/stats', verifyAuth, async (req, res) => {
 
 // --- HELPER FUNCTIONS ---
 
-function updateStats(newStat) {
-  gameStats.push(newStat);
-  if (gameStats.length > 10) gameStats.length = 10;
-  return gameStats;
-}
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
