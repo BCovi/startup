@@ -48,8 +48,15 @@ export function Game() {
   });
   const alivePlayers = allPlayers.filter(player => !eliminatedPlayers.includes(player));
   const isDead = eliminatedPlayers.includes('You') || eliminatedPlayers.includes(currentPlayerName);
-  // Voting states
-  const [votes, setVotes] = useState({ John: 0, Sarah: 0, Mike: 0, Skip: 0 });
+  // Voting states (dynamically initialized for all lobby players)
+  const [votes, setVotes] = useState(() => {
+    const initial = { Skip: 0 };
+    allPlayers.forEach((name) => {
+      initial[name] = 0;
+    });
+    return initial;
+  });
+
   const [userVote, setUserVote] = useState(null);
   const [votingOpen, setVotingOpen] = useState(false);
   const [votingClosed, setVotingClosed] = useState(false);
@@ -105,7 +112,13 @@ const saveGameResult = async (winningTeam) => {
     setEliminatedPlayers([]);
     setPhase('Day Phase ☀️');
     setUserVote(null);
-    setVotes({ John: 0, Sarah: 0, Mike: 0, Skip: 0 });
+    setVotes(() => {
+      const initial = { Skip: 0 };
+      allPlayers.forEach((name) => {
+        initial[name] = 0;
+      });
+      return initial;
+    });
     setIsRevealed(false);
   };
 
@@ -118,8 +131,19 @@ const saveGameResult = async (winningTeam) => {
 
   const handleInspect = () => {
     if (!seerTarget) return;
-    const mockRoles = { John: 'Villager 🙋', Sarah: 'Werewolf 🐺', Mike: 'Doctor 🩺' };
-    setSeerResult(`${seerTarget} is a ${mockRoles[seerTarget] || 'Villager 🙋'}`);
+
+    // Look up their real dealt role from our dynamic playerRoles map
+    const targetRoleName = playerRoles[seerTarget] || 'Villager';
+    
+    const ROLE_ICONS = {
+      Werewolf: '🐺',
+      Seer: '🔮',
+      Doctor: '🩺',
+      Villager: '🙋'
+    };
+
+    const icon = ROLE_ICONS[targetRoleName] || '🙋';
+    setSeerResult(`${seerTarget} is a ${targetRoleName} ${icon}`);
   };
 
   const handleEliminate = () => {
@@ -357,7 +381,7 @@ const saveGameResult = async (winningTeam) => {
                 onChange={(e) => setSeerTarget(e.target.value)}
               >
                 <option value="">Select target player...</option>
-                {['John', 'Sarah', 'Mike']
+                {allPlayers
                   .filter(player => !eliminatedPlayers.includes(player))
                   .map(player => (
                     <option key={player} value={player}>{player}</option>
@@ -383,7 +407,7 @@ const saveGameResult = async (winningTeam) => {
                 onChange={(e) => setEliminateTarget(e.target.value)}
               >
                 <option value="">Select a player...</option>
-                {['John', 'Sarah', 'Mike']
+                {allPlayers
                   .filter(player => !eliminatedPlayers.includes(player))
                   .map(player => (
                     <option key={player} value={player}>{player}</option>
