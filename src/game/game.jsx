@@ -32,6 +32,24 @@ export function Game() {
     Mike: 'Doctor'
   };
 
+const saveGameResult = async (winningTeam) => {
+    console.log('Triggering saveGameResult:', winningTeam, role?.name);
+    if (!role?.name) return;
+    const isWerewolf = role.name === 'Werewolf';
+    const didWin = (winningTeam === 'Werewolves' && isWerewolf) || (winningTeam === 'Town' && !isWerewolf);
+
+    try {
+      const response = await fetch('/api/stats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ won: didWin, role: role.name }),
+      });
+      console.log('POST /api/stats status:', response.status);
+    } catch (err) {
+      console.error('Failed to save game stats:', err);
+    }
+  };
+
   // Win condition checker
   const checkWinCondition = (currentEliminated) => {
     const allPlayerRoles = {
@@ -45,6 +63,7 @@ export function Game() {
 
     if (aliveWerewolves.length === 0) {
       setWinner('Town 🏆 (All Werewolves eliminated!)');
+      saveGameResult('Town');
       return;
     }
 
@@ -53,6 +72,7 @@ export function Game() {
 
     if (aliveWerewolves.length >= aliveTown.length) {
       setWinner('Werewolves 🐺 (They have overtaken the town!)');
+      saveGameResult('Werewolves');
       return;
     }
   };

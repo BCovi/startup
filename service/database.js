@@ -38,10 +38,49 @@ async function updateUserRemoveAuth(user) {
   await userCollection.updateOne({ email: user.email }, { $unset: { token: 1 } });
 }
 
+async function recordGameResult(email, won, role) {
+  const incFields = {
+    [won ? 'wins' : 'losses']: 1,
+  };
+  if (role) {
+    incFields[`roles.${role.toLowerCase()}`] = 1;
+  }
+
+  await statsCollection.updateOne(
+    { email: email },
+    { $inc: incFields },
+    { upsert: true }
+  );
+  console.log('Successfully updated stats in MongoDB!');
+}
+
+async function getLeaderboard() {
+  const stats = await statsCollection.find().toArray();
+
+  return stats
+    .map((p) => {
+      const wins = p.wins || 0;
+      const losses = p.losses || 0;
+      const gamesPlayed = wins + losses;
+      const winRate = gamesPlayed > 0 ? Number(((wins / gamesPlayed) * 100).toFixed(1)) : 0;
+      return {
+        ...p,
+        wins,
+        losses,
+        gamesPlayed,
+        winRate,
+      };
+    })
+    .sort((a, b) => b.wins - a.wins || b.winRate - a.winRate)
+    .slice(0, 10);
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   addUser,
   updateUser,
   updateUserRemoveAuth,
+  recordGameResult,
+  getLeaderboard,
 };

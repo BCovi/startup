@@ -17,9 +17,6 @@ app.use(cookieParser());
 // Serve static frontend files (used in production / deployment)
 app.use(express.static('public'));
 
-// In-memory data structures (will move to MongoDB in the next deliverable)
-let gameStats = []; // Holds your Nightfall leaderboard data
-
 // Router for all /api endpoints
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -64,9 +61,9 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 
 // --- MIDDLEWARE ---
 const verifyAuth = async (req, res, next) => {
-  console.log('--> Incoming Cookies received by server:', req.cookies);
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
+    req.user = user;
     next();
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
@@ -76,14 +73,16 @@ const verifyAuth = async (req, res, next) => {
 // --- NIGHTFALL DATA ENDPOINTS ---
 
 // Get leaderboard stats
-apiRouter.get('/stats',  (_req, res) => {
-  res.send(gameStats);
+apiRouter.get('/stats', async (_req, res) => {
+  const leaderboard = await DB.getLeaderboard();
+  res.send(leaderboard);
 });
 
-// Submit a game stat / match result
-apiRouter.post('/stats', verifyAuth, (req, res) => {
-  gameStats = updateStats(req.body);
-  res.send(gameStats);
+apiRouter.post('/stats', verifyAuth, async (req, res) => {
+  const { won, role } = req.body;
+  await DB.recordGameResult(req.user.email, won, role);
+  const leaderboard = await DB.getLeaderboard();
+  res.send(leaderboard);
 });
 
 // --- HELPER FUNCTIONS ---
