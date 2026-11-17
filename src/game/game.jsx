@@ -336,7 +336,13 @@ const saveGameResult = async (winningTeam) => {
                   setPhase('Night Phase 🌙');
                   setVotingOpen(false);
                   setUserVote(null);
-                  setVotes({ John: 0, Sarah: 0, Mike: 0, Skip: 0 });
+                  setVotes(() => {
+                    const initial = { Skip: 0 };
+                    allPlayers.forEach((name) => {
+                      initial[name] = 0;
+                    });
+                    return initial;
+                  });
                 }}
               >
                 Advance to Night 🌙 {phase.includes('Day') && <span className="badge bg-info text-dark ms-2">Next ➔</span>}
@@ -490,15 +496,15 @@ const saveGameResult = async (winningTeam) => {
           </div>
           <ul className="list-group list-group-flush bg-transparent">
             {[...allPlayers]
-              .sort((a, b) => votes[b] - votes[a])
-              .filter(player => votes[player] > 0)
+              .sort((a, b) => (votes[b] || 0) - (votes[a] || 0))
+              .filter(player => (votes[player] || 0) > 0)
               .map(player => (
                 <li key={player} className="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between align-items-center px-0 py-2">
                   <span>
                     <strong>{player}</strong> 
                     {eliminatedPlayers.includes(player) && <span className="text-danger small ms-1">(Eliminated)</span>}
                   </span>
-                  <span className="badge bg-primary rounded-pill">{votes[player]} {votes[player] === 1 ? 'vote' : 'votes'}</span>
+                  <span className="badge bg-primary rounded-pill">{votes[player] || 0} {(votes[player] || 0) === 1 ? 'vote' : 'votes'}</span>
                 </li>
             ))}
 
