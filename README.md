@@ -127,8 +127,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [x] **Stores data in MongoDB** - Persists game match outcomes and player statistics atomically via `/api/stats` using MongoDB collections and upsert operators.
-- [x] **Stores credentials in MongoDB** - Handles secure user sign-up and authentication by storing bcrypt-hashed passwords and generated session tokens in MongoDB.
+- [x] **Stores data in MongoDB** - Persists game match outcomes and player statistics atomically via `/api/stats` using MongoDB collections and upsert operators. Stores the stats in a seperate "stats" path. Saving things like email, role wins, and total wins and losses. Used for the leaderboard stats on the main page.
+- [x] **Stores credentials in MongoDB** - Handles secure user sign-up and authentication by storing bcrypt-hashed passwords and generated session tokens in MongoDB. Saved in a seperate "user" path. Sigin in checked against the data in MongoDB.
 
 ## 🚀 WebSocket deliverable
 
