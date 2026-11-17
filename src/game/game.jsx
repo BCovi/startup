@@ -21,7 +21,38 @@ export function Game() {
   const allPlayers = lobbyData.players
     ? lobbyData.players.map((p) => p.name)
     : ['John', 'Sarah', 'Mike'];
+  const roleCounts = lobbyData.roleCounts || { mafia: 1, doctor: 1, detective: 0, villager: 1 };
+  const loggedInName = localStorage.getItem('userName')?.split('@')[0];
+  const currentPlayerName = allPlayers.includes(loggedInName) ? loggedInName : allPlayers[0];
+
+  // Build the role deck from lobby roleCounts, shuffle it, and assign 1-to-1 to allPlayers
+  const [playerRoles] = useState(() => {
+    const deck = [
+      ...Array(roleCounts.mafia || 0).fill('Werewolf'),
+      ...Array(roleCounts.doctor || 0).fill('Doctor'),
+      ...Array(roleCounts.detective || 0).fill('Seer'),
+      ...Array(roleCounts.villager || 0).fill('Villager'),
+    ];
+    while (deck.length < allPlayers.length) deck.push('Villager');
+
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+
+    const dealt = {};
+    allPlayers.forEach((name, idx) => {
+      dealt[name] = deck[idx];
+    });
+    return dealt;
+  });
   const alivePlayers = allPlayers.filter(player => !eliminatedPlayers.includes(player));
+  const isDead = eliminatedPlayers.includes('You') || eliminatedPlayers.includes(currentPlayerName);
+  // Voting states
+  const [votes, setVotes] = useState({ John: 0, Sarah: 0, Mike: 0, Skip: 0 });
+  const [userVote, setUserVote] = useState(null);
+  const [votingOpen, setVotingOpen] = useState(false);
+  const [votingClosed, setVotingClosed] = useState(false);
 
 const saveGameResult = async (winningTeam) => {
     console.log('Triggering saveGameResult:', winningTeam, role?.name);
@@ -114,9 +145,10 @@ const saveGameResult = async (winningTeam) => {
       { name: 'Doctor', icon: '🩺', color: 'text-success', goal: 'Protect one player each night from attack.' },
       { name: 'Villager', icon: '🙋', color: 'text-light', goal: 'Find and vote out all Werewolves.' }
     ];
-    
-    const randomRole = roles[Math.floor(Math.random() * roles.length)];
-    setRole(randomRole);
+    const loggedInName = localStorage.getItem('userName')?.split('@')[0];
+    const myName = allPlayers.includes(loggedInName) ? loggedInName : allPlayers[0];
+    const myDealtRoleName = playerRoles[myName] || 'Villager';
+    setRole(roles.find((r) => r.name === myDealtRoleName) || roles[3]);
   }, []);
 
   return (
