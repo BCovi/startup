@@ -63,15 +63,27 @@ async function getLeaderboard() {
       const losses = p.losses || 0;
       const gamesPlayed = wins + losses;
       const winRate = gamesPlayed > 0 ? Number(((wins / gamesPlayed) * 100).toFixed(1)) : 0;
+      const weightedScore = (wins + 1.5) / (gamesPlayed + 3);
+      const username = p.email ? p.email.split('@')[0] : 'Player';
+
+      let mostPlayedRole = 'Player';
+      if (p.roles && Object.keys(p.roles).length > 0) {
+        const topRole = Object.entries(p.roles).sort((a, b) => b[1] - a[1])[0][0];
+        mostPlayedRole = topRole.charAt(0).toUpperCase() + topRole.slice(1);
+      }
+
       return {
         ...p,
+        username,
         wins,
         losses,
         gamesPlayed,
         winRate,
+        mostPlayedRole,
+        weightedScore,
       };
     })
-    .sort((a, b) => b.wins - a.wins || b.winRate - a.winRate)
+    .sort((a, b) => b.weightedScore - a.weightedScore)
     .slice(0, 10);
 }
 

@@ -151,10 +151,10 @@ export function Home() {
         <div className="card shadow-sm border-secondary p-4">
           <h3 className="mb-2 text-center">Global Leaderboard</h3>
           <p className="text-white-50 text-center mb-1">
-            Top players across all hosted matches (Pulled from Database) [Database Place Holder]:
+            Top players across all hosted matches:
           </p>
           <p className="text-white-50 small text-center mb-4">
-            <i>(Example table of data below)</i>
+            <i>(Pulled from Database)</i>
           </p>
           
           <div className="table-responsive">
@@ -173,10 +173,10 @@ export function Home() {
                   leaderboardData.map((row, index) => (
                     <tr key={index}>
                       <td>{row.rank || index + 1}</td>
-                      <td>{row.player || row.email}</td>
-                      <td>{row.winRate || 'N/A'}</td>
+                      <td>{row.username || (row.email ? row.email.split('@')[0] : 'Player')}</td>
+                      <td>{row.winRate !== undefined ? `${row.winRate}%` : 'N/A'}</td>
                       <td>{row.wins || 0}</td>
-                      <td>{row.role || 'Player'}</td>
+                      <td>{row.mostPlayedRole || row.role || 'Player'}</td>
                     </tr>
                   ))
                 ) : (
